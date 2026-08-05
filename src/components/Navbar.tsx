@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { sound } from '../utils/sound';
 import { triggerCursor } from './CustomCursor';
@@ -8,24 +8,17 @@ import { MagneticButton } from './MagneticButton';
 interface NavbarProps {
   darkMode: boolean;
   setDarkMode: (val: boolean) => void;
+  activePage?: 'home' | 'contact';
+  onNavigate?: (page: 'home' | 'contact', sectionId?: string) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  darkMode,
+  setDarkMode,
+  activePage = 'home',
+  onNavigate
+}) => {
   const [soundOn, setSoundOn] = useState(true);
-  const [timeString, setTimeString] = useState('');
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const mins = String(now.getMinutes()).padStart(2, '0');
-      const secs = String(now.getSeconds()).padStart(2, '0');
-      setTimeString(`${hours}:${mins}:${secs}`);
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const toggleSound = () => {
     const next = !soundOn;
@@ -37,6 +30,20 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
   const toggleTheme = () => {
     sound.playClick();
     setDarkMode(!darkMode);
+  };
+
+  const handleNav = (e: React.MouseEvent, page: 'home' | 'contact', sectionId?: string) => {
+    e.preventDefault();
+    sound.playClick();
+    if (onNavigate) {
+      onNavigate(page, sectionId);
+    } else {
+      if (page === 'contact') {
+        window.location.hash = 'contact';
+      } else {
+        window.location.hash = sectionId || '';
+      }
+    }
   };
 
   return (
@@ -51,6 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
         <MagneticButton cursorText="HOME">
           <a
             href="#"
+            onClick={(e) => handleNav(e, 'home')}
             className="flex items-center gap-2 bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xs shadow-brutalist hover:bg-accent-acid hover:text-ink transition-all"
           >
             <span className="w-2.5 h-2.5 rounded-full bg-accent-acid animate-ping" />
@@ -60,34 +68,24 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
           </a>
         </MagneticButton>
 
-        {/* Center Clock & Status (Hidden on small mobile) */}
-        <div className="hidden lg:flex items-center gap-3 sm:gap-4 bg-white/90 dark:bg-canvas-dark-paper/90 backdrop-blur-md px-3.5 py-1.5 rounded-xs border border-ink/20 shadow-sm font-mono text-[clamp(0.75rem,0.85vw,0.9rem)] text-ink dark:text-gray-200">
-          <span className="flex items-center gap-1.5 font-bold">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            OPEN FOR Q3/Q4 2026
-          </span>
-          <span className="text-ink/30 dark:text-white/30">|</span>
-          <span className="font-pixel text-[clamp(0.68rem,0.75vw,0.8rem)] tracking-wider text-ink dark:text-accent-acid">
-            TOK {timeString} JST
-          </span>
-        </div>
-
         {/* Quick Nav & Utilities */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-1 bg-white/90 dark:bg-canvas-dark-paper/90 backdrop-blur-md px-2 py-1 rounded-xs border border-ink/20 shadow-sm font-mono text-[clamp(0.75rem,0.85vw,0.9rem)]">
             <a
               href="#projects"
-              onClick={() => sound.playClick()}
+              onClick={(e) => handleNav(e, 'home', 'projects')}
               onMouseEnter={() => triggerCursor('JUMP', 'hover')}
               onMouseLeave={() => triggerCursor('', 'default')}
-              className="px-2.5 sm:px-3 py-1 sm:py-1.5 hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink transition-colors rounded-xs"
+              className={`px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs ${
+                activePage === 'home' ? 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink' : ''
+              }`}
             >
               01 WORK
             </a>
             <a
               href="#about"
-              onClick={() => sound.playClick()}
+              onClick={(e) => handleNav(e, 'home', 'about')}
               onMouseEnter={() => triggerCursor('JUMP', 'hover')}
               onMouseLeave={() => triggerCursor('', 'default')}
               className="px-2.5 sm:px-3 py-1 sm:py-1.5 hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink transition-colors rounded-xs"
@@ -96,7 +94,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
             </a>
             <a
               href="#playground"
-              onClick={() => sound.playClick()}
+              onClick={(e) => handleNav(e, 'home', 'playground')}
               onMouseEnter={() => triggerCursor('JUMP', 'hover')}
               onMouseLeave={() => triggerCursor('', 'default')}
               className="px-2.5 sm:px-3 py-1 sm:py-1.5 hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink transition-colors rounded-xs"
@@ -105,12 +103,16 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
             </a>
             <a
               href="#contact"
-              onClick={() => sound.playClick()}
-              onMouseEnter={() => triggerCursor('JUMP', 'hover')}
+              onClick={(e) => handleNav(e, 'contact')}
+              onMouseEnter={() => triggerCursor('PAGE', 'hover')}
               onMouseLeave={() => triggerCursor('', 'default')}
-              className="px-2.5 sm:px-3 py-1 sm:py-1.5 hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink transition-colors rounded-xs"
+              className={`px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs ${
+                activePage === 'contact'
+                  ? 'bg-accent-acid text-ink font-bold border border-ink'
+                  : 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink'
+              }`}
             >
-              04 CONTACT
+              04 CONTACT US
             </a>
           </nav>
 
@@ -140,7 +142,12 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode }) => {
           <MagneticButton cursorText="TALK">
             <a
               href="#contact"
-              className="hidden sm:flex items-center gap-1.5 bg-ink text-white dark:bg-accent-acid dark:text-ink px-3.5 sm:px-4 py-1.5 sm:py-2 font-pixel text-[clamp(0.75rem,0.85vw,0.9rem)] font-bold border-2 border-ink rounded-xs shadow-brutalist hover:translate-x-0.5 hover:translate-y-0.5 transition-transform"
+              onClick={(e) => handleNav(e, 'contact')}
+              className={`hidden sm:flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 font-pixel text-[clamp(0.75rem,0.85vw,0.9rem)] font-bold border-2 border-ink rounded-xs shadow-brutalist hover:translate-x-0.5 hover:translate-y-0.5 transition-transform ${
+                activePage === 'contact'
+                  ? 'bg-accent-coral text-white'
+                  : 'bg-ink text-white dark:bg-accent-acid dark:text-ink'
+              }`}
             >
               LET'S TALK <ArrowUpRight className="w-4 h-4" />
             </a>

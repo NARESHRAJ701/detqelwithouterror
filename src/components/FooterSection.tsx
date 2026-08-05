@@ -42,7 +42,7 @@ export const FooterSection: React.FC = () => {
   ];
 
   return (
-    <footer id="contact" className="relative bg-ink text-white dark:bg-canvas-dark-paper pt-24 pb-12 px-4 sm:px-8 border-t-2 border-ink overflow-hidden">
+    <footer id="footer" className="relative bg-ink text-white dark:bg-canvas-dark-paper pt-24 pb-12 px-4 sm:px-8 border-t-2 border-ink overflow-hidden">
       {/* Background Subtle Grid overlay */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 

@@ -134,6 +134,34 @@ class SoundFX {
     oscFan.stop(now + 1.25);
   }
 
+  // Realistic thermal POS printer paper feeding sound (motor ticks + paper buzz)
+  public playPrinterSound() {
+    if (!this.enabled) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    const now = this.ctx.currentTime;
+    
+    // Rapid motor stepper clicks / ticks for thermal printing
+    for (let i = 0; i < 14; i++) {
+      const tickTime = now + i * 0.11;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(380 + (i % 4) * 60, tickTime);
+      osc.frequency.exponentialRampToValueAtTime(140, tickTime + 0.05);
+
+      gain.gain.setValueAtTime(0.09, tickTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, tickTime + 0.05);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(tickTime);
+      osc.stop(tickTime + 0.06);
+    }
+  }
+
   // Realistic projector power-off sound (clunk + fan spin down)
   public playProjectorOff() {
     if (!this.enabled) return;
