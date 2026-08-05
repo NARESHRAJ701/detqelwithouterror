@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-grid-color: rgba(14, 14, 17, 0.05);
+    --bg-grid-size: 36px;
+  }
+
+  .dark {
+    --bg-grid-color: rgba(255, 255, 255, 0.05);
+  }
+
+  body {
+    background-color: #F9F8F6;
+    color: #0E0E11;
+    overflow-x: hidden;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .dark body {
+    background-color: #0E0E11;
+    color: #F9F8F6;
+  }
+}
+
+/* Custom Theme Token Utilities */
+.font-pixel {
+  font-family: 'Pixelify Sans', 'Press Start 2P', monospace;
+}
+
+.font-sans {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-handwriting {
+  font-family: 'Caveat', cursive;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Color Tokens */
+.bg-canvas { background-color: #F9F8F6; }
+.bg-canvas-paper { background-color: #F4F3EF; }
+.bg-canvas-dark { background-color: #0E0E11; }
+.bg-canvas-dark-paper { background-color: #16161C; }
+
+.text-ink { color: #0E0E11; }
+
+.bg-accent-acid { background-color: #E0FF00; }
+.text-accent-acid { color: #E0FF00; }
+
+.bg-accent-coral { background-color: #FF5533; }
+.text-accent-coral { color: #FF5533; }
+
+.bg-accent-blue { background-color: #2563EB; }
+.text-accent-blue { color: #2563EB; }
+
+.bg-accent-purple { background-color: #8B5CF6; }
+.text-accent-purple { color: #8B5CF6; }
+
+.bg-sticky-yellow { background-color: #FFF066; }
+.bg-sticky-pink { background-color: #FFC2E2; }
+.bg-sticky-mint { background-color: #B2F5EA; }
+.bg-sticky-lavender { background-color: #E2D5FF; }
+.bg-sticky-orange { background-color: #FFD1A9; }
+
+/* Brutalist Shadows */
+.shadow-brutalist { box-shadow: 4px 4px 0px 0px #0E0E11; }
+.dark .shadow-brutalist { box-shadow: 4px 4px 0px 0px #E0FF00; }
+
+.shadow-brutalist-lg { box-shadow: 8px 8px 0px 0px #0E0E11; }
+.dark .shadow-brutalist-lg { box-shadow: 8px 8px 0px 0px #E0FF00; }
+
+.shadow-brutalist-sm { box-shadow: 2px 2px 0px 0px #0E0E11; }
+.dark .shadow-brutalist-sm { box-shadow: 2px 2px 0px 0px #E0FF00; }
+
+.shadow-sticky { box-shadow: 2px 8px 20px rgba(0,0,0,0.08); }
+
+/* Engineering Grid Background */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, var(--bg-grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bg-grid-color) 1px, transparent 1px);
+  background-size: var(--bg-grid-size) var(--bg-grid-size);
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(var(--bg-grid-color) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+/* Paper Grain Texture Overlay */
+.paper-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* Tape Sticker Effect */
+.tape-sticker {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.tape-sticker-yellow {
+  background-color: rgba(255, 235, 120, 0.65);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F9F8F6;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #0E0E11;
+}
+::-webkit-scrollbar-thumb {
+  background: #0E0E11;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #E0FF00;
+}
+
+/* Text Stroke / Brutalist typography outline */
+.text-stroke-sm {
+  -webkit-text-stroke: 1px #0E0E11;
+}
+.text-stroke-white {
+  -webkit-text-stroke: 1px #FFFFFF;
+}
+
+/* Noise overlay fixed background */
+.noise-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Keyframes for Marquee and Floating */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+@keyframes spinSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 12s linear infinite;
+}
