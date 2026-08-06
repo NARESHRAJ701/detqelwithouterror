@@ -63,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <span className="w-2.5 h-2.5 rounded-full bg-accent-acid animate-ping" />
             <span className="font-pixel text-[clamp(0.9rem,1.05vw,1.15rem)] font-bold tracking-tight">
-              AEX <span className="text-[clamp(0.65rem,0.7vw,0.75rem)] opacity-60 font-mono">// STUDIO</span>
+              DETQEL
             </span>
           </a>
         </MagneticButton>
@@ -145,8 +145,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={(e) => handleNav(e, 'contact')}
               className={`hidden sm:flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 font-pixel text-[clamp(0.75rem,0.85vw,0.9rem)] font-bold border-2 border-ink rounded-xs shadow-brutalist hover:translate-x-0.5 hover:translate-y-0.5 transition-transform ${
                 activePage === 'contact'
-                  ? 'bg-accent-coral text-white'
-                  : 'bg-ink text-white dark:bg-accent-acid dark:text-ink'
+                  ? 'bg-accent-coral text-black'
+                  : 'bg-ink text-black dark:bg-accent-acid dark:text-ink'
               }`}
             >
               LET'S TALK <ArrowUpRight className="w-4 h-4" />
