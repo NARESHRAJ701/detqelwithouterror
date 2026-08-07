@@ -8,8 +8,8 @@ import { MagneticButton } from './MagneticButton';
 interface NavbarProps {
   darkMode: boolean;
   setDarkMode: (val: boolean) => void;
-  activePage?: 'home' | 'contact';
-  onNavigate?: (page: 'home' | 'contact', sectionId?: string) => void;
+  activePage?: 'home' | 'contact' | 'about' | 'portfolio';
+  onNavigate?: (page: 'home' | 'contact' | 'about' | 'portfolio', sectionId?: string) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     setDarkMode(!darkMode);
   };
 
-  const handleNav = (e: React.MouseEvent, page: 'home' | 'contact', sectionId?: string) => {
+  const handleNav = (e: React.MouseEvent, page: 'home' | 'contact' | 'about' | 'portfolio', sectionId?: string) => {
     e.preventDefault();
     sound.playClick();
     if (onNavigate) {
@@ -40,6 +40,10 @@ export const Navbar: React.FC<NavbarProps> = ({
     } else {
       if (page === 'contact') {
         window.location.hash = 'contact';
+      } else if (page === 'about') {
+        window.location.hash = 'about';
+      } else if (page === 'portfolio') {
+        window.location.hash = 'portfolio';
       } else {
         window.location.hash = sectionId || '';
       }
@@ -63,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <span className="w-2.5 h-2.5 rounded-full bg-accent-acid animate-ping" />
             <span className="font-pixel text-[clamp(0.9rem,1.05vw,1.15rem)] font-bold tracking-tight">
-              AEX <span className="text-[clamp(0.65rem,0.7vw,0.75rem)] opacity-60 font-mono">// STUDIO</span>
+              DETQEL <span className="text-[clamp(0.65rem,0.7vw,0.75rem)] opacity-60 font-mono">// LAB</span>
             </span>
           </a>
         </MagneticButton>
@@ -73,24 +77,26 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-1 bg-white/90 dark:bg-canvas-dark-paper/90 backdrop-blur-md px-2 py-1 rounded-xs border border-ink/20 shadow-sm font-mono text-[clamp(0.75rem,0.85vw,0.9rem)]">
             <a
-              href="#projects"
-              onClick={(e) => handleNav(e, 'home', 'projects')}
-              onMouseEnter={() => triggerCursor('JUMP', 'hover')}
+              href="#portfolio"
+              onClick={(e) => handleNav(e, 'portfolio')}
+              onMouseEnter={() => triggerCursor('PLAYGROUND', 'hover')}
               onMouseLeave={() => triggerCursor('', 'default')}
               className={`px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs ${
-                activePage === 'home' ? 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink' : ''
+                activePage === 'portfolio' ? 'bg-[#88C000] text-ink font-bold shadow-xs' : 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink'
               }`}
             >
-              01 WORK
+              01 PORTFOLIO
             </a>
             <a
               href="#about"
-              onClick={(e) => handleNav(e, 'home', 'about')}
-              onMouseEnter={() => triggerCursor('JUMP', 'hover')}
+              onClick={(e) => handleNav(e, 'about')}
+              onMouseEnter={() => triggerCursor('ABOUT', 'hover')}
               onMouseLeave={() => triggerCursor('', 'default')}
-              className="px-2.5 sm:px-3 py-1 sm:py-1.5 hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink transition-colors rounded-xs"
+              className={`px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs ${
+                activePage === 'about' ? 'bg-[#88C000] text-ink font-bold shadow-xs' : 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink'
+              }`}
             >
-              02 ABOUT
+              02 ABOUT US
             </a>
             <a
               href="#playground"

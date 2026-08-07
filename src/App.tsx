@@ -11,6 +11,8 @@ import { KnowledgeLibraryFAQ } from './components/KnowledgeLibraryFAQ';
 import { PlaygroundSection } from './components/PlaygroundSection';
 import { FooterSection } from './components/FooterSection';
 import { ContactUsPage } from './components/ContactUsPage';
+import { AboutUsPage } from './components/about/AboutUsPage';
+import { PortfolioPage } from './components/portfolio/PortfolioPage';
 import { ProjectModal } from './components/ProjectModal';
 import { ProjectorStorySection } from './components/ProjectorStorySection';
 import type { Project } from './types';
@@ -18,7 +20,7 @@ import type { Project } from './types';
 export function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [currentPage, setCurrentPage] = useState<'home' | 'contact'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'contact' | 'about' | 'portfolio'>('home');
 
   useEffect(() => {
     if (darkMode) {
@@ -35,6 +37,12 @@ export function App() {
       if (hash === '#contact') {
         setCurrentPage('contact');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#about' || hash === '#about-page') {
+        setCurrentPage('about');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#portfolio' || hash === '#work') {
+        setCurrentPage('portfolio');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         setCurrentPage('home');
       }
@@ -50,10 +58,18 @@ export function App() {
     };
   }, []);
 
-  const handleNavigate = (page: 'home' | 'contact', sectionId?: string) => {
+  const handleNavigate = (page: 'home' | 'contact' | 'about' | 'portfolio', sectionId?: string) => {
     if (page === 'contact') {
       setCurrentPage('contact');
       window.location.hash = 'contact';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (page === 'about') {
+      setCurrentPage('about');
+      window.location.hash = 'about';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (page === 'portfolio') {
+      setCurrentPage('portfolio');
+      window.location.hash = 'portfolio';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setCurrentPage('home');
@@ -116,9 +132,15 @@ export function App() {
             {/* Playground & Interactive Labs */}
             <PlaygroundSection />
           </>
-        ) : (
+        ) : currentPage === 'contact' ? (
           /* DEDICATED SEPARATE CONTACT US PAGE */
           <ContactUsPage />
+        ) : currentPage === 'about' ? (
+          /* DEDICATED SEPARATE ABOUT US PAGE */
+          <AboutUsPage />
+        ) : (
+          /* DEDICATED SEPARATE PORTFOLIO CREATIVE PLAYGROUND PAGE */
+          <PortfolioPage onSelectProject={(project) => setSelectedProject(project)} />
         )}
       </main>
 
