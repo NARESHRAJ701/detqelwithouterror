@@ -67,11 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <span className="w-2.5 h-2.5 rounded-full bg-accent-acid animate-ping" />
             <span className="font-pixel text-[clamp(0.9rem,1.05vw,1.15rem)] font-bold tracking-tight">
-<<<<<<< HEAD
               DETQEL <span className="text-[clamp(0.65rem,0.7vw,0.75rem)] opacity-60 font-mono">// LAB</span>
-=======
-              DETQEL
->>>>>>> 2c4cecab771bc55b9ce75404a078b7cf536523f5
             </span>
           </a>
         </MagneticButton>
