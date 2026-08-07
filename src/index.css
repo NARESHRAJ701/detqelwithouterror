@@ -48,8 +48,8 @@
 
 .text-ink { color: #0E0E11; }
 
-.bg-accent-acid { background-color: #A855F7; }
-.text-accent-acid { color: #A855F7; }
+.bg-accent-acid { background-color: #7939a1; }
+.text-accent-acid { color: #7939a1; }
 
 .bg-accent-coral { background-color: #FF5533; }
 .text-accent-coral { color: #FF5533; }
@@ -68,13 +68,13 @@
 
 /* Brutalist Shadows */
 .shadow-brutalist { box-shadow: 4px 4px 0px 0px #0E0E11; }
-.dark .shadow-brutalist { box-shadow: 4px 4px 0px 0px #A855F7; }
+.dark .shadow-brutalist { box-shadow: 4px 4px 0px 0px #7939a1; }
 
 .shadow-brutalist-lg { box-shadow: 8px 8px 0px 0px #0E0E11; }
-.dark .shadow-brutalist-lg { box-shadow: 8px 8px 0px 0px #A855F7; }
+.dark .shadow-brutalist-lg { box-shadow: 8px 8px 0px 0px #7939a1; }
 
 .shadow-brutalist-sm { box-shadow: 2px 2px 0px 0px #0E0E11; }
-.dark .shadow-brutalist-sm { box-shadow: 2px 2px 0px 0px #A855F7; }
+.dark .shadow-brutalist-sm { box-shadow: 2px 2px 0px 0px #7939a1; }
 
 .shadow-sticky { box-shadow: 2px 8px 20px rgba(0,0,0,0.08); }
 
@@ -147,7 +147,7 @@
   background: #0E0E11;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: #A855F7;
+  background: #7939a1;
 }
 
 /* Text Stroke / Brutalist typography outline */

@@ -166,7 +166,7 @@ export const ContactWorkstationSection: React.FC = () => {
                 particleCount: 80,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: ['#A855F7', '#FF5533', '#2563EB', '#A7F3D0']
+                colors: ['#7939a1', '#FF5533', '#2563EB', '#A7F3D0']
               });
 
               setTimeout(() => {
@@ -250,7 +250,7 @@ export const ContactWorkstationSection: React.FC = () => {
 
         {/* LED STATUS BOARD MOUNTED ON STUDIO WALL */}
         <div className="mb-12 flex justify-center">
-          <div className="bg-[#121417] text-[#A855F7] border-4 border-ink p-3.5 sm:p-4 rounded-xs shadow-brutalist max-w-3xl w-full flex flex-wrap items-center justify-between gap-4 font-mono text-xs relative overflow-hidden">
+          <div className="bg-[#121417] text-[#7939a1] border-4 border-ink p-3.5 sm:p-4 rounded-xs shadow-brutalist max-w-3xl w-full flex flex-wrap items-center justify-between gap-4 font-mono text-xs relative overflow-hidden">
             {/* Glowing Scanline */}
             <div className="absolute top-0 left-0 right-0 h-0.5 bg-accent-acid/40 animate-pulse pointer-events-none" />
 

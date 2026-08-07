@@ -17,7 +17,7 @@ const SERVICE_TAGS = [
   { text: 'Web Development', rotation: 5, xOffset: '25vw', yOffset: '0vh', color: 'bg-sky-100 text-sky-900 border-sky-300', clipColor: '#0EA5E9' },
   { text: 'Automation', rotation: -4, xOffset: '20vw', yOffset: '15vh', color: 'bg-amber-100 text-amber-900 border-amber-300', clipColor: '#F59E0B' },
   { text: 'ERP & CRM Systems', rotation: 2, xOffset: '0vw', yOffset: '21vh', color: 'bg-teal-100 text-teal-900 border-teal-300', clipColor: '#14B8A6' },
-  { text: 'SaaS Products', rotation: 3, xOffset: '-20vw', yOffset: '15vh', color: 'bg-purple-100 text-purple-900 border-purple-300', clipColor: '#A855F7' },
+  { text: 'SaaS Products', rotation: 3, xOffset: '-20vw', yOffset: '15vh', color: 'bg-purple-100 text-purple-900 border-purple-300', clipColor: '#7939a1' },
   { text: 'Mobile Apps', rotation: -2, xOffset: '-25vw', yOffset: '0vh', color: 'bg-pink-100 text-pink-900 border-pink-300', clipColor: '#EC4899' },
 ];
 
@@ -63,7 +63,7 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
   const rightProjects = PROJECTS_DATA.slice(0, 3);
 
   return (
-    <div className="relative w-full h-screen h-[100vh] max-h-[100vh] overflow-hidden bg-[#87CEEB] selection:bg-accent-acid selection:text-ink font-sans">
+    <div className="relative w-full h-screen h-[100vh] max-h-[100vh] overflow-hidden bg-[#87CEEB] selection:bg-[#E0FF00] selection:text-ink font-sans">
       
       {/* 1. STUDIO GHIBLI HAND-PAINTED LANDSCAPE BACKGROUND WITH PARALLAX */}
       <motion.div
@@ -148,7 +148,7 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
             </div>
             <div className="font-mono text-[clamp(0.75rem,0.8vw,0.9rem)] text-white drop-shadow-xs">
               <div className="flex items-center gap-1.5 font-bold">
-                <span className="w-2 h-2 rounded-full bg-accent-acid animate-ping" />
+                <span className="w-2 h-2 rounded-full bg-[#E0FF00] animate-ping" />
                 <span>Available for Projects</span>
               </div>
               <span className="text-white/80 text-[clamp(0.65rem,0.7vw,0.75rem)]">DETQEL — AI-Powered Product Studio</span>
@@ -212,7 +212,7 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
                 AI-POWERED
               </span><br />
               PRODUCTS<br />
-              <span className="text-accent-acid drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+              <span className="text-[#E0FF00] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                 THAT SCALE.
               </span>
             </h1>
@@ -298,7 +298,7 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
             className="lg:col-span-4 flex flex-col space-y-2 items-end"
           >
             <div className="font-mono text-[clamp(0.68rem,0.75vw,0.8rem)] text-white/80 font-bold uppercase tracking-wider mb-0.5 flex items-center gap-1.5">
-              <Sparkles className="w-3 h-3 text-accent-acid" /> FEATURED WORKS PREVIEW
+              <Sparkles className="w-3 h-3 text-[#E0FF00]" /> FEATURED WORKS PREVIEW
             </div>
 
             {rightProjects.map((project) => (
@@ -329,7 +329,7 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
                   <h4 className="font-pixel text-[clamp(0.75rem,0.85vw,0.9rem)] font-bold text-white truncate uppercase">
                     {project.title}
                   </h4>
-                  <div className="flex items-center gap-1 text-[clamp(0.65rem,0.7vw,0.75rem)] font-mono font-bold text-accent-acid mt-0.5">
+                  <div className="flex items-center gap-1 text-[clamp(0.65rem,0.7vw,0.75rem)] font-mono font-bold text-[#E0FF00] mt-0.5">
                     <span>VIEW CASE STUDY</span>
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </div>

@@ -212,7 +212,7 @@ export const RobotTestimonialScene: React.FC = () => {
               {/* Front Bumper Shield on Left (Direction of travel ←) */}
               <div 
                 className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-16 rounded-l-full border-l-2 border-y-2 border-ink shadow-sm z-40 flex items-center justify-center"
-                style={{ background: 'linear-gradient(180deg, #A855F7 0%, #B2E600 100%)' }}
+                style={{ background: 'linear-gradient(180deg, #7939a1 0%, #B2E600 100%)' }}
               >
                 <div className="w-1.5 h-6 bg-black/40 rounded-full animate-pulse" />
               </div>
@@ -239,7 +239,7 @@ export const RobotTestimonialScene: React.FC = () => {
                 <div className="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-white/20 to-transparent rounded-full blur-xs pointer-events-none" />
 
                 {/* Glowing Neon Lime LED Halo Ring */}
-                <div className="w-24 h-24 rounded-full border-2 border-accent-acid shadow-[0_0_20px_#A855F7,inset_0_0_10px_#A855F7] flex flex-col items-center justify-center relative">
+                <div className="w-24 h-24 rounded-full border-2 border-accent-acid shadow-[0_0_20px_#7939a1,inset_0_0_10px_#7939a1] flex flex-col items-center justify-center relative">
                   
                   {/* Central Raised LiDAR Turret Dome */}
                   <div 
@@ -265,7 +265,7 @@ export const RobotTestimonialScene: React.FC = () => {
                 </div>
 
                 {/* Left Sensor Status Light */}
-                <div className="absolute left-2.5 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-accent-acid animate-ping shadow-[0_0_8px_#A855F7]" />
+                <div className="absolute left-2.5 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-accent-acid animate-ping shadow-[0_0_8px_#7939a1]" />
               </div>
 
               {/* Dual Spinning Side Sweeper Brushes Underneath */}

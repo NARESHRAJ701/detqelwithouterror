@@ -98,7 +98,7 @@ const ARCHIVE_ITEMS: RawArchiveItem[] = [
     toolsUsed: 'Figma, React, TailwindCSS',
     image: '/projects/fintrack.png',
     thumbnails: ['/projects/fintrack.png', '/projects/nexora_ai.png', '/projects/movefit.png'],
-    clipColor: '#A855F7', // Purple clip
+    clipColor: '#7939a1', // Purple clip
     strokeColor: '#9333EA',
     clipPos: 'right',
     rotation: 3

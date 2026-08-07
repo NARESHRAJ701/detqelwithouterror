@@ -20,7 +20,7 @@ export default {
           light: '#8E8E9A',
         },
         accent: {
-          acid: '#A855F7',
+          acid: '#7939a1',
           'acid-green': '#00E676',
           blue: '#2563EB',
           coral: '#FF5533',
