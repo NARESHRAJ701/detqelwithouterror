@@ -100,13 +100,19 @@ export const RobotTestimonialScene: React.FC = () => {
         {/* Minimal Office Desk Decorative Objects */}
         {/* Left Side: Potted Plant & Notebook Stack */}
         <div className="absolute left-6 top-8 z-10 hidden sm:flex items-center gap-4 pointer-events-none opacity-90">
-          {/* Small Potted Plant */}
-          <div className="flex flex-col items-center">
-            <div className="w-10 h-10 bg-emerald-700/80 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-md">
-              🌿
-            </div>
-            <div className="w-8 h-8 bg-amber-800/80 rounded-t-sm border border-black/20" />
-          </div>
+          {/* Single Pixel Potted Plant */}
+          <motion.div 
+            whileHover={{ scale: 1.1, rotate: [-2, 2, -2] }}
+            className="flex flex-col items-center cursor-pointer group"
+            onClick={() => sound.playClick()}
+            title="Studio Potted Plant"
+          >
+            <img 
+              src="/images/single_plant_snake.png" 
+              alt="Studio Potted Plant" 
+              className="w-10 h-20 object-contain drop-shadow-md group-hover:brightness-110 transition-all"
+            />
+          </motion.div>
 
           {/* Stack of Notebooks */}
           <div className="space-y-1 font-mono text-[10px] font-bold">

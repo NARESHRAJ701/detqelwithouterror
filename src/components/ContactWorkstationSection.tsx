@@ -417,6 +417,21 @@ export const ContactWorkstationSection: React.FC = () => {
                   </div>
                 </div>
 
+                {/* Single Pixel Studio Plant */}
+                <motion.div
+                  whileHover={{ scale: 1.15, rotate: [0, -3, 3, 0] }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => sound.playClick()}
+                  className="relative flex flex-col items-center cursor-pointer group"
+                  title="Click studio plant to water!"
+                >
+                  <img
+                    src="/images/single_plant_snake.png"
+                    alt="Workstation Plant"
+                    className="h-12 w-auto object-contain drop-shadow-md group-hover:brightness-110 transition-all"
+                  />
+                </motion.div>
+
                 {/* Live Digital Clock */}
                 <div className="bg-[#181820] text-accent-acid border-2 border-ink px-3 py-1 rounded-xs font-mono text-xs font-bold shadow-brutalist-sm flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5" />
