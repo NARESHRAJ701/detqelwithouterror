@@ -63,7 +63,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
                       setActiveIndex(index);
                       sound.playHover();
                     }
-                    triggerCursor('INSPECT', 'hover');
+                    triggerCursor('', 'view', project.image);
                   }}
                   onMouseLeave={() => triggerCursor('', 'default')}
                   onClick={() => {

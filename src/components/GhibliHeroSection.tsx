@@ -11,13 +11,14 @@ interface GhibliHeroSectionProps {
 }
 
 const SERVICE_TAGS = [
-  { text: 'AI Solutions', rotation: -5, xOffset: '-23vw', yOffset: '-14vh', color: 'bg-emerald-100 text-emerald-900 border-emerald-300', clipColor: '#10B981' },
-  { text: 'Brand Identity', rotation: 4, xOffset: '23vw', yOffset: '-16vh', color: 'bg-indigo-100 text-indigo-900 border-indigo-300', clipColor: '#6366F1' },
-  { text: 'UI/UX Design', rotation: -3, xOffset: '30vw', yOffset: '-4vh', color: 'bg-lime-200 text-lime-950 border-lime-400', clipColor: '#84CC16' },
-  { text: 'Web Development', rotation: 5, xOffset: '-28vw', yOffset: '2vh', color: 'bg-sky-100 text-sky-900 border-sky-300', clipColor: '#0EA5E9' },
-  { text: 'Automation', rotation: -4, xOffset: '25vw', yOffset: '11vh', color: 'bg-amber-100 text-amber-900 border-amber-300', clipColor: '#F59E0B' },
-  { text: 'SaaS Products', rotation: 3, xOffset: '-24vw', yOffset: '14vh', color: 'bg-purple-100 text-purple-900 border-purple-300', clipColor: '#A855F7' },
-  { text: 'Mobile Apps', rotation: -2, xOffset: '31vw', yOffset: '17vh', color: 'bg-pink-100 text-pink-900 border-pink-300', clipColor: '#EC4899' },
+  { text: 'AI Solutions', rotation: -5, xOffset: '-22vw', yOffset: '-17vh', color: 'bg-emerald-100 text-emerald-900 border-emerald-300', clipColor: '#10B981' },
+  { text: 'Brand Identity', rotation: 4, xOffset: '0vw', yOffset: '-24vh', color: 'bg-indigo-100 text-indigo-900 border-indigo-300', clipColor: '#6366F1' },
+  { text: 'UI/UX Design', rotation: -3, xOffset: '22vw', yOffset: '-17vh', color: 'bg-lime-200 text-lime-950 border-lime-400', clipColor: '#84CC16' },
+  { text: 'Web Development', rotation: 5, xOffset: '25vw', yOffset: '0vh', color: 'bg-sky-100 text-sky-900 border-sky-300', clipColor: '#0EA5E9' },
+  { text: 'Automation', rotation: -4, xOffset: '20vw', yOffset: '15vh', color: 'bg-amber-100 text-amber-900 border-amber-300', clipColor: '#F59E0B' },
+  { text: 'ERP & CRM Systems', rotation: 2, xOffset: '0vw', yOffset: '21vh', color: 'bg-teal-100 text-teal-900 border-teal-300', clipColor: '#14B8A6' },
+  { text: 'SaaS Products', rotation: 3, xOffset: '-20vw', yOffset: '15vh', color: 'bg-purple-100 text-purple-900 border-purple-300', clipColor: '#A855F7' },
+  { text: 'Mobile Apps', rotation: -2, xOffset: '-25vw', yOffset: '0vh', color: 'bg-pink-100 text-pink-900 border-pink-300', clipColor: '#EC4899' },
 ];
 
 const DOCK_ITEMS = [
@@ -161,37 +162,40 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
           {/* FLOATING PAPER SERVICE TAGS AROUND HEADLINE */}
           <div className="absolute inset-0 pointer-events-none z-20 hidden md:block">
             {SERVICE_TAGS.map((tag, idx) => (
-              <motion.div
+              <div
                 key={tag.text}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  y: [0, -6, 0],
-                  rotate: [tag.rotation, tag.rotation + 2, tag.rotation]
-                }}
-                transition={{
-                  duration: 4 + idx,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                  delay: idx * 0.15
-                }}
+                className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
                 style={{
-                  top: '50%',
-                  left: '50%',
-                  transform: `translate(calc(-50% + ${tag.xOffset}), calc(-50% + ${tag.yOffset}))`
+                  top: `calc(50% + ${tag.yOffset})`,
+                  left: `calc(50% + ${tag.xOffset})`,
                 }}
-                className={`pointer-events-auto absolute cursor-pointer font-mono text-[clamp(0.7rem,0.75vw,0.85rem)] font-bold px-3 py-1 rounded-xs border-2 border-ink shadow-brutalist flex items-center gap-1.5 hover:scale-110 transition-transform ${tag.color}`}
-                onMouseEnter={() => {
-                  sound.playHover();
-                  triggerCursor('SERVICE', 'hover');
-                }}
-                onMouseLeave={() => triggerCursor('', 'default')}
               >
-                {/* Paperclip */}
-                <div className="w-2 h-3.5 border-2 border-ink rounded-xs -mt-2.5 shadow-xs" style={{ borderColor: tag.clipColor }} />
-                <span>{tag.text}</span>
-              </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    y: [0, -8, 0],
+                    rotate: [tag.rotation, tag.rotation + 3, tag.rotation]
+                  }}
+                  transition={{
+                    duration: 4 + idx * 0.4,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: idx * 0.15
+                  }}
+                  className={`cursor-pointer font-mono text-[clamp(0.7rem,0.75vw,0.85rem)] font-bold px-3 py-1.5 rounded-xs border-2 border-ink shadow-brutalist flex items-center gap-1.5 hover:scale-110 transition-transform ${tag.color}`}
+                  onMouseEnter={() => {
+                    sound.playHover();
+                    triggerCursor('SERVICE', 'hover');
+                  }}
+                  onMouseLeave={() => triggerCursor('', 'default')}
+                >
+                  {/* Paperclip */}
+                  <div className="w-2 h-3.5 border-2 border-ink rounded-xs -mt-2.5 shadow-xs" style={{ borderColor: tag.clipColor }} />
+                  <span>{tag.text}</span>
+                </motion.div>
+              </div>
             ))}
           </div>
 
@@ -307,7 +311,7 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
                 }}
                 onMouseEnter={() => {
                   sound.playHover();
-                  triggerCursor('VIEW CASE', 'view');
+                  triggerCursor('', 'view', project.image);
                 }}
                 onMouseLeave={() => triggerCursor('', 'default')}
                 className="w-full max-w-[240px] sm:max-w-[270px] lg:max-w-[290px] bg-white/25 dark:bg-black/30 backdrop-blur-md border border-white/40 dark:border-white/20 p-2 sm:p-2.5 rounded-xl shadow-xl cursor-pointer transition-all group flex items-center gap-2.5"
