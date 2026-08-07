@@ -19,7 +19,7 @@ export const FooterSection: React.FC = () => {
         particleCount: 80,
         spread: 70,
         origin: { y: 0.8 },
-        colors: ['#E0FF00', '#FF5533', '#2563EB', '#C084FC'],
+        colors: ['#A855F7', '#FF5533', '#2563EB', '#C084FC'],
       });
     } catch {
       // Fallback

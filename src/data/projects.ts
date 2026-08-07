@@ -13,7 +13,7 @@ export const PROJECTS_DATA: Project[] = [
     deliverables: ['Brand Identity System', 'Custom Shopify Flagship', 'Interactive Origin Tracker', 'Sustainable Packaging'],
     image: '/projects/go_planet_coffee.png',
     tags: ['Next.js 14', 'Three.js', 'TailwindCSS', 'Shopify Storefront API', 'Framer Motion'],
-    accentColor: '#E0FF00',
+    accentColor: '#A855F7',
     bgAccent: 'bg-accent-acid',
     textAccent: 'text-accent-acid',
     borderAccent: 'border-accent-acid',
