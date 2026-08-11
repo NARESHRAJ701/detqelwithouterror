@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
-import { HeroSection } from './components/HeroSection';
 import { GhibliHeroSection } from './components/GhibliHeroSection';
 import { AboutSection } from './components/AboutSection';
+import { HeroSection } from './components/HeroSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { RawArchiveSection } from './components/RawArchiveSection';
 import { RobotTestimonialScene } from './components/RobotTestimonialScene';
@@ -43,7 +43,13 @@ export function App() {
       } else if (hash === '#portfolio' || hash === '#work') {
         setCurrentPage('portfolio');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
+      } else if (hash === '#services') {
+        setCurrentPage('home');
+        setTimeout(() => {
+          const el = document.getElementById('services');
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      } else if (hash === '' || hash === '#home') {
         setCurrentPage('home');
       }
     };
@@ -58,7 +64,7 @@ export function App() {
     };
   }, []);
 
-  const handleNavigate = (page: 'home' | 'contact' | 'about' | 'portfolio', sectionId?: string) => {
+  const handleNavigate = (page: 'home' | 'contact' | 'about' | 'portfolio' | 'services', sectionId?: string) => {
     if (page === 'contact') {
       setCurrentPage('contact');
       window.location.hash = 'contact';
@@ -71,6 +77,14 @@ export function App() {
       setCurrentPage('portfolio');
       window.location.hash = 'portfolio';
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (page === 'services') {
+      // Services is now a section on the home page — scroll to it
+      setCurrentPage('home');
+      window.location.hash = 'services';
+      setTimeout(() => {
+        const el = document.getElementById('services');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
     } else {
       setCurrentPage('home');
       window.location.hash = sectionId || '';
@@ -111,7 +125,7 @@ export function App() {
             {/* Hero Section */}
             <HeroSection />
 
-            {/* Featured Projects Showcase */}
+            {/* Section 3: Featured Projects Showcase ("Selected Work" / "Our Works") */}
             <ProjectsSection onSelectProject={(project) => setSelectedProject(project)} />
 
             {/* Behind The Scenes Raw Archive Showcase */}

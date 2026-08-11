@@ -1,146 +1,164 @@
-import React, { useState } from 'react';
-import confetti from 'canvas-confetti';
+import React from 'react';
 import { sound } from '../utils/sound';
 import { triggerCursor } from './CustomCursor';
 import { MagneticButton } from './MagneticButton';
-import { ArrowUp, Copy, Check, Code2, Globe, FileText, Share2 } from 'lucide-react';
+import { MapPin, CheckCircle2, Zap, ArrowUpRight, Code2, Share2, Globe, FileText } from 'lucide-react';
 
 export const FooterSection: React.FC = () => {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopyEmail = () => {
-    sound.playSuccess();
-    navigator.clipboard.writeText('hello@aex-studio.design');
-    setCopied(true);
-
-    // Confetti Explosion
-    try {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.8 },
-        colors: ['#7939a1', '#FF5533', '#2563EB', '#C084FC'],
-      });
-    } catch {
-      // Fallback
-    }
-
-    setTimeout(() => setCopied(false), 3000);
-  };
-
-  const scrollToTop = () => {
-    sound.playClick();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const socialLinks = [
-    { name: 'GITHUB', url: 'https://github.com', icon: Code2, color: 'hover:bg-accent-acid hover:text-ink' },
-    { name: 'TWITTER / X', url: 'https://twitter.com', icon: Share2, color: 'hover:bg-accent-blue hover:text-white' },
-    { name: 'DRIBBBLE', url: 'https://dribbble.com', icon: Globe, color: 'hover:bg-accent-coral hover:text-white' },
-    { name: 'LINKEDIN', url: 'https://linkedin.com', icon: Globe, color: 'hover:bg-accent-purple hover:text-white' },
-    { name: 'READ.CV', url: 'https://read.cv', icon: FileText, color: 'hover:bg-sticky-yellow hover:text-ink' },
-  ];
-
   return (
-    <footer id="footer" className="relative bg-ink text-white dark:bg-canvas-dark-paper pt-24 pb-12 px-4 sm:px-8 border-t-2 border-ink overflow-hidden">
-      {/* Background Subtle Grid overlay */}
+    <footer id="footer" className="relative bg-[#05050A] text-white pt-24 pb-12 px-6 sm:px-12 border-t-[3px] border-dashed border-white/20 overflow-hidden font-mono">
+      {/* Background Gradients & Grid */}
+      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 mix-blend-overlay pointer-events-none" />
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-900/30 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Top Playful Badge */}
-        <div className="flex justify-between items-center mb-12 border-b border-white/20 pb-6">
-          <div className="flex items-center gap-2 font-mono text-xs text-accent-acid">
-            <span className="w-2.5 h-2.5 rounded-full bg-accent-acid animate-ping" />
-            <span>04 // INITIATE TRANSMISSION</span>
+      <div className="max-w-[1400px] mx-auto relative z-10 flex flex-col gap-20">
+        
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
+          
+          {/* Left Column: Brand */}
+          <div className="lg:col-span-3 flex flex-col gap-6">
+            <div className="font-pixel text-2xl sm:text-3xl tracking-wider font-bold text-white drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]">
+              DETQEL <span className="text-purple-400">//</span> LABS
+            </div>
+            <div className="w-12 h-1 bg-purple-500 rounded-none" />
+            <p className="font-sans text-white/70 text-sm leading-relaxed max-w-sm">
+              A digital product studio crafting AI-powered solutions, immersive web experiences, and bold brands for the future.
+            </p>
           </div>
 
-          <MagneticButton cursorText="TOP">
-            <button
-              onClick={scrollToTop}
-              onMouseEnter={() => triggerCursor('TOP', 'hover')}
-              onMouseLeave={() => triggerCursor('', 'default')}
-              className="p-3 bg-white text-ink border-2 border-white rounded-xs shadow-brutalist hover:bg-accent-acid hover:border-accent-acid transition-all"
-            >
-              <ArrowUp className="w-5 h-5" />
-            </button>
-          </MagneticButton>
-        </div>
-
-        {/* Massive Headline "LET'S TALK" */}
-        <div className="mb-16">
-          <h2 className="font-pixel text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-none text-white hover:text-accent-acid transition-colors duration-300">
-            LET'S TALK<span className="text-accent-coral">.</span>
-          </h2>
-          <p className="font-sans text-xl sm:text-2xl text-white/70 max-w-2xl mt-4 font-medium">
-            Have a landmark product, WebGL motion project, or creative venture in mind? Let’s build something extraordinary together.
-          </p>
-        </div>
-
-        {/* Massive Copy Email Banner */}
-        <div className="mb-20">
-          <div className="bg-canvas-dark-paper dark:bg-canvas-dark p-6 sm:p-10 rounded-xs border-2 border-white/20 shadow-brutalist flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <span className="font-mono text-xs text-accent-acid uppercase font-bold block mb-1">
-                DIRECT INBOX ACCESS
-              </span>
-              <span className="font-pixel text-2xl sm:text-4xl font-bold tracking-tight text-white select-all">
-                hello@aex-studio.design
-              </span>
+          {/* Center Columns: Links */}
+          <div className="lg:col-span-6 grid grid-cols-2 md:grid-cols-3 gap-8">
+            {/* Explore */}
+            <div className="flex flex-col gap-5">
+              <h4 className="font-pixel text-xs text-purple-400 tracking-widest uppercase flex items-center gap-2">
+                <span className="w-2 h-2 bg-purple-500 rounded-none inline-block"></span> Explore
+              </h4>
+              <ul className="flex flex-col gap-3 font-sans text-sm text-white/60">
+                {['Portfolio', 'Labs', 'Case Studies', 'Services', 'Blog'].map(link => (
+                  <li key={link} className="hover:text-purple-300 hover:translate-x-1 transition-transform cursor-pointer w-fit">
+                    {link}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Studio */}
+            <div className="flex flex-col gap-5">
+              <h4 className="font-pixel text-xs text-purple-400 tracking-widest uppercase flex items-center gap-2">
+                <span className="w-2 h-2 bg-purple-500 rounded-none inline-block"></span> Studio
+              </h4>
+              <ul className="flex flex-col gap-3 font-sans text-sm text-white/60">
+                {['About Us', 'Process', 'Technologies', 'Careers', 'Pricing'].map(link => (
+                  <li key={link} className="hover:text-purple-300 hover:translate-x-1 transition-transform cursor-pointer w-fit">
+                    {link}
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <MagneticButton cursorText={copied ? 'COPIED!' : 'COPY'}>
-              <button
-                onClick={handleCopyEmail}
-                className="w-full md:w-auto inline-flex items-center justify-center gap-3 bg-accent-acid text-ink px-8 py-4 font-pixel text-sm font-bold border-2 border-ink shadow-brutalist hover:bg-accent-coral hover:text-white transition-all"
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-5 h-5 text-emerald-900" /> COPIED TO CLIPBOARD!
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-5 h-5" /> COPY EMAIL ADDRESS
-                  </>
-                )}
-              </button>
-            </MagneticButton>
+            {/* Connect */}
+            <div className="flex flex-col gap-5">
+              <h4 className="font-pixel text-xs text-purple-400 tracking-widest uppercase flex items-center gap-2">
+                <span className="w-2 h-2 bg-purple-500 rounded-none inline-block"></span> Connect
+              </h4>
+              <ul className="flex flex-col gap-3 font-sans text-sm text-white/60">
+                {['Contact Us', 'Schedule Call', 'Partnerships', 'Support', 'Privacy Policy'].map(link => (
+                  <li key={link} className="hover:text-purple-300 hover:translate-x-1 transition-transform cursor-pointer w-fit">
+                    {link}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
 
-        {/* Social Links Grid */}
-        <div className="mb-16">
-          <span className="font-mono text-xs text-white/50 uppercase font-bold block mb-4">
-            NETWORK & CHANNELS
-          </span>
-          <div className="flex flex-wrap gap-3">
-            {socialLinks.map((link) => {
-              const IconComponent = link.icon;
-              return (
-                <MagneticButton key={link.name} cursorText="OPEN">
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noreferrer"
+          {/* Right Column: Studio Status */}
+          <div className="lg:col-span-3">
+            <div className="border border-white/10 bg-white/[0.02] backdrop-blur-sm p-6 rounded-sm relative group overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-purple-600 to-transparent opacity-50" />
+              
+              <h4 className="font-pixel text-xs text-white/80 tracking-widest uppercase mb-6 flex justify-between items-center">
+                _STUDIO STATUS
+                <span className="flex gap-1">
+                  <span className="w-1 h-3 bg-white/20 animate-pulse delay-75"></span>
+                  <span className="w-1 h-4 bg-white/40 animate-pulse delay-150"></span>
+                  <span className="w-1 h-2 bg-white/20 animate-pulse delay-300"></span>
+                </span>
+              </h4>
+              
+              <div className="flex flex-col gap-4 font-sans text-sm text-white/70">
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-4 h-4 text-purple-400" />
+                  <span>Chennai, India</span>
+                </div>
+                <div className="w-full h-px border-b border-dashed border-white/10" />
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-4 h-4 text-green-400" />
+                  <span>Accepting selected projects</span>
+                </div>
+                <div className="w-full h-px border-b border-dashed border-white/10" />
+                <div className="flex items-center gap-3">
+                  <Zap className="w-4 h-4 text-yellow-400" />
+                  <span>Response time: {'<'} 24 hrs</span>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <MagneticButton cursorText="EXPLORE">
+                  <button
                     onClick={() => sound.playClick()}
-                    className={`inline-flex items-center gap-2 bg-white/10 text-white font-mono text-xs font-bold px-5 py-3 border border-white/20 rounded-xs transition-all ${link.color}`}
+                    onMouseEnter={() => triggerCursor('EXPLORE', 'hover')}
+                    onMouseLeave={() => triggerCursor('', 'default')}
+                    className="w-full group relative flex items-center justify-between bg-transparent border border-purple-500/50 text-white px-5 py-3 font-pixel text-[10px] uppercase hover:bg-purple-500/10 hover:border-purple-400 transition-all overflow-hidden"
                   >
-                    <IconComponent className="w-4 h-4" /> {link.name}
-                  </a>
+                    <span className="relative z-10">Explore Our Work</span>
+                    <ArrowUpRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  </button>
                 </MagneticButton>
-              );
-            })}
+              </div>
+            </div>
           </div>
+          
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-white/50">
-          <div>
-            <span>© 2026 AEX STUDIO. HANDCRAFTED WITH PRECISION.</span>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-dashed border-white/20">
+          
+          <div className="flex flex-col gap-2 text-center md:text-left">
+            <span className="font-pixel text-[10px] text-white/80">
+              © 2026 DETQEL LABS
+            </span>
+            <span className="font-sans text-xs text-white/50">
+              Crafted with AI, design systems, and obsessive attention to detail.
+            </span>
           </div>
+
+          {/* Abstract Center Pixel Icon */}
+          <div className="hidden md:flex items-center justify-center">
+             <div className="relative w-8 h-8 flex items-center justify-center opacity-80 hover:opacity-100 hover:rotate-90 transition-all duration-500 cursor-pointer">
+                <div className="absolute w-1 h-6 bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
+                <div className="absolute w-6 h-1 bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
+                <div className="absolute w-2 h-2 bg-white shadow-[0_0_15px_rgba(255,255,255,0.9)]"></div>
+             </div>
+          </div>
+
           <div className="flex items-center gap-4">
-            <span>TOKYO // SF // ZURICH</span>
-            <span>★ AWWWARDS SITE OF THE DAY</span>
+            {[Code2, Share2, Globe, FileText].map((Icon, idx) => (
+              <MagneticButton key={idx} cursorText="VISIT">
+                <a
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); sound.playClick(); }}
+                  onMouseEnter={() => triggerCursor('VISIT', 'hover')}
+                  onMouseLeave={() => triggerCursor('', 'default')}
+                  className="w-10 h-10 flex items-center justify-center border border-white/10 rounded-sm hover:border-purple-500/50 hover:bg-purple-500/10 hover:text-purple-300 transition-all text-white/60"
+                >
+                  <Icon className="w-4 h-4" />
+                </a>
+              </MagneticButton>
+            ))}
           </div>
+
         </div>
       </div>
     </footer>

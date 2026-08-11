@@ -162,6 +162,56 @@ class SoundFX {
     }
   }
 
+  // Ambient Cafe Synth / Vinyl hum toggle
+  private ambientOsc: OscillatorNode | null = null;
+  private ambientGain: GainNode | null = null;
+  private isAmbientPlaying: boolean = false;
+
+  public toggleCafeAmbient(): boolean {
+    if (!this.enabled) return false;
+    this.initCtx();
+    if (!this.ctx) return false;
+
+    if (this.isAmbientPlaying) {
+      if (this.ambientGain) {
+        this.ambientGain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.5);
+        setTimeout(() => {
+          this.ambientOsc?.stop();
+          this.ambientOsc?.disconnect();
+          this.ambientOsc = null;
+          this.ambientGain = null;
+        }, 500);
+      }
+      this.isAmbientPlaying = false;
+      return false;
+    } else {
+      const now = this.ctx.currentTime;
+      this.ambientOsc = this.ctx.createOscillator();
+      this.ambientGain = this.ctx.createGain();
+      
+      this.ambientOsc.type = 'sine';
+      this.ambientOsc.frequency.setValueAtTime(220, now); // Warm A3 tone
+      
+      // Gentle lfo modulation for cafe warmth
+      const lfo = this.ctx.createOscillator();
+      const lfoGain = this.ctx.createGain();
+      lfo.frequency.setValueAtTime(0.2, now);
+      lfoGain.gain.setValueAtTime(5, now);
+      lfo.connect(this.ambientOsc.frequency);
+      lfo.start(now);
+
+      this.ambientGain.gain.setValueAtTime(0.001, now);
+      this.ambientGain.gain.linearRampToValueAtTime(0.04, now + 1);
+
+      this.ambientOsc.connect(this.ambientGain);
+      this.ambientGain.connect(this.ctx.destination);
+
+      this.ambientOsc.start(now);
+      this.isAmbientPlaying = true;
+      return true;
+    }
+  }
+
   // Realistic projector power-off sound (clunk + fan spin down)
   public playProjectorOff() {
     if (!this.enabled) return;

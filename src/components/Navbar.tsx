@@ -9,7 +9,7 @@ interface NavbarProps {
   darkMode: boolean;
   setDarkMode: (val: boolean) => void;
   activePage?: 'home' | 'contact' | 'about' | 'portfolio';
-  onNavigate?: (page: 'home' | 'contact' | 'about' | 'portfolio', sectionId?: string) => void;
+  onNavigate?: (page: 'home' | 'contact' | 'about' | 'portfolio' | 'services', sectionId?: string) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     setDarkMode(!darkMode);
   };
 
-  const handleNav = (e: React.MouseEvent, page: 'home' | 'contact' | 'about' | 'portfolio', sectionId?: string) => {
+  const handleNav = (e: React.MouseEvent, page: 'home' | 'contact' | 'about' | 'portfolio' | 'services', sectionId?: string) => {
     e.preventDefault();
     sound.playClick();
     if (onNavigate) {
@@ -44,6 +44,8 @@ export const Navbar: React.FC<NavbarProps> = ({
         window.location.hash = 'about';
       } else if (page === 'portfolio') {
         window.location.hash = 'portfolio';
+      } else if (page === 'services') {
+        window.location.hash = 'services';
       } else {
         window.location.hash = sectionId || '';
       }
@@ -65,9 +67,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={(e) => handleNav(e, 'home')}
             className="flex items-center gap-2 bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xs shadow-brutalist hover:bg-accent-acid hover:text-ink transition-all"
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-accent-acid animate-ping" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#C8FF2F] animate-ping" />
             <span className="font-pixel text-[clamp(0.9rem,1.05vw,1.15rem)] font-bold tracking-tight">
-              DETQEL <span className="text-[clamp(0.65rem,0.7vw,0.75rem)] opacity-60 font-mono">// LAB</span>
+              DETQEL <span className="text-[clamp(0.65rem,0.7vw,0.75rem)] opacity-60 font-mono">// CAFÉ</span>
             </span>
           </a>
         </MagneticButton>
@@ -77,15 +79,24 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-1 bg-white/90 dark:bg-canvas-dark-paper/90 backdrop-blur-md px-2 py-1 rounded-xs border border-ink/20 shadow-sm font-mono text-[clamp(0.75rem,0.85vw,0.9rem)]">
             <a
+              href="#services"
+              onClick={(e) => handleNav(e, 'services')}
+              onMouseEnter={() => triggerCursor('SERVICES', 'hover')}
+              onMouseLeave={() => triggerCursor('', 'default')}
+              className="px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink"
+            >
+              01 SERVICES
+            </a>
+            <a
               href="#portfolio"
               onClick={(e) => handleNav(e, 'portfolio')}
               onMouseEnter={() => triggerCursor('PLAYGROUND', 'hover')}
               onMouseLeave={() => triggerCursor('', 'default')}
               className={`px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs ${
-                activePage === 'portfolio' ? 'bg-[#88C000] text-ink font-bold shadow-xs' : 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink'
+                activePage === 'portfolio' ? 'bg-[#C8FF2F] text-ink font-bold shadow-xs' : 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink'
               }`}
             >
-              01 PORTFOLIO
+              02 PORTFOLIO
             </a>
             <a
               href="#about"
@@ -93,10 +104,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               onMouseEnter={() => triggerCursor('ABOUT', 'hover')}
               onMouseLeave={() => triggerCursor('', 'default')}
               className={`px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs ${
-                activePage === 'about' ? 'bg-[#88C000] text-ink font-bold shadow-xs' : 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink'
+                activePage === 'about' ? 'bg-[#C8FF2F] text-ink font-bold shadow-xs' : 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink'
               }`}
             >
-              02 ABOUT US
+              03 ABOUT US
             </a>
             <a
               href="#playground"
@@ -105,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onMouseLeave={() => triggerCursor('', 'default')}
               className="px-2.5 sm:px-3 py-1 sm:py-1.5 hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink transition-colors rounded-xs"
             >
-              03 LABS
+              04 LABS
             </a>
             <a
               href="#contact"
@@ -114,11 +125,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               onMouseLeave={() => triggerCursor('', 'default')}
               className={`px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs ${
                 activePage === 'contact'
-                  ? 'bg-accent-acid text-ink font-bold border border-ink'
+                  ? 'bg-[#C8FF2F] text-ink font-bold border border-ink'
                   : 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink'
               }`}
             >
-              04 CONTACT US
+              05 CONTACT US
             </a>
           </nav>
 
