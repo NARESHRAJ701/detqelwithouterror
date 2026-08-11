@@ -119,34 +119,41 @@ export function App() {
       {/* Main Content Layout */}
       <main>
         {currentPage === 'home' ? (
-          <>
+          <div className="relative">
             {/* Fullscreen Studio Ghibli Parallax Hero Section */}
-            <GhibliHeroSection onSelectProject={(project) => setSelectedProject(project)} />
+            <div className="sticky top-0 z-0 w-full h-screen overflow-hidden">
+              <GhibliHeroSection onSelectProject={(project) => setSelectedProject(project)} />
+            </div>
 
-            {/* Realistic Torn Paper Edge Transition */}
-            <TornPaperDivider />
+            {/* Content that scrolls ON TOP of the sticky hero section */}
+            <div className="relative z-10">
+              {/* Realistic Torn Paper Edge Transition */}
+              <TornPaperDivider />
 
-            {/* Hero Section (WE BUILD WORLDS) */}
-            <HeroSection />
+              <div className="bg-[#050608] dark:bg-canvas-dark shadow-2xl">
+                {/* Hero Section (WE BUILD WORLDS) */}
+                <HeroSection />
 
-            {/* Interactive Puzzle Services Showcase */}
-            <PuzzleServicesSection />
+                {/* Interactive Puzzle Services Showcase */}
+                <PuzzleServicesSection />
 
-            {/* Robot Vacuum Delivery Testimonial Scene */}
-            <RobotTestimonialScene />
+                {/* Robot Vacuum Delivery Testimonial Scene */}
+                <RobotTestimonialScene />
 
-            {/* Knowledge Library FAQ Section */}
-            <KnowledgeLibraryFAQ />
+                {/* Knowledge Library FAQ Section */}
+                <KnowledgeLibraryFAQ />
 
-            {/* Manifesto & Polaroid About Section */}
-            <AboutSection />
+                {/* Manifesto & Polaroid About Section */}
+                <AboutSection />
 
-            {/* Interactive Office Projector About Us Showcase */}
-            <ProjectorStorySection />
+                {/* Interactive Office Projector About Us Showcase */}
+                <ProjectorStorySection />
 
-            {/* Playground & Interactive Labs */}
-            <PlaygroundSection />
-          </>
+                {/* Playground & Interactive Labs */}
+                <PlaygroundSection />
+              </div>
+            </div>
+          </div>
         ) : currentPage === 'contact' ? (
           /* DEDICATED SEPARATE CONTACT US PAGE */
           <ContactUsPage />

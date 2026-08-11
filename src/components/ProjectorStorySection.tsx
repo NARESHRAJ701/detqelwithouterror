@@ -12,7 +12,6 @@ import {
   Sparkles, 
   Compass, 
   Heart,
-  ChevronRight,
   ArrowUpDown,
   Music,
   Radio,

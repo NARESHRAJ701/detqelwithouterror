@@ -94,7 +94,7 @@ export const TornPaperDivider: React.FC<TornPaperDividerProps> = () => {
 
 
   return (
-    <div className="relative w-full z-20 pointer-events-none select-none -mt-16 sm:-mt-24 md:-mt-28 lg:-mt-32">
+    <div className="relative w-full z-20 pointer-events-none select-none -mt-8 sm:-mt-12 md:-mt-14 lg:-mt-16">
       {/* Animated Torn Paper Vector Container */}
       <motion.div
         style={{ y: paperY }}

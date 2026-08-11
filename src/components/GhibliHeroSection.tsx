@@ -133,7 +133,7 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
       {/* 3. HERO CONTENT WRAPPER - Centered responsive container (max-w: 1600px, width: 92vw, margin: 0 auto) */}
       <motion.div
         style={{ y: contentY, opacity }}
-        className="relative z-10 w-[92vw] max-w-[1600px] h-full flex flex-col justify-between mx-auto pt-[clamp(4.5rem,7vh,5.5rem)] pb-[clamp(1rem,3vh,2rem)] px-2 sm:px-4 box-border overflow-hidden"
+        className="relative z-10 w-[92vw] max-w-[1600px] h-full flex flex-col justify-between mx-auto pt-[clamp(4.5rem,7vh,5.5rem)] pb-[clamp(4.5rem,7.5vh,6.5rem)] px-2 sm:px-4 box-border overflow-hidden"
       >
         {/* TOP STATUS CARD (LEFT SAFE AREA) */}
         <div className="flex justify-between items-start shrink-0 pt-2 sm:pt-4">
@@ -221,7 +221,7 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
         </div>
 
         {/* BOTTOM SECTION: LEFT SUPPORTING STATEMENT + CENTER DOCK + RIGHT PROJECT CARDS STACK */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-end shrink-0 pb-2 sm:pb-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-end shrink-0 pb-6 sm:pb-10 lg:pb-12">
           
           {/* LEFT SUPPORTING STATEMENT (THE DETQEL MANIFESTO) */}
           <motion.div
