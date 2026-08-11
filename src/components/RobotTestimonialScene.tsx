@@ -34,7 +34,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: 'Ananya Reddy',
     company: 'ARI Matcha',
     avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80',
-    rating: 5,
+    rating: 4.5,
     text: 'Their design process is insanely good. Every detail was crafted with purpose and clarity.',
     tapeColor: 'bg-emerald-500',
     pinType: 'pin',
@@ -58,7 +58,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: 'Billa Ferments',
     company: 'Billa Hotsauce',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
-    rating: 5,
+    rating: 4.5,
     text: 'Hyper-vibrant design with liquid WebGL shaders that blew our audience away!',
     tapeColor: 'bg-rose-400/80',
     pinType: 'clip',
@@ -78,6 +78,49 @@ const TESTIMONIALS: Testimonial[] = [
     offsetY: 10
   }
 ];
+
+const renderRatingStars = (rating: number) => {
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 !== 0;
+
+  return (
+    <div className="flex items-center gap-2 mb-2.5">
+      <div className="flex items-center gap-1">
+        {[...Array(5)].map((_, i) => {
+          if (i < fullStars) {
+            return (
+              <Star 
+                key={i} 
+                className="w-4 h-4 fill-amber-400 text-amber-400 drop-shadow-[0_0_5px_rgba(251,191,36,0.7)]" 
+              />
+            );
+          } else if (i === fullStars && hasHalfStar) {
+            return (
+              <div key={i} className="relative w-4 h-4">
+                <Star className="w-4 h-4 text-gray-600 fill-gray-700/40 absolute inset-0" />
+                <div className="overflow-hidden w-[50%] absolute inset-0">
+                  <Star className="w-4 h-4 fill-amber-400 text-amber-400 drop-shadow-[0_0_5px_rgba(251,191,36,0.7)]" />
+                </div>
+              </div>
+            );
+          } else {
+            return (
+              <Star 
+                key={i} 
+                className="w-4 h-4 text-gray-600 fill-gray-700/40" 
+              />
+            );
+          }
+        })}
+      </div>
+
+      {/* Rating numerical value display beside stars */}
+      <span className="font-mono text-xs font-black text-amber-300 bg-amber-950/80 border border-amber-500/50 px-1.5 py-0.5 rounded-sm shadow-xs">
+        {rating.toFixed(1)}
+      </span>
+    </div>
+  );
+};
 
 export const RobotTestimonialScene: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
@@ -332,12 +375,8 @@ export const RobotTestimonialScene: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Star Rating */}
-                    <div className="flex items-center gap-1 mb-2">
-                      {[...Array(card.rating)].map((_, sIdx) => (
-                        <Star key={sIdx} className="w-3.5 h-3.5 fill-accent-coral text-accent-coral" />
-                      ))}
-                    </div>
+                    {/* Star Rating with Rating Number Badge */}
+                    {renderRatingStars(card.rating)}
 
                     {/* Testimonial Quote Text */}
                     <p className="font-sans text-xs sm:text-sm text-white leading-relaxed font-medium">

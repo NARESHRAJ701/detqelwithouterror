@@ -137,10 +137,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={toggleSound}
             onMouseEnter={() => triggerCursor(soundOn ? 'MUTE' : 'UNMUTE', 'hover')}
             onMouseLeave={() => triggerCursor('', 'default')}
-            className="p-1.5 sm:p-2 bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white rounded-xs shadow-brutalist hover:bg-accent-coral hover:text-white transition-all"
+            className="p-1.5 sm:p-2 bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white rounded-xs shadow-brutalist hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink transition-all"
             title="Toggle Sound Effects"
           >
-            {soundOn ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4 opacity-50" />}
+            {soundOn ? <Volume2 className="w-4 h-4 text-ink dark:text-white" /> : <VolumeX className="w-4 h-4 opacity-50 text-ink dark:text-white" />}
           </button>
 
           {/* Theme Toggle */}
@@ -148,10 +148,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={toggleTheme}
             onMouseEnter={() => triggerCursor(darkMode ? 'LIGHT' : 'DARK', 'hover')}
             onMouseLeave={() => triggerCursor('', 'default')}
-            className="p-1.5 sm:p-2 bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white rounded-xs shadow-brutalist hover:bg-accent-blue hover:text-white transition-all"
+            className="p-1.5 sm:p-2 bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white rounded-xs shadow-brutalist hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink transition-all"
             title="Toggle Theme Mode"
           >
-            {darkMode ? <Sun className="w-4 h-4 text-accent-acid" /> : <Moon className="w-4 h-4" />}
+            {darkMode ? <Sun className="w-4 h-4 text-ink dark:text-white" /> : <Moon className="w-4 h-4 text-ink dark:text-white" />}
           </button>
 
           {/* Primary CTA */}
@@ -159,10 +159,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <a
               href="#contact"
               onClick={(e) => handleNav(e, 'contact')}
-              className={`hidden sm:flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 font-pixel text-[clamp(0.75rem,0.85vw,0.9rem)] font-bold border-2 border-ink rounded-xs shadow-brutalist hover:translate-x-0.5 hover:translate-y-0.5 transition-transform ${
+              className={`hidden sm:flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 font-pixel text-[clamp(0.75rem,0.85vw,0.9rem)] font-bold border-2 border-ink rounded-xs shadow-brutalist hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink hover:translate-x-0.5 hover:translate-y-0.5 transition-all ${
                 activePage === 'contact'
-                  ? 'bg-accent-coral text-black'
-                  : 'bg-ink text-black dark:bg-accent-acid dark:text-ink'
+                  ? 'bg-accent-coral text-ink'
+                  : 'bg-white text-ink dark:bg-canvas-dark-paper dark:text-white'
               }`}
             >
               LET'S TALK <ArrowUpRight className="w-4 h-4" />
