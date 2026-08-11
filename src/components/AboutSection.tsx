@@ -1,34 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { PolaroidGallery } from './PolaroidGallery';
-import { POLAROID_DATA } from '../data/projects';
-import { sound } from '../utils/sound';
-import { triggerCursor } from './CustomCursor';
-import { Award, Zap, Code2, Globe, Cpu, CheckCircle2 } from 'lucide-react';
+import { Award, Code2, Globe, CheckCircle2 } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('ALL');
-
-  const skillsData = [
-    { name: 'React / Next.js 15', category: 'FRONTEND', color: 'bg-blue-100 text-blue-900 border-blue-300' },
-    { name: 'TypeScript', category: 'FRONTEND', color: 'bg-sky-100 text-sky-900 border-sky-300' },
-    { name: 'Three.js & WebGL', category: '3D/WEBGL', color: 'bg-purple-100 text-purple-900 border-purple-300' },
-    { name: 'GLSL Shaders', category: '3D/WEBGL', color: 'bg-pink-100 text-pink-900 border-pink-300' },
-    { name: 'Framer Motion', category: 'MOTION', color: 'bg-emerald-100 text-emerald-900 border-emerald-300' },
-    { name: 'GSAP & ScrollTrigger', category: 'MOTION', color: 'bg-green-100 text-green-900 border-green-300' },
-    { name: 'Swiss Typography', category: 'DESIGN', color: 'bg-amber-100 text-amber-900 border-amber-300' },
-    { name: 'Design Systems Architecture', category: 'SYSTEMS', color: 'bg-indigo-100 text-indigo-900 border-indigo-300' },
-    { name: 'Stripe & Fintech APIs', category: 'SYSTEMS', color: 'bg-violet-100 text-violet-900 border-violet-300' },
-    { name: 'Tailwind CSS', category: 'FRONTEND', color: 'bg-teal-100 text-teal-900 border-teal-300' },
-    { name: 'WebGPU & Canvas', category: '3D/WEBGL', color: 'bg-rose-100 text-rose-900 border-rose-300' },
-    { name: 'Performance Optimization', category: 'SYSTEMS', color: 'bg-yellow-100 text-yellow-900 border-yellow-300' },
-  ];
-
-  const categories = ['ALL', 'FRONTEND', 'MOTION', '3D/WEBGL', 'DESIGN', 'SYSTEMS'];
-
-  const filteredSkills = activeTab === 'ALL'
-    ? skillsData
-    : skillsData.filter((s) => s.category === activeTab);
 
   const stats = [
     { label: 'AWWWARDS & FWA', value: '24+', icon: Award, color: 'text-accent-coral' },
@@ -108,73 +82,6 @@ export const AboutSection: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Polaroid Archive Gallery */}
-        <div className="mb-20">
-          <div className="mb-6 flex items-center justify-between">
-            <h3 className="font-pixel text-xl sm:text-2xl font-bold uppercase text-ink dark:text-white flex items-center gap-2">
-              <Zap className="w-5 h-5 text-accent-coral" /> BEHIND THE SCENES // RAW ARCHIVE
-            </h3>
-            <span className="font-mono text-xs text-ink/60 dark:text-gray-400">
-              [HOVER TO INSPECT]
-            </span>
-          </div>
-
-          <PolaroidGallery items={POLAROID_DATA} />
-        </div>
-
-        {/* Filterable Skill Chips */}
-        <div>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-            <div>
-              <h3 className="font-pixel text-xl sm:text-2xl font-bold uppercase text-ink dark:text-white flex items-center gap-2">
-                <Cpu className="w-5 h-5 text-accent-blue" /> TECHNICAL ARSENAL & SKILLS
-              </h3>
-              <p className="font-mono text-xs text-ink/60 dark:text-gray-400 mt-1">
-                Filter technologies by discipline
-              </p>
-            </div>
-
-            {/* Category Filter Tabs */}
-            <div className="flex flex-wrap gap-1.5 bg-white dark:bg-canvas-dark-paper p-1 rounded-xs border-2 border-ink shadow-brutalist-sm font-mono text-xs">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => {
-                    sound.playClick();
-                    setActiveTab(cat);
-                  }}
-                  className={`px-3 py-1 rounded-xs transition-colors font-bold ${
-                    activeTab === cat
-                      ? 'bg-ink text-white dark:bg-accent-acid dark:text-ink'
-                      : 'hover:bg-black/5 dark:hover:bg-white/10 text-ink dark:text-gray-300'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Skill Chips Cloud */}
-          <div className="flex flex-wrap gap-3">
-            {filteredSkills.map((skill, idx) => (
-              <motion.span
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.2, delay: idx * 0.03 }}
-                onMouseEnter={() => {
-                  sound.playHover();
-                  triggerCursor('SKILL', 'hover');
-                }}
-                onMouseLeave={() => triggerCursor('', 'default')}
-                className={`font-mono text-xs font-bold px-4 py-2 rounded-xs border-2 border-ink shadow-brutalist-sm hover:scale-105 transition-transform cursor-pointer ${skill.color}`}
-              >
-                ⚡ {skill.name}
-              </motion.span>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

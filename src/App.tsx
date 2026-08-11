@@ -5,8 +5,8 @@ import { GhibliHeroSection } from './components/GhibliHeroSection';
 import { TornPaperDivider } from './components/TornPaperDivider';
 import { AboutSection } from './components/AboutSection';
 import { HeroSection } from './components/HeroSection';
-import { ProjectsSection } from './components/ProjectsSection';
-import { RawArchiveSection } from './components/RawArchiveSection';
+import { PuzzleServicesSection } from './components/PuzzleServicesSection';
+
 import { RobotTestimonialScene } from './components/RobotTestimonialScene';
 import { KnowledgeLibraryFAQ } from './components/KnowledgeLibraryFAQ';
 import { PlaygroundSection } from './components/PlaygroundSection';
@@ -126,14 +126,11 @@ export function App() {
             {/* Realistic Torn Paper Edge Transition */}
             <TornPaperDivider />
 
-            {/* Hero Section */}
+            {/* Hero Section (WE BUILD WORLDS) */}
             <HeroSection />
 
-            {/* Section 3: Featured Projects Showcase ("Selected Work" / "Our Works") */}
-            <ProjectsSection onSelectProject={(project) => setSelectedProject(project)} />
-
-            {/* Behind The Scenes Raw Archive Showcase */}
-            <RawArchiveSection onSelectProject={(project) => setSelectedProject(project)} />
+            {/* Interactive Puzzle Services Showcase */}
+            <PuzzleServicesSection />
 
             {/* Robot Vacuum Delivery Testimonial Scene */}
             <RobotTestimonialScene />

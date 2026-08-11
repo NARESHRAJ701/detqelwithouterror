@@ -1,16 +1,13 @@
 import React, { useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-interface TornPaperDividerProps {
-  onScrollClick?: () => void;
-}
+interface TornPaperDividerProps {}
 
-export const TornPaperDivider: React.FC<TornPaperDividerProps> = ({ onScrollClick }) => {
+export const TornPaperDivider: React.FC<TornPaperDividerProps> = () => {
   const { scrollY } = useScroll();
 
   // Parallax subtle movement on scroll
   const paperY = useTransform(scrollY, [0, 600], [0, 18]);
-  const badgeY = useTransform(scrollY, [0, 600], [0, 10]);
 
   // Generate realistic hand-torn paper edge vectors
   const { darkFillPath, paperFiberPath, shadowPath, highlightPath } = useMemo(() => {
@@ -95,18 +92,6 @@ export const TornPaperDivider: React.FC<TornPaperDividerProps> = ({ onScrollClic
     };
   }, []);
 
-  const handleScrollClick = () => {
-    if (onScrollClick) {
-      onScrollClick();
-    } else {
-      const target = document.getElementById('second-section') || document.querySelector('section');
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.scrollBy({ top: window.innerHeight * 0.75, behavior: 'smooth' });
-      }
-    }
-  };
 
   return (
     <div className="relative w-full z-20 pointer-events-none select-none -mt-16 sm:-mt-24 md:-mt-28 lg:-mt-32">

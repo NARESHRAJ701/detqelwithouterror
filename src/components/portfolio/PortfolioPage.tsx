@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motio
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, ArrowRight, ExternalLink, SlidersHorizontal } from 'lucide-react';
+import { ProjectsSection } from '../ProjectsSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -733,7 +734,7 @@ interface PortfolioPageProps {
   onSelectProject?: (project: any) => void;
 }
 
-export const PortfolioPage: React.FC<PortfolioPageProps> = () => {
+export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject }) => {
   const [activeFilter, setActiveFilter] = useState<FilterKey>('ALL');
   const [displayedProjects, setDisplayedProjects] = useState(PROJECTS);
   const filterBarRef = useRef<HTMLDivElement>(null);
@@ -922,6 +923,11 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = () => {
             </motion.div>
           </AnimatePresence>
         </section>
+
+        {/* ── SECTION 04.5: FEATURED PROJECTS (Moved from Home) ─────────────── */}
+        <div className="mb-20 -mx-6 sm:-mx-10 rounded-2xl overflow-hidden shadow-2xl">
+          <ProjectsSection onSelectProject={onSelectProject || (() => {})} />
+        </div>
 
         {/* ── SECTION 05: CREATIVE CTA ─────────────────────────────────────── */}
         <section className="mb-0">
