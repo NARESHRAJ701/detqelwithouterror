@@ -48,7 +48,7 @@ export const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#050608] border-y border-[#1E2640]/50 text-white overflow-hidden selection:bg-[#00FF9D] selection:text-[#050608]">
+    <section id="second-section" ref={sectionRef} className="relative w-full bg-[#050608] border-y border-[#1E2640]/50 text-white overflow-hidden selection:bg-[#00FF9D] selection:text-[#050608]">
       
       {/* Micro labels / Framing */}
       <div className="absolute top-4 left-6 text-[10px] uppercase font-mono tracking-widest text-gray-500 z-20 flex items-center gap-2">
@@ -121,8 +121,9 @@ export const HeroSection: React.FC = () => {
           
           {/* Subtle gradient overlay to blend left edge on desktop */}
           <div className="hidden lg:block absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-[#050608] via-[#050608]/80 to-transparent z-10 pointer-events-none" />
-          {/* Top gradient for mobile blending */}
-          <div className="block lg:hidden absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#050608] to-transparent z-10 pointer-events-none" />
+          
+          {/* Top gradient to blend with torn paper transition above */}
+          <div className="absolute inset-x-0 top-0 h-16 lg:h-24 bg-gradient-to-b from-[#050608] via-[#050608]/60 to-transparent z-10 pointer-events-none" />
           
           <video
             ref={videoRef}

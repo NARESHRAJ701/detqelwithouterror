@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { GhibliHeroSection } from './components/GhibliHeroSection';
+import { TornPaperDivider } from './components/TornPaperDivider';
 import { AboutSection } from './components/AboutSection';
 import { HeroSection } from './components/HeroSection';
 import { ProjectsSection } from './components/ProjectsSection';
@@ -121,6 +122,9 @@ export function App() {
           <>
             {/* Fullscreen Studio Ghibli Parallax Hero Section */}
             <GhibliHeroSection onSelectProject={(project) => setSelectedProject(project)} />
+
+            {/* Realistic Torn Paper Edge Transition */}
+            <TornPaperDivider />
 
             {/* Hero Section */}
             <HeroSection />
