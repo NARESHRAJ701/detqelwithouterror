@@ -288,7 +288,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
             </div>
             <div className="flex flex-col">
               <span className="font-pixel text-lg sm:text-xl font-bold tracking-tight text-black flex items-center gap-1.5">
-                DETQEL <span className="w-2 h-2 rounded-full bg-[#C8FF2F] animate-ping" />
+                DETQEL <span className="w-2 h-2 rounded-full bg-[#C8FF2F] border border-black/40" />
               </span>
               <span className="font-mono text-[9px] text-black/60 uppercase tracking-wider">Creative Studio</span>
             </div>

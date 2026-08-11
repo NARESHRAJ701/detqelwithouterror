@@ -170,12 +170,12 @@ export const ServicesSection: React.FC = () => {
           </div>
 
           <div className="flex flex-col items-start md:items-end justify-between self-stretch space-y-6 max-w-md">
-            <div className="font-mono text-xs font-bold text-ink/70 dark:text-gray-300 flex items-center gap-2">
+            <div className="font-mono text-xs font-bold text-ink dark:text-gray-200 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-accent-coral" />
               <span>7 SERVICE OFFERINGS</span>
               <span className="text-ink font-bold text-sm">┐</span>
             </div>
-            <p className="font-sans text-base text-ink/70 dark:text-gray-300 leading-relaxed md:text-right">
+            <p className="font-sans text-base text-ink dark:text-gray-200 font-medium leading-relaxed md:text-right">
               From brand identity to AI automation — a full-spectrum studio built for modern businesses that demand excellence.
             </p>
           </div>
@@ -208,7 +208,7 @@ export const ServicesSection: React.FC = () => {
                   }`}
                 >
                   {/* Number */}
-                  <span className="font-mono text-[10px] font-bold text-ink/40 dark:text-white/30 w-6 shrink-0">
+                  <span className="font-mono text-[10px] font-bold text-ink dark:text-gray-300 w-6 shrink-0">
                     {service.number}
                   </span>
 
@@ -223,7 +223,7 @@ export const ServicesSection: React.FC = () => {
                   {/* Label */}
                   <span
                     className={`font-pixel text-xs sm:text-sm font-bold uppercase tracking-wide flex-1 text-left ${
-                      isActive ? 'text-ink dark:text-white' : 'text-ink/70 dark:text-gray-400'
+                      isActive ? 'text-ink dark:text-white' : 'text-ink dark:text-gray-300'
                     }`}
                   >
                     {service.label}
@@ -266,7 +266,7 @@ export const ServicesSection: React.FC = () => {
                     <span className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
                     <span className="w-3 h-3 rounded-full bg-[#27C93F]" />
                   </div>
-                  <span className="font-mono text-[10px] font-bold text-ink/40 dark:text-gray-500 uppercase tracking-widest">
+                  <span className="font-mono text-[10px] font-bold text-ink dark:text-gray-300 uppercase tracking-widest">
                     SERVICE_INSPECTOR // #{activeService.number}
                   </span>
                 </div>
@@ -305,14 +305,14 @@ export const ServicesSection: React.FC = () => {
                   <h3 className="font-pixel text-2xl sm:text-3xl font-black uppercase text-ink dark:text-white whitespace-pre-line leading-tight">
                     {activeService.title}
                   </h3>
-                  <p className="font-sans text-sm text-ink/75 dark:text-gray-300 leading-relaxed">
+                  <p className="font-sans text-sm text-ink dark:text-gray-200 font-medium leading-relaxed">
                     {activeService.description}
                   </p>
                 </div>
 
                 {/* Capabilities */}
                 <div className="space-y-2">
-                  <span className="font-mono text-[10px] font-bold text-ink/50 dark:text-gray-400 uppercase tracking-wider block">
+                  <span className="font-mono text-[10px] font-bold text-ink dark:text-gray-300 uppercase tracking-wider block">
                     CAPABILITIES
                   </span>
                   <div className="flex flex-wrap gap-2">
@@ -329,7 +329,7 @@ export const ServicesSection: React.FC = () => {
 
                 {/* Deliverables */}
                 <div className="p-3 bg-canvas-paper dark:bg-canvas-dark border border-ink/20 rounded-xs font-mono text-xs space-y-1">
-                  <span className="text-ink/50 dark:text-gray-400 block text-[10px]">DELIVERABLES</span>
+                  <span className="text-ink dark:text-gray-300 block text-[10px]">DELIVERABLES</span>
                   <span className="font-bold text-ink dark:text-white">{activeService.deliverables}</span>
                 </div>
 
@@ -363,7 +363,7 @@ export const ServicesSection: React.FC = () => {
 
         {/* BOTTOM CONTROLS */}
         <div className="flex items-center justify-between pt-6 border-t-2 border-ink">
-          <div className="flex items-center gap-4 font-mono text-xs font-bold text-ink/70 dark:text-gray-300">
+          <div className="flex items-center gap-4 font-mono text-xs font-bold text-ink dark:text-gray-200">
             <span className="uppercase font-mono text-[10px] tracking-widest opacity-60">
               {activeService.number} / 07
             </span>

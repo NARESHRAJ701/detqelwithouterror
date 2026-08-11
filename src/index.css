@@ -40,31 +40,38 @@
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Color Tokens */
-.bg-canvas { background-color: #F9F8F6; }
-.bg-canvas-paper { background-color: #F4F3EF; }
-.bg-canvas-dark { background-color: #0E0E11; }
-.bg-canvas-dark-paper { background-color: #16161C; }
+@layer utilities {
+  /* Color Tokens */
+  .bg-canvas { background-color: #F9F8F6; }
+  .bg-canvas-paper { background-color: #F4F3EF; }
+  .bg-canvas-dark { background-color: #0E0E11; }
+  .bg-canvas-dark-paper { background-color: #16161C; }
 
-.text-ink { color: #0E0E11; }
+  .text-ink { color: #0E0E11; }
 
-.bg-accent-acid { background-color: #7939a1; }
-.text-accent-acid { color: #7939a1; }
+  .bg-accent-acid { background-color: #7939a1; }
+  .text-accent-acid { color: #7939a1; }
 
-.bg-accent-coral { background-color: #FF5533; }
-.text-accent-coral { color: #FF5533; }
+  .bg-accent-coral { background-color: #FF5533; }
+  .text-accent-coral { color: #FF5533; }
 
-.bg-accent-blue { background-color: #2563EB; }
-.text-accent-blue { color: #2563EB; }
+  .bg-accent-blue { background-color: #2563EB; }
+  .text-accent-blue { color: #2563EB; }
 
-.bg-accent-purple { background-color: #8B5CF6; }
-.text-accent-purple { color: #8B5CF6; }
+  .bg-accent-purple { background-color: #8B5CF6; }
+  .text-accent-purple { color: #8B5CF6; }
 
-.bg-sticky-yellow { background-color: #FFF066; }
-.bg-sticky-pink { background-color: #FFC2E2; }
-.bg-sticky-mint { background-color: #B2F5EA; }
-.bg-sticky-lavender { background-color: #E2D5FF; }
-.bg-sticky-orange { background-color: #FFD1A9; }
+  .bg-sticky-yellow { background-color: #FFF066; }
+  .bg-sticky-pink { background-color: #FFC2E2; }
+  .bg-sticky-mint { background-color: #B2F5EA; }
+  .bg-sticky-lavender { background-color: #E2D5FF; }
+  .bg-sticky-orange { background-color: #FFD1A9; }
+
+  /* Cone Clip Path for Study Lamp Light Beam */
+  .clip-path-cone {
+    clip-path: polygon(44% 0%, 56% 0%, 100% 100%, 0% 100%);
+  }
+}
 
 /* Brutalist Shadows */
 .shadow-brutalist { box-shadow: 4px 4px 0px 0px #0E0E11; }

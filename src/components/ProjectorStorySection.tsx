@@ -271,8 +271,8 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                   </span>
                 </div>
 
-                <h2 className="font-pixel text-4xl sm:text-6xl font-black uppercase tracking-tight transition-colors duration-500">
-                  OUR <span className="text-accent-acid">STORY.</span>
+                <h2 className="font-pixel text-4xl sm:text-6xl font-black uppercase tracking-tight text-accent-acid transition-colors duration-500">
+                  OUR STORY<span className="text-accent-coral">.</span>
                 </h2>
 
                 <p className={`font-sans text-sm sm:text-base leading-relaxed max-w-md mt-3 transition-colors duration-500 ${
@@ -362,10 +362,10 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   onClick={togglePower}
-                  onMouseEnter={() => triggerCursor('POWER ON/OFF', 'hover')}
+                  onMouseEnter={() => triggerCursor('POWER ON/OFF 💡', 'hover')}
                   onMouseLeave={() => triggerCursor('', 'default')}
                   className={`relative w-52 sm:w-60 h-28 sm:h-32 bg-gradient-to-b from-neutral-200 via-neutral-300 to-neutral-400 dark:from-neutral-700 dark:via-neutral-800 dark:to-neutral-900 border-2 border-neutral-500 rounded-xl shadow-2xl cursor-pointer p-3 flex flex-col justify-between transition-all ${
-                    isOn ? 'shadow-[0_0_40px_rgba(132,204,22,0.3)]' : ''
+                    isOn ? 'shadow-[0_0_40px_rgba(139,92,246,0.4)]' : ''
                   }`}
                 >
                   {/* Top Vents & Brand Badge */}
@@ -376,7 +376,7 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                         isWarmingUp 
                           ? 'bg-amber-400 animate-ping' 
                           : isOn 
-                            ? 'bg-accent-acid shadow-[0_0_8px_#84cc16] animate-pulse' 
+                            ? 'bg-accent-acid shadow-[0_0_8px_#8B5CF6] animate-pulse' 
                             : 'bg-red-500'
                       }`} />
                       <span className="font-mono text-[9px] font-bold text-neutral-700 dark:text-neutral-300">
@@ -435,19 +435,32 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                       ))}
                     </div>
 
-                    {/* Projector Lens Assembly */}
-                    <div className="relative w-14 h-14 rounded-full bg-neutral-900 border-4 border-neutral-400 dark:border-neutral-600 flex items-center justify-center overflow-hidden shadow-inner shrink-0">
-                      {/* Glass Lens Layer */}
-                      <div className={`w-10 h-10 rounded-full transition-all duration-500 flex items-center justify-center ${
+                    {/* Projector Lens / Power ON-OFF Button */}
+                    <motion.button
+                      whileHover={{ scale: 1.08 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        togglePower();
+                      }}
+                      onMouseEnter={() => triggerCursor('POWER ON/OFF 💡', 'hover')}
+                      onMouseLeave={() => triggerCursor('', 'default')}
+                      className={`relative w-14 h-14 rounded-full border-4 border-neutral-400 dark:border-neutral-600 flex items-center justify-center overflow-hidden shadow-brutalist-sm shrink-0 transition-all cursor-pointer ${
                         isOn 
-                          ? 'bg-gradient-to-r from-amber-200 via-white to-amber-100 shadow-[0_0_50px_20px_rgba(255,255,255,1)]' 
-                          : 'bg-neutral-800'
+                          ? 'bg-accent-acid text-ink shadow-[0_0_25px_rgba(139,92,246,0.8)]' 
+                          : 'bg-neutral-800 text-white hover:bg-neutral-700'
+                      }`}
+                      title="Click to Turn Projector ON / OFF"
+                    >
+                      {/* Glass Lens & Illuminated Power Icon */}
+                      <div className={`w-10 h-10 rounded-full transition-all duration-300 flex items-center justify-center ${
+                        isOn 
+                          ? 'bg-gradient-to-r from-purple-300 via-white to-purple-200 text-ink shadow-[0_0_20px_#8B5CF6]' 
+                          : 'bg-neutral-700 text-white/80'
                       }`}>
-                        {isOn && (
-                          <div className="w-4 h-4 rounded-full bg-white blur-[2px] animate-ping" />
-                        )}
+                        <Power className={`w-5 h-5 ${isOn ? 'animate-pulse text-purple-950' : 'text-white'}`} />
                       </div>
-                    </div>
+                    </motion.button>
                   </div>
 
                   {/* Projector Beam Volumetric Cone Effect */}
@@ -474,45 +487,6 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                   </AnimatePresence>
                 </motion.div>
 
-              </div>
-            </div>
-
-            {/* 3. Desk Card: Projector Power Control Board */}
-            <div className="relative pt-4 flex items-end justify-end">
-              <div className="bg-white/95 dark:bg-canvas-dark-paper/95 border-2 border-ink p-3 rounded-xs shadow-brutalist max-w-xs rotate-[-2deg] relative z-20">
-                {/* Yellow Masking Tape on Top */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-yellow-200/80 border border-yellow-400/60 rotate-[-3deg]" />
-
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <h4 className="font-pixel text-xs font-bold uppercase text-ink dark:text-white">
-                      PROJECTOR CONTROL
-                    </h4>
-                    <p className="font-mono text-[10px] text-ink/60 dark:text-gray-400 mt-0.5">
-                      {isOn ? `Mode: ${activeMode}` : 'Click to start presentation'}
-                    </p>
-                  </div>
-
-                  {/* Illuminated Large Power Button */}
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={togglePower}
-                    className={`w-12 h-12 rounded-full border-2 border-ink flex items-center justify-center transition-all shadow-brutalist-sm ${
-                      isOn 
-                        ? 'bg-accent-acid text-ink shadow-[0_0_20px_rgba(132,204,22,0.8)]' 
-                        : 'bg-neutral-800 text-white hover:bg-neutral-700'
-                    }`}
-                  >
-                    <Power className={`w-6 h-6 ${isOn ? 'animate-pulse' : ''}`} />
-                  </motion.button>
-                </div>
-
-                {/* Handwritten Callout */}
-                <div className="mt-2 text-[9px] font-mono text-accent-acid italic font-bold flex items-center gap-1">
-                  <span>sound on for better experience</span>
-                  <ChevronRight className="w-3 h-3" />
-                </div>
               </div>
             </div>
 

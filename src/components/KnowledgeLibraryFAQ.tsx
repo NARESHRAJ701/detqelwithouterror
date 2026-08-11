@@ -348,8 +348,6 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [lampOn, setLampOn] = useState(true);
   const [catState, setCatState] = useState<'sleeping' | 'stretching' | 'yawning' | 'meowing' | 'purring'>('sleeping');
-  const [robotBlinking, setRobotBlinking] = useState(false);
-  const [birdLanded, setBirdLanded] = useState(false);
 
   // Keyboard shortcut listener to close open book modal with ESC key
   useEffect(() => {
@@ -363,13 +361,8 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedBook]);
 
-  // Idle animations for robot blinking, cat yawning, bird landing
+  // Idle animation for cat yawning/stretching
   useEffect(() => {
-    const robotInterval = setInterval(() => {
-      setRobotBlinking(true);
-      setTimeout(() => setRobotBlinking(false), 250);
-    }, 4000);
-
     const catInterval = setInterval(() => {
       const actions: ('stretching' | 'yawning' | 'purring')[] = ['stretching', 'yawning', 'purring'];
       const nextAction = actions[Math.floor(Math.random() * actions.length)];
@@ -377,14 +370,8 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
       setTimeout(() => setCatState('sleeping'), 3200);
     }, 10000);
 
-    const birdInterval = setInterval(() => {
-      setBirdLanded(prev => !prev);
-    }, 9000);
-
     return () => {
-      clearInterval(robotInterval);
       clearInterval(catInterval);
-      clearInterval(birdInterval);
     };
   }, []);
 
@@ -547,7 +534,7 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
               </div>
 
               {/* Bold Pixel Heading */}
-              <h2 className="font-pixel text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink dark:text-white tracking-tight leading-[1.02] mb-4">
+              <h2 className="font-pixel text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0E0E11] dark:text-white tracking-tight leading-[1.02] mb-4">
                 FREQUENTLY<br />
                 ASKED<br />
                 <span className="text-accent-coral underline decoration-accent-acid decoration-4 underline-offset-4">
@@ -561,13 +548,13 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
 
               {/* Handwritten Note & SVG Hand-drawn Arrow */}
               <div className="relative inline-block mt-2 mb-6">
-                <div className="font-handwriting text-2xl sm:text-3xl text-accent-coral dark:text-accent-acid font-bold -rotate-3 hover:scale-105 transition-transform flex items-center gap-2">
+                <div className="font-handwriting text-2xl sm:text-3xl text-accent-coral dark:text-amber-300 font-bold -rotate-3 hover:scale-105 transition-transform flex items-center gap-2">
                   <span>Pick a book to learn more</span>
                   <span className="animate-bounce">→</span>
                 </div>
                 
                 {/* SVG Arrow pointing right */}
-                <svg className="w-24 h-10 text-accent-coral dark:text-accent-acid ml-12 -mt-1 hidden sm:block" viewBox="0 0 100 40" fill="none">
+                <svg className="w-24 h-10 text-accent-coral dark:text-amber-300 ml-12 -mt-1 hidden sm:block" viewBox="0 0 100 40" fill="none">
                   <path d="M5 10 C30 5, 60 30, 90 20" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" fill="none" />
                   <path d="M82 14 L92 20 L84 28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                 </svg>
@@ -598,12 +585,15 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
           {/* Right Column: Creative Office Environment & Desktop Shelf Decor */}
           <div className="lg:col-span-7 flex flex-col justify-end">
             
-            {/* Top Shelf Accessories Bar: Study Lamp (Left Corner) & Animated Sleeping Cat (Right Corner) */}
+            {/* Top Shelf Accessories Bar: Study Lamp (Centered) & Animated Sleeping Cat (Right Corner) */}
             <div className="relative flex items-end justify-between px-3 sm:px-6 pb-2 border-b-4 border-[#5A381E] bg-gradient-to-r from-[#8B5A2B]/25 via-transparent to-[#8B5A2B]/25 rounded-t-xs min-h-[95px]">
               
-              {/* LEFT CORNER: Interactive Study Lamp */}
+              {/* LEFT SPACER (For visual balance) */}
+              <div className="w-16 hidden sm:block pointer-events-none" />
+
+              {/* CENTER: Interactive Study Lamp */}
               <div
-                className="relative flex flex-col items-center cursor-pointer group select-none z-20"
+                className="absolute left-1/2 -translate-x-1/2 bottom-0 flex flex-col items-center cursor-pointer group select-none z-30"
                 onClick={() => {
                   if (lampOn) {
                     sound.playProjectorOff();
@@ -615,68 +605,27 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
                 title="Click to toggle Study Lamp light"
               >
                 {/* Lamp Dome Shade & Glow Bulb */}
-                <div className={`w-10 h-9 rounded-t-full border-2 border-ink shadow-md relative z-10 flex items-center justify-center transition-colors ${lampOn ? 'bg-amber-400 dark:bg-amber-500' : 'bg-gray-400 dark:bg-gray-700'}`}>
-                  <div className={`w-3.5 h-3.5 rounded-full border border-ink/40 transition-colors ${lampOn ? 'bg-yellow-100 shadow-[0_0_14px_#FCD34D] animate-pulse' : 'bg-gray-600'}`} />
+                <div className={`w-10 h-9 rounded-t-full border-2 border-ink shadow-md relative z-20 flex items-center justify-center transition-colors ${lampOn ? 'bg-amber-400 dark:bg-amber-500' : 'bg-gray-400 dark:bg-gray-700'}`}>
+                  <div className={`w-3.5 h-3.5 rounded-full border border-ink/40 transition-colors ${lampOn ? 'bg-yellow-100 shadow-[0_0_16px_#FCD34D] animate-pulse' : 'bg-gray-600'}`} />
                 </div>
                 {/* Gooseneck Arm Stem & Brass Base */}
-                <div className="w-1.5 h-11 bg-gradient-to-b from-gray-700 to-amber-900 border-x border-ink -mt-0.5" />
-                <div className="w-12 h-2.5 bg-amber-900 dark:bg-amber-950 rounded-xs border-2 border-ink shadow-brutalist-sm" />
+                <div className="w-1.5 h-11 bg-gradient-to-b from-gray-700 to-amber-900 border-x border-ink -mt-0.5 relative z-20" />
+                <div className="w-12 h-2.5 bg-amber-900 dark:bg-amber-950 rounded-xs border-2 border-ink shadow-brutalist-sm relative z-20" />
 
-                {/* Light Beam Cone (Radiates light onto shelf when ON) */}
+                {/* Single Soft Light Beam Cone (Fades out halfway down the wooden board) */}
                 {lampOn && (
-                  <div className="absolute top-8 left-1/2 -translate-x-1/2 w-48 h-56 bg-gradient-to-b from-amber-300/35 via-amber-200/15 to-transparent pointer-events-none clip-path-cone blur-[1px] opacity-90 transition-opacity z-0" />
+                  <div className="absolute top-7 left-1/2 -translate-x-1/2 w-[520px] sm:w-[680px] max-w-[90vw] h-[220px] sm:h-[250px] bg-gradient-to-b from-amber-300/30 via-amber-200/12 to-transparent clip-path-cone blur-[2px] pointer-events-none z-10 opacity-80 transition-opacity" />
                 )}
 
                 {/* Hover Tooltip Label */}
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity font-pixel text-[8px] font-bold bg-white dark:bg-canvas-dark-paper border border-ink px-1 rounded-xs mt-1 shadow-xs whitespace-nowrap">
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity font-pixel text-[8px] font-bold bg-white dark:bg-canvas-dark-paper border border-ink px-1 rounded-xs mt-1 shadow-xs whitespace-nowrap z-30">
                   {lampOn ? 'TURN OFF 💡' : 'TURN ON 💡'}
                 </span>
               </div>
 
-              {/* CENTER DECOR: DETQEL Mug & Robo Mascot */}
-              <div className="flex items-end gap-5 sm:gap-8 pb-1">
-                {/* DETQEL Coffee Mug */}
-                <div className="relative flex flex-col items-center">
-                  <motion.div
-                    className="w-1.5 h-1.5 rounded-full bg-white/70 mb-1"
-                    animate={{ y: [-2, -15], opacity: [0.8, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                  <div className="w-9 h-10 bg-white dark:bg-canvas-dark-paper border-2 border-ink rounded-b-md shadow-brutalist-sm relative flex items-center justify-center">
-                    <span className="font-pixel text-[8px] font-bold text-accent-coral">AEX</span>
-                    <div className="absolute -right-3 top-2 w-3 h-5 border-2 border-ink rounded-r-md" />
-                  </div>
-                </div>
-
-                {/* Tiny Pixel Robot Mascot */}
-                <div className="relative flex flex-col items-center group cursor-pointer" onClick={() => sound.playSuccess()}>
-                  <div className="bg-emerald-400 border-2 border-ink px-2 py-1 rounded-xs shadow-brutalist-sm text-center relative">
-                    <div className="flex items-center justify-center gap-1">
-                      <div className={`w-1.5 h-1.5 bg-black rounded-full ${robotBlinking ? 'h-0.5' : ''}`} />
-                      <div className={`w-1.5 h-1.5 bg-black rounded-full ${robotBlinking ? 'h-0.5' : ''}`} />
-                    </div>
-                    <span className="font-pixel text-[7px] text-ink font-bold block mt-0.5">ROBO-FAQ</span>
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-1 h-3 bg-ink">
-                      <div className="w-2 h-2 rounded-full bg-accent-acid border border-ink -mt-1 -ml-0.5 animate-pulse" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Pixel Bird Landing */}
-                {birdLanded && (
-                  <motion.div
-                    initial={{ y: -20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    className="hidden sm:block font-pixel text-xs bg-sky-200 dark:bg-sky-900 border border-ink px-1.5 py-0.5 rounded-xs shadow-xs"
-                  >
-                    🐦 *chirp*
-                  </motion.div>
-                )}
-              </div>
-
               {/* RIGHT CORNER: Animated Sleeping Pixel Cat */}
               <div
-                className="relative flex flex-col items-end cursor-pointer group select-none z-20 pb-1"
+                className="relative flex flex-col items-end cursor-pointer group select-none z-20 pb-1 ml-auto"
                 onClick={triggerCatAction}
                 title="Click to pet the sleeping cat!"
               >
@@ -774,14 +723,46 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
               <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-amber-300" />
               <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-amber-300" />
 
-              {/* Inner Wooden Backing Box */}
-              <div className="relative bg-[#361E0E] dark:bg-[#120B06] border-2 border-[#241308] p-4 sm:p-6 rounded-xs shadow-inner min-h-[340px] flex items-end justify-center overflow-x-auto no-scrollbar">
-                
+              {/* Inner Wooden Backing Box (Adjusted UI Lighting for Lamp ON/OFF) */}
+              <div
+                className={`relative border-2 border-[#241308] p-4 sm:p-6 rounded-xs shadow-inner min-h-[340px] flex items-end justify-center overflow-x-auto no-scrollbar transition-all duration-500 ${
+                  lampOn
+                    ? 'bg-[#361E0E] dark:bg-[#120B06] shadow-[inset_0_0_50px_rgba(251,191,36,0.12)]'
+                    : 'bg-[#0E0704] dark:bg-[#070302] shadow-[inset_0_0_80px_rgba(0,0,0,0.85)]'
+                }`}
+              >
+                {/* Warm Ambient Illumination Overlay over Wooden Backing when Lamp ON */}
+                {lampOn && (
+                  <div className="absolute inset-0 bg-gradient-to-b from-amber-400/12 via-amber-300/4 to-transparent pointer-events-none z-0 transition-opacity duration-500" />
+                )}
+
+                {/* Dark Shadow Overlay when Lamp OFF */}
+                {!lampOn && (
+                  <div className="absolute inset-0 bg-black/60 pointer-events-none z-0 transition-opacity duration-500" />
+                )}
+
+                {/* Dark Cabinet Guidance Prompt when Lamp is OFF */}
+                {!lampOn && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20 transition-opacity duration-500 px-4 text-center">
+                    <div className="bg-black/65 border border-amber-400/30 px-4 py-2.5 rounded-xs backdrop-blur-xs shadow-lg">
+                      <span className="font-pixel text-xs sm:text-sm text-amber-300 uppercase tracking-widest block animate-pulse">
+                        💡 CLICK THE STUDY LAMP ABOVE TO REVEAL FAQ BOOKS
+                      </span>
+                    </div>
+                  </div>
+                )}
+
                 {/* Wooden Shelf Base Board */}
                 <div className="absolute bottom-0 left-0 right-0 h-5 bg-[#543315] border-t-2 border-[#8B5A2B] shadow-md z-0" />
 
-                {/* THE 10 BOOKS ROW */}
-                <div className="relative z-10 flex items-end justify-center gap-1.5 sm:gap-2.5 px-2 pb-5 min-w-[620px] sm:min-w-0">
+                {/* THE 10 BOOKS ROW (Hidden when Lamp OFF, Revealed when Lamp ON) */}
+                <div
+                  className={`relative z-10 flex items-end justify-center gap-1.5 sm:gap-2.5 px-2 pb-5 min-w-[620px] sm:min-w-0 transition-all duration-500 ease-in-out ${
+                    lampOn
+                      ? 'opacity-100 translate-y-0 pointer-events-auto'
+                      : 'opacity-0 translate-y-4 pointer-events-none'
+                  }`}
+                >
                   {filteredBooks.map((book, idx) => {
                     const IconComp = book.icon;
                     const isHovered = hoveredBookId === book.id;
@@ -924,52 +905,52 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
                 </button>
               </div>
 
-              {/* 2-PAGE SPREAD CONTENT BOX */}
-              <div className="grid grid-cols-1 md:grid-cols-2 bg-[#FAF8F3] dark:bg-[#1A1822] border-2 border-ink rounded-xs shadow-inner relative overflow-hidden mt-12 md:mt-0">
+              {/* 2-PAGE SPREAD CONTENT BOX (Authentic Paper Journal Spread) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 bg-[#FBF9F5] text-[#0E0E11] border-2 border-[#1E1007] rounded-xs shadow-inner relative overflow-hidden mt-12 md:mt-0">
                 
                 {/* Center Book Spine Fold Shadow */}
                 <div className="hidden md:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-8 bg-gradient-to-r from-black/15 via-black/5 to-black/15 pointer-events-none z-20" />
 
                 {/* LEFT PAGE */}
-                <div className="p-6 sm:p-8 border-b-2 md:border-b-0 md:border-r-2 border-ink/20 flex flex-col justify-between relative bg-paper-grain">
+                <div className="p-6 sm:p-8 border-b-2 md:border-b-0 md:border-r-2 border-slate-300 flex flex-col justify-between relative bg-paper-grain">
                   <div>
                     {/* Category & Book Number Header */}
                     <div className="flex items-center justify-between mb-4">
-                      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xs font-pixel text-xs font-bold border border-ink/20 ${selectedBook.color.badgeBg} ${selectedBook.color.badgeText}`}>
+                      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xs font-pixel text-xs font-bold border border-slate-900/20 shadow-xs ${selectedBook.color.badgeBg} ${selectedBook.color.badgeText}`}>
                         <selectedBook.icon className="w-3.5 h-3.5" />
                         {selectedBook.category.toUpperCase()}
                       </span>
-                      <span className="font-mono text-xs text-ink/50 dark:text-gray-400 font-bold">
+                      <span className="font-mono text-xs text-slate-600 font-bold">
                         VOL. 2026 // BOOK #{selectedBook.number}
                       </span>
                     </div>
 
                     {/* Question Title */}
-                    <h3 className="font-pixel text-2xl sm:text-3xl font-extrabold text-ink dark:text-white leading-tight mb-4">
+                    <h3 className="font-pixel text-2xl sm:text-3xl font-extrabold text-[#0E0E11] leading-tight mb-4">
                       {selectedBook.question}
                     </h3>
 
                     {/* Short Explanation */}
-                    <p className="font-sans text-base text-ink/85 dark:text-gray-300 leading-relaxed mb-6">
+                    <p className="font-sans text-base text-slate-800 leading-relaxed mb-6 font-medium">
                       {selectedBook.explanation}
                     </p>
 
                     {/* Highlights / Blueprint List */}
                     <div className="space-y-2.5 mb-6">
-                      <h4 className="font-pixel text-xs uppercase font-bold tracking-wider text-ink/60 dark:text-gray-400">
+                      <h4 className="font-pixel text-xs uppercase font-bold tracking-wider text-slate-600 mb-2">
                         KEY BLUEPRINT HIGHLIGHTS:
                       </h4>
                       {selectedBook.highlights.map((item, idx) => (
                         <div key={idx} className="flex items-start gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                          <span className="font-mono text-xs sm:text-sm text-ink dark:text-gray-200">{item}</span>
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span className="font-mono text-xs sm:text-sm text-slate-900 font-semibold">{item}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   {/* Left Page Footer */}
-                  <div className="pt-4 border-t border-ink/10 flex justify-between items-center text-[10px] font-mono text-ink/40 dark:text-gray-500">
+                  <div className="pt-4 border-t border-slate-300 flex justify-between items-center text-[10px] font-mono text-slate-500 font-bold">
                     <span>DETQEL KNOWLEDGE LIBRARY</span>
                     <span>PAGE 01</span>
                   </div>
@@ -979,27 +960,27 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
                 <div className="p-6 sm:p-8 flex flex-col justify-between relative bg-paper-grain">
                   <div>
                     {/* Pro Tips Box */}
-                    <div className="bg-amber-100/90 dark:bg-amber-950/70 border-l-4 border-amber-500 p-4 rounded-xs shadow-sticky mb-6 relative">
+                    <div className="bg-amber-100 border-l-4 border-amber-500 p-4 rounded-xs shadow-sticky mb-6 relative">
                       <div className="tape-sticker tape-sticker-yellow w-14 h-4 -top-2 left-6 rounded-xs" />
-                      <div className="flex items-center gap-2 mb-1 text-amber-900 dark:text-amber-200 font-pixel text-xs font-bold">
-                        <Lightbulb className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                      <div className="flex items-center gap-2 mb-1 text-amber-900 font-pixel text-xs font-bold">
+                        <Lightbulb className="w-4 h-4 text-amber-600" />
                         STUDIO PRO TIP
                       </div>
-                      <p className="font-sans text-xs sm:text-sm text-amber-950 dark:text-amber-100 leading-normal">
+                      <p className="font-sans text-xs sm:text-sm text-amber-950 font-medium leading-normal">
                         {selectedBook.tip}
                       </p>
                     </div>
 
                     {/* Related Services */}
                     <div className="mb-6">
-                      <h4 className="font-pixel text-xs uppercase font-bold tracking-wider text-ink/60 dark:text-gray-400 mb-2.5">
+                      <h4 className="font-pixel text-xs uppercase font-bold tracking-wider text-slate-600 mb-2.5">
                         RELATED SERVICES & CAPABILITIES:
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {selectedBook.relatedServices.map((service, i) => (
                           <span
                             key={i}
-                            className="bg-white dark:bg-canvas-dark-paper border border-ink/30 text-ink dark:text-gray-200 px-2.5 py-1 rounded-xs font-mono text-xs shadow-brutalist-sm"
+                            className="bg-white border-2 border-slate-900 text-slate-900 px-2.5 py-1 rounded-xs font-mono text-xs font-bold shadow-brutalist-sm"
                           >
                             ⚡ {service}
                           </span>
@@ -1008,11 +989,11 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
                     </div>
 
                     {/* Call to Action Box */}
-                    <div className="bg-white dark:bg-canvas-dark-paper border-2 border-ink p-4 rounded-xs shadow-brutalist">
-                      <h4 className="font-pixel text-sm font-bold text-ink dark:text-white mb-1">
+                    <div className="bg-white border-2 border-slate-900 p-4 rounded-xs shadow-brutalist">
+                      <h4 className="font-pixel text-sm font-bold text-slate-900 mb-1">
                         Ready to take the next step?
                       </h4>
-                      <p className="font-sans text-xs text-ink/70 dark:text-gray-300 mb-3">
+                      <p className="font-sans text-xs text-slate-700 font-medium mb-3">
                         Let's turn your ideas into a high-impact digital experience.
                       </p>
                       <a
@@ -1021,7 +1002,7 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
                           sound.playSuccess();
                           setSelectedBook(null);
                         }}
-                        className="inline-flex items-center gap-2 bg-ink text-white dark:bg-accent-acid dark:text-ink px-4 py-2 font-pixel text-xs font-bold border-2 border-ink rounded-xs shadow-brutalist-sm hover:translate-x-0.5 hover:translate-y-0.5 transition-transform"
+                        className="inline-flex items-center gap-2 bg-slate-900 text-white hover:bg-accent-coral px-4 py-2 font-pixel text-xs font-bold border-2 border-slate-900 rounded-xs shadow-brutalist-sm hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
                       >
                         LET'S BUILD TOGETHER <ArrowRight className="w-4 h-4" />
                       </a>
@@ -1029,7 +1010,7 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
                   </div>
 
                   {/* Right Page Footer */}
-                  <div className="pt-4 border-t border-ink/10 flex justify-between items-center text-[10px] font-mono text-ink/40 dark:text-gray-500 mt-6">
+                  <div className="pt-4 border-t border-slate-300 flex justify-between items-center text-[10px] font-mono text-slate-500 font-bold mt-6">
                     <span>HANDCRAFTED FOR CREATIVE EXCELLENCE</span>
                     <span>PAGE 02</span>
                   </div>

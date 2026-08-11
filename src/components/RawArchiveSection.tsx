@@ -195,14 +195,14 @@ export const RawArchiveSection: React.FC<RawArchiveSectionProps> = ({ onSelectPr
           {/* Right Header Description & Metric Tag */}
           <div className="flex flex-col items-start md:items-end justify-between self-stretch space-y-6 max-w-md">
             {/* Top Right Counter Badge */}
-            <div className="font-mono text-xs font-bold text-ink/70 dark:text-gray-300 flex items-center gap-2">
+            <div className="font-mono text-xs font-bold text-ink dark:text-gray-200 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-accent-coral" />
               <span>50+ PROJECTS DELIVERED</span>
               <span className="text-ink font-bold text-sm">┐</span>
             </div>
 
             {/* Subtitle Description */}
-            <p className="font-sans text-base text-ink/70 dark:text-gray-300 leading-relaxed md:text-right">
+            <p className="font-sans text-base text-ink dark:text-gray-200 font-medium leading-relaxed md:text-right">
               A curated selection of digital experiences we've designed, engineered, and shipped for brands and ambitious teams.
             </p>
           </div>
