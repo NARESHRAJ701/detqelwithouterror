@@ -3,7 +3,7 @@ import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { GhibliHeroSection } from './components/GhibliHeroSection';
 import { TornPaperDivider } from './components/TornPaperDivider';
-import { AboutSection } from './components/AboutSection';
+
 import { HeroSection } from './components/HeroSection';
 import { PuzzleServicesSection } from './components/PuzzleServicesSection';
 
@@ -138,8 +138,6 @@ export function App() {
             {/* Knowledge Library FAQ Section */}
             <KnowledgeLibraryFAQ />
 
-            {/* Manifesto & Polaroid About Section */}
-            <AboutSection />
 
             {/* Interactive Office Projector About Us Showcase */}
             <ProjectorStorySection />

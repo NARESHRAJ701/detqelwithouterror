@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'OffBit';
+  src: url('/fonts/OTF/OffBitTrial-Bold.otf') format('opentype');
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --bg-grid-color: rgba(14, 14, 17, 0.05);
@@ -25,7 +31,7 @@
 
 /* Custom Theme Token Utilities */
 .font-pixel {
-  font-family: 'Pixelify Sans', 'Press Start 2P', monospace;
+  font-family: 'OffBit', 'Pixelify Sans', 'Press Start 2P', monospace;
 }
 
 .font-sans {
