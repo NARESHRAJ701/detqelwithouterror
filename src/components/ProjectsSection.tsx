@@ -22,7 +22,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 pb-6 border-b-2 border-ink gap-6">
           <div>
-            <div className="flex items-center gap-2 text-ink/60 dark:text-gray-400 font-mono text-xs mb-3">
+            <div className="flex items-center gap-2 text-ink dark:text-gray-300 font-mono text-xs mb-3">
               <span className="bg-ink text-white dark:bg-accent-acid dark:text-ink px-2.5 py-0.5 font-pixel font-bold">
                 01
               </span>
@@ -33,11 +33,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
             </h2>
           </div>
 
-          <div className="font-mono text-xs text-ink/70 dark:text-gray-400 max-w-sm text-left sm:text-right space-y-1">
+          <div className="font-mono text-xs text-ink dark:text-gray-300 max-w-sm text-left sm:text-right space-y-1">
             <p className="font-bold text-ink dark:text-white uppercase flex items-center gap-2 sm:justify-end">
               <Sparkles className="w-3.5 h-3.5 text-accent-coral" /> CURATED STUDIO SHOWCASE
             </p>
-            <p>Interactive editorial index of high-impact AI products, brand flagships, and spatial motion systems.</p>
+            <p className="font-medium text-ink dark:text-gray-200">Interactive editorial index of high-impact AI products, brand flagships, and spatial motion systems.</p>
           </div>
         </div>
 
@@ -46,7 +46,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
           
           {/* LEFT COLUMN: Editorial Navigation List (5 Projects) */}
           <div className="lg:col-span-5 flex flex-col space-y-2">
-            <div className="flex items-center justify-between pb-3 border-b border-ink/20 font-mono text-xs text-ink/50 dark:text-gray-500 uppercase tracking-wider">
+            <div className="flex items-center justify-between pb-3 border-b border-ink/20 font-mono text-xs text-ink dark:text-gray-300 font-bold uppercase tracking-wider">
               <span>INDEX // REF</span>
               <span>PROJECT TITLE</span>
               <span>DISCIPLINE</span>
@@ -217,13 +217,13 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
                   </div>
 
                   <div className="font-mono text-xs text-right">
-                    <span className="text-ink/60 dark:text-gray-400 block">CLIENT</span>
+                    <span className="text-ink dark:text-gray-300 font-bold block">CLIENT</span>
                     <span className="font-bold text-ink dark:text-white">{activeProject.client}</span>
                   </div>
                 </div>
 
                 {/* Project Description */}
-                <p className="font-sans text-base sm:text-lg text-ink/80 dark:text-gray-300 leading-relaxed">
+                <p className="font-sans text-base sm:text-lg text-ink dark:text-gray-200 font-medium leading-relaxed">
                   {activeProject.description}
                 </p>
 
@@ -231,7 +231,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                   {/* Service Tags */}
                   <div className="space-y-2">
-                    <span className="font-mono text-xs font-bold text-ink/60 dark:text-gray-400 flex items-center gap-1.5 uppercase">
+                    <span className="font-mono text-xs font-bold text-ink dark:text-gray-300 flex items-center gap-1.5 uppercase">
                       <Layers className="w-3.5 h-3.5 text-accent-blue" /> STUDIO SERVICES
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -248,10 +248,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
 
                   {/* Key Deliverables Manifest */}
                   <div className="space-y-2">
-                    <span className="font-mono text-xs font-bold text-ink/60 dark:text-gray-400 flex items-center gap-1.5 uppercase">
+                    <span className="font-mono text-xs font-bold text-ink dark:text-gray-300 flex items-center gap-1.5 uppercase">
                       <CheckCircle2 className="w-3.5 h-3.5 text-accent-acid-green" /> KEY DELIVERABLES
                     </span>
-                    <ul className="space-y-1 font-mono text-xs text-ink/80 dark:text-gray-300">
+                    <ul className="space-y-1 font-mono text-xs text-ink dark:text-gray-200 font-medium">
                       {activeProject.deliverables.map((item) => (
                         <li key={item} className="flex items-center gap-2">
                           <span className="text-accent-acid-green font-bold">✓</span> {item}

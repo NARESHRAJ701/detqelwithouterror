@@ -3,7 +3,10 @@ import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { GhibliHeroSection } from './components/GhibliHeroSection';
 import { TornPaperDivider } from './components/TornPaperDivider';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 17837ed8f4a56b3599d5f51f57d9c3e0bb48eb8c
 import { HeroSection } from './components/HeroSection';
 import { PuzzleServicesSection } from './components/PuzzleServicesSection';
 
@@ -119,32 +122,41 @@ export function App() {
       {/* Main Content Layout */}
       <main>
         {currentPage === 'home' ? (
-          <>
+          <div className="relative">
             {/* Fullscreen Studio Ghibli Parallax Hero Section */}
-            <GhibliHeroSection onSelectProject={(project) => setSelectedProject(project)} />
+            <div className="sticky top-0 z-0 w-full h-screen overflow-hidden">
+              <GhibliHeroSection onSelectProject={(project) => setSelectedProject(project)} />
+            </div>
 
-            {/* Realistic Torn Paper Edge Transition */}
-            <TornPaperDivider />
+            {/* Content that scrolls ON TOP of the sticky hero section */}
+            <div className="relative z-10">
+              {/* Realistic Torn Paper Edge Transition */}
+              <TornPaperDivider />
 
-            {/* Hero Section (WE BUILD WORLDS) */}
-            <HeroSection />
+              <div className="bg-[#050608] dark:bg-canvas-dark shadow-2xl">
+                {/* Hero Section (WE BUILD WORLDS) */}
+                <HeroSection />
 
-            {/* Interactive Puzzle Services Showcase */}
-            <PuzzleServicesSection />
+                {/* Interactive Puzzle Services Showcase */}
+                <PuzzleServicesSection />
 
-            {/* Robot Vacuum Delivery Testimonial Scene */}
-            <RobotTestimonialScene />
+                {/* Robot Vacuum Delivery Testimonial Scene */}
+                <RobotTestimonialScene />
 
-            {/* Knowledge Library FAQ Section */}
-            <KnowledgeLibraryFAQ />
+                {/* Knowledge Library FAQ Section */}
+                <KnowledgeLibraryFAQ />
 
+<<<<<<< HEAD
+=======
+                {/* Interactive Office Projector About Us Showcase */}
+                <ProjectorStorySection />
+>>>>>>> 17837ed8f4a56b3599d5f51f57d9c3e0bb48eb8c
 
-            {/* Interactive Office Projector About Us Showcase */}
-            <ProjectorStorySection />
-
-            {/* Playground & Interactive Labs */}
-            <PlaygroundSection />
-          </>
+                {/* Playground & Interactive Labs */}
+                <PlaygroundSection />
+              </div>
+            </div>
+          </div>
         ) : currentPage === 'contact' ? (
           /* DEDICATED SEPARATE CONTACT US PAGE */
           <ContactUsPage />

@@ -109,7 +109,7 @@ export const PlaygroundSection: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 pb-6 border-b-2 border-ink gap-4">
           <div>
-            <div className="flex items-center gap-2 text-ink/60 dark:text-gray-400 font-mono text-xs mb-2">
+            <div className="flex items-center gap-2 text-ink dark:text-gray-300 font-mono text-xs mb-2">
               <span className="bg-ink text-white dark:bg-accent-acid dark:text-ink px-2 py-0.5 font-pixel">
                 03
               </span>
@@ -120,7 +120,7 @@ export const PlaygroundSection: React.FC = () => {
             </h2>
           </div>
 
-          <p className="font-mono text-xs text-ink/60 dark:text-gray-400 max-w-xs">
+          <p className="font-mono text-xs text-ink dark:text-gray-200 font-medium max-w-xs">
             Test micro-interaction algorithms, character scramblers, and custom sticker drop canvases.
           </p>
         </div>
@@ -139,7 +139,7 @@ export const PlaygroundSection: React.FC = () => {
                 </span>
               </div>
 
-              <p className="font-sans text-sm text-ink/70 dark:text-gray-300 mb-4">
+              <p className="font-sans text-sm text-ink dark:text-gray-200 font-medium mb-4">
                 Type any title below and run the character scramble reveal sequence:
               </p>
 
@@ -190,7 +190,7 @@ export const PlaygroundSection: React.FC = () => {
                 </button>
               </div>
 
-              <p className="font-sans text-sm text-ink/70 dark:text-gray-300 mb-4">
+              <p className="font-sans text-sm text-ink dark:text-gray-200 font-medium mb-4">
                 Click anywhere inside the box below to drop interactive paper stickers:
               </p>
 
@@ -202,8 +202,8 @@ export const PlaygroundSection: React.FC = () => {
                 className="relative min-h-[220px] bg-grid-pattern border-2 border-dashed border-ink/40 rounded-xs overflow-hidden cursor-crosshair flex items-center justify-center p-4 select-none"
               >
                 {stickers.length === 0 && (
-                  <div className="text-center font-mono text-xs text-ink/40 dark:text-gray-400">
-                    <Sparkles className="w-6 h-6 mx-auto mb-2 opacity-50" />
+                  <div className="text-center font-mono text-xs text-ink dark:text-gray-300 font-bold">
+                    <Sparkles className="w-6 h-6 mx-auto mb-2 opacity-80" />
                     CLICK ANYWHERE TO STAMP STICKERS
                   </div>
                 )}
@@ -223,7 +223,7 @@ export const PlaygroundSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="font-mono text-[11px] text-ink/60 dark:text-gray-400 text-center">
+            <div className="font-mono text-[11px] text-ink dark:text-gray-300 font-bold text-center">
               ⚡ STICKERS STAMPED: <strong className="text-ink dark:text-white">{stickers.length}</strong>
             </div>
           </div>

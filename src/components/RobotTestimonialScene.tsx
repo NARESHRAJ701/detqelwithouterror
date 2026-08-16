@@ -34,7 +34,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: 'Ananya Reddy',
     company: 'ARI Matcha',
     avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80',
-    rating: 5,
+    rating: 4.5,
     text: 'Their design process is insanely good. Every detail was crafted with purpose and clarity.',
     tapeColor: 'bg-emerald-500',
     pinType: 'pin',
@@ -58,7 +58,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: 'Billa Ferments',
     company: 'Billa Hotsauce',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
-    rating: 5,
+    rating: 4.5,
     text: 'Hyper-vibrant design with liquid WebGL shaders that blew our audience away!',
     tapeColor: 'bg-rose-400/80',
     pinType: 'clip',
@@ -79,6 +79,49 @@ const TESTIMONIALS: Testimonial[] = [
   }
 ];
 
+const renderRatingStars = (rating: number) => {
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 !== 0;
+
+  return (
+    <div className="flex items-center gap-2 mb-2.5">
+      <div className="flex items-center gap-1">
+        {[...Array(5)].map((_, i) => {
+          if (i < fullStars) {
+            return (
+              <Star 
+                key={i} 
+                className="w-4 h-4 fill-amber-400 text-amber-400 drop-shadow-[0_0_5px_rgba(251,191,36,0.7)]" 
+              />
+            );
+          } else if (i === fullStars && hasHalfStar) {
+            return (
+              <div key={i} className="relative w-4 h-4">
+                <Star className="w-4 h-4 text-gray-600 fill-gray-700/40 absolute inset-0" />
+                <div className="overflow-hidden w-[50%] absolute inset-0">
+                  <Star className="w-4 h-4 fill-amber-400 text-amber-400 drop-shadow-[0_0_5px_rgba(251,191,36,0.7)]" />
+                </div>
+              </div>
+            );
+          } else {
+            return (
+              <Star 
+                key={i} 
+                className="w-4 h-4 text-gray-600 fill-gray-700/40" 
+              />
+            );
+          }
+        })}
+      </div>
+
+      {/* Rating numerical value display beside stars */}
+      <span className="font-mono text-xs font-black text-amber-300 bg-amber-950/80 border border-amber-500/50 px-1.5 py-0.5 rounded-sm shadow-xs">
+        {rating.toFixed(1)}
+      </span>
+    </div>
+  );
+};
+
 export const RobotTestimonialScene: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [activeCard, setActiveCard] = useState<string | null>(null);
@@ -97,54 +140,29 @@ export const RobotTestimonialScene: React.FC = () => {
         {/* Soft Afternoon Sunlight Overlay from Left */}
         <div className="absolute top-0 left-0 bottom-0 w-1/2 bg-gradient-to-r from-amber-100/30 via-amber-50/10 to-transparent pointer-events-none z-10" />
 
-        {/* Minimal Office Desk Decorative Objects */}
-        {/* Left Side: Potted Plant & Notebook Stack */}
-        <div className="absolute left-6 top-8 z-10 hidden sm:flex items-center gap-4 pointer-events-none opacity-90">
-          {/* Single Pixel Potted Plant */}
-          <motion.div 
-            whileHover={{ scale: 1.1, rotate: [-2, 2, -2] }}
-            className="flex flex-col items-center cursor-pointer group"
-            onClick={() => sound.playClick()}
-            title="Studio Potted Plant"
-          >
-            <img 
-              src="/images/single_plant_snake.png" 
-              alt="Studio Potted Plant" 
-              className="w-10 h-20 object-contain drop-shadow-md group-hover:brightness-110 transition-all"
-            />
-          </motion.div>
+        {/* Top Control Header Bar */}
+        <div className="flex flex-wrap justify-between items-center z-20 font-mono text-xs mb-4 gap-3">
+          {/* Left Controls: BOT Title + Horizontal PLANS & IMPACT Row Buttons */}
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-2 bg-white dark:bg-canvas-dark-paper px-3 py-1.5 border-2 border-ink shadow-brutalist-sm rounded-xs">
+              <span className="w-2.5 h-2.5 rounded-full bg-accent-acid animate-ping" />
+              <span className="font-bold text-ink dark:text-white uppercase tracking-wider">
+                TESTIMONIAL_DELIVERY_BOT_v2.4
+              </span>
+            </div>
 
-          {/* Stack of Notebooks */}
-          <div className="space-y-1 font-mono text-[10px] font-bold">
-            <div className="bg-[#4338CA] text-white px-3 py-1 border border-black rounded-xs shadow-sm">
-              IDEAS // 2026
-            </div>
-            <div className="bg-[#059669] text-white px-3 py-1 border border-black rounded-xs shadow-sm">
-              PLANS
-            </div>
-            <div className="bg-[#D97706] text-white px-3 py-1 border border-black rounded-xs shadow-sm">
-              IMPACT
+            {/* PLANS & IMPACT Row Order Buttons */}
+            <div className="flex items-center gap-2 font-mono text-[11px] font-bold">
+              <div className="bg-[#059669] text-white px-3 py-1.5 border-2 border-ink rounded-xs shadow-brutalist-sm">
+                PLANS
+              </div>
+              <div className="bg-[#D97706] text-white px-3 py-1.5 border-2 border-ink rounded-xs shadow-brutalist-sm">
+                IMPACT
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Right Side Desk Objects: Coffee Mug & Paper Clip */}
-        <div className="absolute right-8 top-8 z-10 hidden md:flex items-center gap-3 pointer-events-none opacity-80">
-          <div className="w-12 h-12 bg-white dark:bg-canvas-dark border-2 border-ink rounded-full flex items-center justify-center font-bold text-xs shadow-sm">
-            ☕ DETQEL
-          </div>
-          <div className="w-4 h-6 border-2 border-accent-coral rotate-12 rounded-sm" />
-        </div>
-
-        {/* Top Control Toggle */}
-        <div className="flex justify-between items-center z-20 font-mono text-xs mb-4">
-          <div className="flex items-center gap-2 bg-white dark:bg-canvas-dark-paper px-3 py-1.5 border-2 border-ink shadow-brutalist-sm rounded-xs">
-            <span className="w-2.5 h-2.5 rounded-full bg-accent-acid animate-ping" />
-            <span className="font-bold text-ink dark:text-white uppercase tracking-wider">
-              TESTIMONIAL_DELIVERY_BOT_v2.4
-            </span>
-          </div>
-
+          {/* Right Controls: Pause / Resume Drive & Reset */}
           <div className="flex items-center gap-2">
             <button
               onClick={() => {
@@ -322,7 +340,7 @@ export const RobotTestimonialScene: React.FC = () => {
                       sound.playHover();
                     }}
                     onMouseLeave={() => setActiveCard(null)}
-                    className={`relative w-64 bg-[#FAF8F5] dark:bg-[#25232B] border-2 border-ink rounded-xs p-4 shadow-brutalist transition-all duration-300 ${
+                    className={`relative w-64 bg-[#232129] border-2 border-ink rounded-xs p-4 shadow-brutalist transition-all duration-300 text-white ${
                       isActive ? 'ring-2 ring-accent-acid z-40 scale-105' : 'z-10'
                     }`}
                   >
@@ -348,29 +366,25 @@ export const RobotTestimonialScene: React.FC = () => {
                         className="w-10 h-10 rounded-full border-2 border-ink object-cover"
                       />
                       <div>
-                        <h4 className="font-pixel text-sm font-bold text-ink dark:text-white leading-tight">
+                        <h4 className="font-pixel text-sm sm:text-base font-bold text-white leading-tight tracking-wide">
                           {card.name}
                         </h4>
-                        <span className="font-mono text-[10px] text-ink/60 dark:text-gray-400 font-bold block">
+                        <span className="font-mono text-[10px] text-gray-300 font-bold block">
                           {card.company}
                         </span>
                       </div>
                     </div>
 
-                    {/* Star Rating */}
-                    <div className="flex items-center gap-1 mb-2">
-                      {[...Array(card.rating)].map((_, sIdx) => (
-                        <Star key={sIdx} className="w-3.5 h-3.5 fill-accent-coral text-accent-coral" />
-                      ))}
-                    </div>
+                    {/* Star Rating with Rating Number Badge */}
+                    {renderRatingStars(card.rating)}
 
                     {/* Testimonial Quote Text */}
-                    <p className="font-sans text-xs text-ink/80 dark:text-gray-300 leading-relaxed font-medium">
+                    <p className="font-sans text-xs sm:text-sm text-white leading-relaxed font-medium">
                       "{card.text}"
                     </p>
 
                     {/* Corner Doodle */}
-                    <div className="absolute bottom-1 right-2 text-[9px] font-handwriting text-ink/40 dark:text-gray-500">
+                    <div className="absolute bottom-1 right-2 text-[9px] font-handwriting text-gray-400">
                       verified client ✓
                     </div>
                   </motion.div>

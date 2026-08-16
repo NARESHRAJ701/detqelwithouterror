@@ -2,17 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { sound } from '../utils/sound';
 import { triggerCursor } from './CustomCursor';
-import { 
-  Power, 
-  Box, 
-  Users, 
-  UserCheck, 
-  Calendar, 
-  Target, 
-  Sparkles, 
-  Compass, 
+import {
+  Power,
+  Box,
+  Users,
+  UserCheck,
+  Calendar,
+  Target,
+  Sparkles,
+  Compass,
   Heart,
-  ChevronRight,
   ArrowUpDown,
   Music,
   Radio,
@@ -102,11 +101,11 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
   const [isScreenPulledDown, setIsScreenPulledDown] = useState<boolean>(true);
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const [isWarmingUp, setIsWarmingUp] = useState<boolean>(false);
-  
+
   // Projector Modes: 'STORY' | 'MUSIC' | 'COMIC'
   const [activeMode, setActiveMode] = useState<'STORY' | 'MUSIC' | 'COMIC'>('STORY');
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
-  
+
   const sectionRef = useRef<HTMLElement>(null);
 
   // Power Toggle
@@ -131,7 +130,7 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
     sound.playClick();
     const nextPulled = !isScreenPulledDown;
     setIsScreenPulledDown(nextPulled);
-    
+
     if (!nextPulled && isOn) {
       setIsOn(false);
       sound.playProjectorOff();
@@ -180,7 +179,7 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      
+
       // If section scrolls completely out of view, turn off projector
       if (rect.bottom < 0 || rect.top > windowHeight) {
         if (isOn) setIsOn(false);
@@ -195,20 +194,18 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
   const currentTrack = YOUTUBE_PLAYLIST[currentTrackIndex];
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      id="our-story-projector" 
-      className={`relative w-full min-h-screen py-16 sm:py-24 px-4 sm:px-8 border-b-2 border-ink transition-colors duration-1000 overflow-hidden font-sans select-none ${
-        isOn 
-          ? 'bg-[#0b0d11] text-white' 
+      id="our-story-projector"
+      className={`relative w-full min-h-screen py-16 sm:py-24 px-4 sm:px-8 border-b-2 border-ink transition-colors duration-1000 overflow-hidden font-sans select-none ${isOn
+          ? 'bg-[#0b0d11] text-white'
           : 'bg-[#ebe7e0] dark:bg-[#15171c] text-ink dark:text-white'
-      } ${className}`}
+        } ${className}`}
     >
       {/* Background Room Lighting Effect Overlay */}
-      <div 
-        className={`absolute inset-0 pointer-events-none transition-opacity duration-1000 z-0 ${
-          isOn ? 'opacity-80' : 'opacity-0'
-        }`}
+      <div
+        className={`absolute inset-0 pointer-events-none transition-opacity duration-1000 z-0 ${isOn ? 'opacity-80' : 'opacity-0'
+          }`}
         style={{
           background: 'radial-gradient(circle at 75% 50%, rgba(20, 24, 33, 0.4) 0%, rgba(8, 9, 12, 0.95) 80%)'
         }}
@@ -218,18 +215,15 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none z-0" />
 
       <div className="max-w-[1600px] w-[92vw] mx-auto relative z-10">
-        
+
         {/* Main 2-Column Office Environment Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch min-h-[750px]">
-          
-          {/* ========================================================================= */}
-          {/* LEFT COLUMN: STORY HEADER, PINNED WALL NOTES, PHYSICAL DESK & PROJECTOR */}
-          {/* ========================================================================= */}
+
           <div className="lg:col-span-5 flex flex-col justify-between relative space-y-8">
-            
+
             {/* 1. Header Text & Pinned Wall Notes */}
             <div className="space-y-4 relative">
-              
+
               {/* Pinned Architectural Wireframe & Sticky Notes on the Wall */}
               <div className="absolute -top-6 -right-4 hidden sm:flex flex-col gap-2 pointer-events-none opacity-90 z-0">
                 {/* Wireframe Sketch Note */}
@@ -261,9 +255,8 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
               {/* Title Section */}
               <div className="relative z-10">
                 <div className="flex items-center gap-2 font-mono text-xs mb-2 transition-colors duration-500">
-                  <span className={`px-2 py-0.5 font-pixel font-bold transition-colors ${
-                    isOn ? 'bg-accent-acid text-ink' : 'bg-ink text-white dark:bg-accent-acid dark:text-ink'
-                  }`}>
+                  <span className={`px-2 py-0.5 font-pixel font-bold transition-colors ${isOn ? 'bg-accent-acid text-ink' : 'bg-ink text-white dark:bg-accent-acid dark:text-ink'
+                    }`}>
                     02
                   </span>
                   <span className={isOn ? 'text-white/70' : 'text-ink/60 dark:text-gray-400'}>
@@ -271,13 +264,12 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                   </span>
                 </div>
 
-                <h2 className="font-pixel text-4xl sm:text-6xl font-black uppercase tracking-tight transition-colors duration-500">
-                  OUR <span className="text-accent-acid">STORY.</span>
+                <h2 className="font-pixel text-4xl sm:text-6xl font-black uppercase tracking-tight text-accent-acid transition-colors duration-500">
+                  OUR STORY<span className="text-accent-coral">.</span>
                 </h2>
 
-                <p className={`font-sans text-sm sm:text-base leading-relaxed max-w-md mt-3 transition-colors duration-500 ${
-                  isOn ? 'text-white/80' : 'text-ink/80 dark:text-gray-300'
-                }`}>
+                <p className={`font-sans text-sm sm:text-base leading-relaxed max-w-md mt-3 transition-colors duration-500 ${isOn ? 'text-white/80' : 'text-ink/80 dark:text-gray-300'
+                  }`}>
                   DETQEL is an AI-first digital product studio helping startups and brands turn ambitious ideas into scalable products and unforgettable digital experiences.
                 </p>
               </div>
@@ -297,7 +289,7 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
 
             {/* 2. Physical Wooden Desk with Office Props & Projector Chassis */}
             <div className="relative mt-auto pt-8">
-              
+
               {/* Floating Equalizer Notes when Music is Playing */}
               <AnimatePresence>
                 {activeMode === 'MUSIC' && isOn && (
@@ -324,12 +316,12 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
 
               {/* Desk Office Props */}
               <div className="absolute bottom-12 left-0 right-0 flex items-end justify-between px-2 pointer-events-auto">
-                
+
                 {/* Left Desk Items: Plant, Mug, Wireframe Notebook */}
                 <div className="flex items-end gap-3 sm:gap-4">
                   {/* DETQEL Coffee Mug */}
                   <div className="w-10 h-11 bg-neutral-900 border-2 border-neutral-700 rounded-b-lg rounded-tr-md shadow-lg relative flex items-center justify-center group cursor-pointer"
-                       title="DETQEL Mug">
+                    title="DETQEL Mug">
                     <span className="font-pixel text-[8px] font-bold text-white tracking-widest">DETQEL</span>
                     <div className="absolute -left-2 top-2 w-2.5 h-6 border-2 border-neutral-700 rounded-l-md" />
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-1 h-2 bg-white/40 rounded-full blur-[1px] animate-ping" />
@@ -362,23 +354,21 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   onClick={togglePower}
-                  onMouseEnter={() => triggerCursor('POWER ON/OFF', 'hover')}
+                  onMouseEnter={() => triggerCursor('POWER ON/OFF 💡', 'hover')}
                   onMouseLeave={() => triggerCursor('', 'default')}
-                  className={`relative w-52 sm:w-60 h-28 sm:h-32 bg-gradient-to-b from-neutral-200 via-neutral-300 to-neutral-400 dark:from-neutral-700 dark:via-neutral-800 dark:to-neutral-900 border-2 border-neutral-500 rounded-xl shadow-2xl cursor-pointer p-3 flex flex-col justify-between transition-all ${
-                    isOn ? 'shadow-[0_0_40px_rgba(132,204,22,0.3)]' : ''
-                  }`}
+                  className={`relative w-52 sm:w-60 h-28 sm:h-32 bg-gradient-to-b from-neutral-200 via-neutral-300 to-neutral-400 dark:from-neutral-700 dark:via-neutral-800 dark:to-neutral-900 border-2 border-neutral-500 rounded-xl shadow-2xl cursor-pointer p-3 flex flex-col justify-between transition-all ${isOn ? 'shadow-[0_0_40px_rgba(139,92,246,0.4)]' : ''
+                    }`}
                 >
                   {/* Top Vents & Brand Badge */}
                   <div className="flex justify-between items-center border-b border-neutral-400 dark:border-neutral-700 pb-1.5">
                     <div className="flex items-center gap-1.5">
                       {/* Power Status LED */}
-                      <span className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                        isWarmingUp 
-                          ? 'bg-amber-400 animate-ping' 
-                          : isOn 
-                            ? 'bg-accent-acid shadow-[0_0_8px_#84cc16] animate-pulse' 
+                      <span className={`w-2.5 h-2.5 rounded-full transition-colors ${isWarmingUp
+                          ? 'bg-amber-400 animate-ping'
+                          : isOn
+                            ? 'bg-accent-acid shadow-[0_0_8px_#8B5CF6] animate-pulse'
                             : 'bg-red-500'
-                      }`} />
+                        }`} />
                       <span className="font-mono text-[9px] font-bold text-neutral-700 dark:text-neutral-300">
                         {isWarmingUp ? 'WARMING UP...' : 'PROJ-4K // DETQEL'}
                       </span>
@@ -395,11 +385,10 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                         }}
                         onMouseEnter={() => triggerCursor('MUSIC MODE', 'hover')}
                         onMouseLeave={() => triggerCursor('', 'default')}
-                        className={`p-1 rounded-full border transition-all ${
-                          activeMode === 'MUSIC' && isOn 
-                            ? 'bg-accent-acid text-ink border-accent-acid' 
+                        className={`p-1 rounded-full border transition-all ${activeMode === 'MUSIC' && isOn
+                            ? 'bg-accent-acid text-ink border-accent-acid'
                             : 'bg-neutral-800 text-white/80 border-neutral-600 hover:bg-neutral-700'
-                        }`}
+                          }`}
                         title="Play Youtube Music Stream"
                       >
                         <Music className="w-3 h-3" />
@@ -414,11 +403,10 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                         }}
                         onMouseEnter={() => triggerCursor('READ MANGA', 'hover')}
                         onMouseLeave={() => triggerCursor('', 'default')}
-                        className={`p-1 rounded-full border transition-all ${
-                          activeMode === 'COMIC' && isOn 
-                            ? 'bg-accent-acid text-ink border-accent-acid' 
+                        className={`p-1 rounded-full border transition-all ${activeMode === 'COMIC' && isOn
+                            ? 'bg-accent-acid text-ink border-accent-acid'
                             : 'bg-neutral-800 text-white/80 border-neutral-600 hover:bg-neutral-700'
-                        }`}
+                          }`}
                         title="Read Nano Machine Chapter 320 Manga"
                       >
                         <BookOpen className="w-3 h-3" />
@@ -435,19 +423,30 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                       ))}
                     </div>
 
-                    {/* Projector Lens Assembly */}
-                    <div className="relative w-14 h-14 rounded-full bg-neutral-900 border-4 border-neutral-400 dark:border-neutral-600 flex items-center justify-center overflow-hidden shadow-inner shrink-0">
-                      {/* Glass Lens Layer */}
-                      <div className={`w-10 h-10 rounded-full transition-all duration-500 flex items-center justify-center ${
-                        isOn 
-                          ? 'bg-gradient-to-r from-amber-200 via-white to-amber-100 shadow-[0_0_50px_20px_rgba(255,255,255,1)]' 
-                          : 'bg-neutral-800'
-                      }`}>
-                        {isOn && (
-                          <div className="w-4 h-4 rounded-full bg-white blur-[2px] animate-ping" />
-                        )}
+                    {/* Projector Lens / Power ON-OFF Button */}
+                    <motion.button
+                      whileHover={{ scale: 1.08 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        togglePower();
+                      }}
+                      onMouseEnter={() => triggerCursor('POWER ON/OFF 💡', 'hover')}
+                      onMouseLeave={() => triggerCursor('', 'default')}
+                      className={`relative w-14 h-14 rounded-full border-4 border-neutral-400 dark:border-neutral-600 flex items-center justify-center overflow-hidden shadow-brutalist-sm shrink-0 transition-all cursor-pointer ${isOn
+                          ? 'bg-accent-acid text-ink shadow-[0_0_25px_rgba(139,92,246,0.8)]'
+                          : 'bg-neutral-800 text-white hover:bg-neutral-700'
+                        }`}
+                      title="Click to Turn Projector ON / OFF"
+                    >
+                      {/* Glass Lens & Illuminated Power Icon */}
+                      <div className={`w-10 h-10 rounded-full transition-all duration-300 flex items-center justify-center ${isOn
+                          ? 'bg-gradient-to-r from-purple-300 via-white to-purple-200 text-ink shadow-[0_0_20px_#8B5CF6]'
+                          : 'bg-neutral-700 text-white/80'
+                        }`}>
+                        <Power className={`w-5 h-5 ${isOn ? 'animate-pulse text-purple-950' : 'text-white'}`} />
                       </div>
-                    </div>
+                    </motion.button>
                   </div>
 
                   {/* Projector Beam Volumetric Cone Effect */}
@@ -477,52 +476,13 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
               </div>
             </div>
 
-            {/* 3. Desk Card: Projector Power Control Board */}
-            <div className="relative pt-4 flex items-end justify-end">
-              <div className="bg-white/95 dark:bg-canvas-dark-paper/95 border-2 border-ink p-3 rounded-xs shadow-brutalist max-w-xs rotate-[-2deg] relative z-20">
-                {/* Yellow Masking Tape on Top */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-yellow-200/80 border border-yellow-400/60 rotate-[-3deg]" />
-
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <h4 className="font-pixel text-xs font-bold uppercase text-ink dark:text-white">
-                      PROJECTOR CONTROL
-                    </h4>
-                    <p className="font-mono text-[10px] text-ink/60 dark:text-gray-400 mt-0.5">
-                      {isOn ? `Mode: ${activeMode}` : 'Click to start presentation'}
-                    </p>
-                  </div>
-
-                  {/* Illuminated Large Power Button */}
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={togglePower}
-                    className={`w-12 h-12 rounded-full border-2 border-ink flex items-center justify-center transition-all shadow-brutalist-sm ${
-                      isOn 
-                        ? 'bg-accent-acid text-ink shadow-[0_0_20px_rgba(132,204,22,0.8)]' 
-                        : 'bg-neutral-800 text-white hover:bg-neutral-700'
-                    }`}
-                  >
-                    <Power className={`w-6 h-6 ${isOn ? 'animate-pulse' : ''}`} />
-                  </motion.button>
-                </div>
-
-                {/* Handwritten Callout */}
-                <div className="mt-2 text-[9px] font-mono text-accent-acid italic font-bold flex items-center gap-1">
-                  <span>sound on for better experience</span>
-                  <ChevronRight className="w-3 h-3" />
-                </div>
-              </div>
-            </div>
-
           </div>
 
           {/* ========================================================================= */}
           {/* RIGHT COLUMN: PULL-DOWN PROJECTION SCREEN & PROJECTED MODES               */}
           {/* ========================================================================= */}
           <div className="lg:col-span-7 flex flex-col justify-between relative pt-6 sm:pt-0">
-            
+
             {/* Screen Top Slider Mode Switcher & Pull Control */}
             <div className="flex flex-wrap items-center justify-between gap-2 mb-2 px-1">
               <div className="flex flex-wrap items-center gap-1.5">
@@ -541,22 +501,20 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                 <div className="flex items-center gap-1 bg-neutral-900 p-0.5 rounded-full border border-neutral-700">
                   <button
                     onClick={() => switchMode('STORY')}
-                    className={`px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold transition-all ${
-                      activeMode === 'STORY'
+                    className={`px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold transition-all ${activeMode === 'STORY'
                         ? 'bg-accent-acid text-ink shadow-sm'
                         : 'text-white/70 hover:text-white'
-                    }`}
+                      }`}
                   >
                     01 STORY
                   </button>
 
                   <button
                     onClick={() => switchMode('MUSIC')}
-                    className={`px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold transition-all flex items-center gap-1 ${
-                      activeMode === 'MUSIC'
+                    className={`px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold transition-all flex items-center gap-1 ${activeMode === 'MUSIC'
                         ? 'bg-accent-acid text-ink shadow-sm'
                         : 'text-white/70 hover:text-white'
-                    }`}
+                      }`}
                   >
                     <Music className="w-3 h-3" />
                     <span>02 MUSIC</span>
@@ -564,11 +522,10 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
 
                   <button
                     onClick={() => switchMode('COMIC')}
-                    className={`px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold transition-all flex items-center gap-1 ${
-                      activeMode === 'COMIC'
+                    className={`px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold transition-all flex items-center gap-1 ${activeMode === 'COMIC'
                         ? 'bg-accent-acid text-ink shadow-sm'
                         : 'text-white/70 hover:text-white'
-                    }`}
+                      }`}
                   >
                     <BookOpen className="w-3 h-3" />
                     <span>03 COMICS</span>
@@ -583,7 +540,7 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
 
             {/* Main Pull-down Screen Container */}
             <div className="relative w-full flex-1 min-h-[500px] flex flex-col">
-              
+
               {/* Screen Top Roller Bar */}
               <div className="w-full h-5 bg-neutral-900 border-2 border-neutral-700 rounded-t-sm flex justify-between items-center px-3 z-30 shadow-md">
                 <div className="w-3 h-3 rounded-full bg-neutral-700" />
@@ -608,12 +565,11 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                 className="relative flex-1 w-full flex flex-col justify-between"
               >
                 {/* White Projection Canvas Surface */}
-                <div className={`relative flex-1 w-full border-x-4 border-b-4 border-neutral-900 transition-all duration-700 overflow-hidden flex flex-col justify-between p-4 sm:p-6 ${
-                  isOn 
-                    ? 'bg-[#faf8f3] dark:bg-[#f7f4eb] text-neutral-900 shadow-[0_0_60px_rgba(255,255,255,0.25)]' 
+                <div className={`relative flex-1 w-full border-x-4 border-b-4 border-neutral-900 transition-all duration-700 overflow-hidden flex flex-col justify-between p-4 sm:p-6 ${isOn
+                    ? 'bg-[#faf8f3] dark:bg-[#f7f4eb] text-neutral-900 shadow-[0_0_60px_rgba(255,255,255,0.25)]'
                     : 'bg-[#fcfbf9] text-transparent shadow-inner'
-                }`}>
-                  
+                  }`}>
+
                   {/* Projector Edge Keystone & Texture Overlay when ON */}
                   {isOn && (
                     <>
@@ -660,7 +616,7 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                         {/* Interactive Scrollable Manga Reader Frame */}
                         <div className="relative flex-1 w-full min-h-[420px] rounded-xs border-2 border-neutral-800 bg-neutral-950 overflow-hidden shadow-2xl flex flex-col">
                           {/* Top Embedded Iframe with fallbacks */}
-                          <iframe 
+                          <iframe
                             src={MANGA_CONFIG.url}
                             title={MANGA_CONFIG.title}
                             className="w-full flex-1 border-0 min-h-[400px] bg-neutral-900"
@@ -706,7 +662,7 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <button 
+                            <button
                               onClick={() => setActiveMode('STORY')}
                               className="bg-accent-acid text-ink font-bold px-2.5 py-0.5 rounded-xs hover:scale-105 transition-transform text-[10px]"
                             >
@@ -717,7 +673,7 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
 
                         {/* Live YouTube Video Player Embedded Directly on the Projected Screen */}
                         <div className="relative flex-1 w-full aspect-video min-h-[260px] rounded-xs border-2 border-neutral-800 bg-black overflow-hidden shadow-2xl">
-                          <iframe 
+                          <iframe
                             className="w-full h-full object-cover"
                             src={currentTrack.embedUrl}
                             title={currentTrack.title}
@@ -735,11 +691,10 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                               <button
                                 key={track.id}
                                 onClick={() => selectTrack(idx)}
-                                className={`px-2.5 py-1 rounded-xs transition-all text-[10px] font-bold ${
-                                  currentTrackIndex === idx
+                                className={`px-2.5 py-1 rounded-xs transition-all text-[10px] font-bold ${currentTrackIndex === idx
                                     ? 'bg-accent-acid text-ink shadow-sm'
                                     : 'bg-neutral-800 text-white/70 hover:text-white'
-                                }`}
+                                  }`}
                               >
                                 {track.title.split('// ')[1] || track.title}
                               </button>
@@ -767,7 +722,7 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                       >
                         {/* Presentation Top Section */}
                         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-                          
+
                           {/* Left Text Block */}
                           <div className="md:col-span-7 space-y-4">
                             <div className="inline-flex items-center gap-2 bg-neutral-900 text-white font-mono text-[10px] font-bold px-2.5 py-1 rounded-xs uppercase tracking-widest">
@@ -795,9 +750,9 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                               {/* Paperclip */}
                               <div className="absolute top-1 right-3 w-2.5 h-6 border-2 border-neutral-600 rounded-t-full" />
 
-                              <img 
-                                src="/images/detqel_team_photo.png" 
-                                alt="DETQEL Team Photo" 
+                              <img
+                                src="/images/detqel_team_photo.png"
+                                alt="DETQEL Team Photo"
                                 className="w-full aspect-[4/3] object-cover rounded-xs"
                               />
                               <div className="mt-2 text-center font-mono text-[9px] font-bold text-neutral-700 uppercase tracking-wider">
@@ -813,7 +768,7 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                           {STATS_DATA.map((stat, idx) => {
                             const IconComp = stat.icon;
                             return (
-                              <div 
+                              <div
                                 key={idx}
                                 className="bg-white/80 backdrop-blur-xs p-3 rounded-xs border border-neutral-300 shadow-xs hover:border-neutral-900 transition-colors"
                               >
@@ -862,7 +817,7 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
 
             {/* Slide Navigation Bar Below Screen (When in Presentation Mode) */}
             {isOn && isScreenPulledDown && activeMode === 'STORY' && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-4 flex flex-wrap items-center justify-between gap-2 bg-neutral-900 text-white p-2.5 rounded-xs border border-neutral-700 font-mono text-xs shadow-lg z-20"
@@ -875,11 +830,10 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                         sound.playClick();
                         setActiveSlide(idx);
                       }}
-                      className={`px-2.5 py-1 rounded-xs transition-all font-bold ${
-                        activeSlide === idx 
-                          ? 'bg-accent-acid text-ink shadow-sm' 
+                      className={`px-2.5 py-1 rounded-xs transition-all font-bold ${activeSlide === idx
+                          ? 'bg-accent-acid text-ink shadow-sm'
                           : 'text-white/60 hover:text-white hover:bg-white/10'
-                      }`}
+                        }`}
                     >
                       {slide.badge.split('// ')[1] || slide.badge}
                     </button>

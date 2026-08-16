@@ -65,11 +65,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <a
             href="#"
             onClick={(e) => handleNav(e, 'home')}
-            className="flex items-center gap-2 bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xs shadow-brutalist hover:bg-accent-acid hover:text-ink transition-all"
+            className="flex items-center gap-2 bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xs shadow-brutalist hover:shadow-brutalist-lg transition-all"
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-[#C8FF2F] animate-ping" />
             <span className="font-pixel text-[clamp(0.9rem,1.05vw,1.15rem)] font-bold tracking-tight">
-              DETQEL <span className="text-[clamp(0.65rem,0.7vw,0.75rem)] opacity-60 font-mono">// CAFÉ</span>
+              DETQEL
             </span>
           </a>
         </MagneticButton>
@@ -83,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={(e) => handleNav(e, 'services')}
               onMouseEnter={() => triggerCursor('SERVICES', 'hover')}
               onMouseLeave={() => triggerCursor('', 'default')}
-              className="px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink"
+              className="px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink font-bold"
             >
               01 SERVICES
             </a>
@@ -93,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onMouseEnter={() => triggerCursor('PLAYGROUND', 'hover')}
               onMouseLeave={() => triggerCursor('', 'default')}
               className={`px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs ${
-                activePage === 'portfolio' ? 'bg-[#C8FF2F] text-ink font-bold shadow-xs' : 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink'
+                activePage === 'portfolio' ? 'bg-accent-acid text-white font-bold shadow-xs' : 'hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink font-bold'
               }`}
             >
               02 PORTFOLIO
@@ -104,7 +103,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onMouseEnter={() => triggerCursor('ABOUT', 'hover')}
               onMouseLeave={() => triggerCursor('', 'default')}
               className={`px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs ${
-                activePage === 'about' ? 'bg-[#C8FF2F] text-ink font-bold shadow-xs' : 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink'
+                activePage === 'about' ? 'bg-accent-acid text-white font-bold shadow-xs' : 'hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink font-bold'
               }`}
             >
               03 ABOUT US
@@ -114,7 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={(e) => handleNav(e, 'home', 'playground')}
               onMouseEnter={() => triggerCursor('JUMP', 'hover')}
               onMouseLeave={() => triggerCursor('', 'default')}
-              className="px-2.5 sm:px-3 py-1 sm:py-1.5 hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink transition-colors rounded-xs"
+              className="px-2.5 sm:px-3 py-1 sm:py-1.5 hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink transition-colors rounded-xs font-bold"
             >
               04 LABS
             </a>
@@ -125,8 +124,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onMouseLeave={() => triggerCursor('', 'default')}
               className={`px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs ${
                 activePage === 'contact'
-                  ? 'bg-[#C8FF2F] text-ink font-bold border border-ink'
-                  : 'hover:bg-ink hover:text-white dark:hover:bg-accent-acid dark:hover:text-ink'
+                  ? 'bg-accent-acid text-white font-bold border border-ink'
+                  : 'hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink font-bold'
               }`}
             >
               05 CONTACT US
@@ -138,10 +137,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={toggleSound}
             onMouseEnter={() => triggerCursor(soundOn ? 'MUTE' : 'UNMUTE', 'hover')}
             onMouseLeave={() => triggerCursor('', 'default')}
-            className="p-1.5 sm:p-2 bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white rounded-xs shadow-brutalist hover:bg-accent-coral hover:text-white transition-all"
+            className="p-1.5 sm:p-2 bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white rounded-xs shadow-brutalist hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink transition-all"
             title="Toggle Sound Effects"
           >
-            {soundOn ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4 opacity-50" />}
+            {soundOn ? <Volume2 className="w-4 h-4 text-ink dark:text-white" /> : <VolumeX className="w-4 h-4 opacity-50 text-ink dark:text-white" />}
           </button>
 
           {/* Theme Toggle */}
@@ -149,10 +148,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={toggleTheme}
             onMouseEnter={() => triggerCursor(darkMode ? 'LIGHT' : 'DARK', 'hover')}
             onMouseLeave={() => triggerCursor('', 'default')}
-            className="p-1.5 sm:p-2 bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white rounded-xs shadow-brutalist hover:bg-accent-blue hover:text-white transition-all"
+            className="p-1.5 sm:p-2 bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white rounded-xs shadow-brutalist hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink transition-all"
             title="Toggle Theme Mode"
           >
-            {darkMode ? <Sun className="w-4 h-4 text-accent-acid" /> : <Moon className="w-4 h-4" />}
+            {darkMode ? <Sun className="w-4 h-4 text-ink dark:text-white" /> : <Moon className="w-4 h-4 text-ink dark:text-white" />}
           </button>
 
           {/* Primary CTA */}
@@ -160,10 +159,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <a
               href="#contact"
               onClick={(e) => handleNav(e, 'contact')}
-              className={`hidden sm:flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 font-pixel text-[clamp(0.75rem,0.85vw,0.9rem)] font-bold border-2 border-ink rounded-xs shadow-brutalist hover:translate-x-0.5 hover:translate-y-0.5 transition-transform ${
+              className={`hidden sm:flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-2 font-pixel text-[clamp(0.75rem,0.85vw,0.9rem)] font-bold border-2 border-ink rounded-xs shadow-brutalist hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink hover:translate-x-0.5 hover:translate-y-0.5 transition-all ${
                 activePage === 'contact'
-                  ? 'bg-accent-coral text-black'
-                  : 'bg-ink text-black dark:bg-accent-acid dark:text-ink'
+                  ? 'bg-accent-coral text-ink'
+                  : 'bg-white text-ink dark:bg-canvas-dark-paper dark:text-white'
               }`}
             >
               LET'S TALK <ArrowUpRight className="w-4 h-4" />
