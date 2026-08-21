@@ -40,7 +40,7 @@ export interface FAQBook {
     badgeText: string;
     accentHex: string;
   };
-  icon: React.ElementType;
+  icon: React.ComponentType<{ className?: string }>;
   height: string;
   width: string;
   highlights: string[];
@@ -421,7 +421,8 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
   return (
     <section
       id="faq"
-      className="relative py-24 px-4 sm:px-8 bg-[#F5F2EA] dark:bg-[#14131A] border-b-2 border-ink overflow-hidden select-none font-sans transition-colors duration-300"
+      className="relative py-24 px-4 sm:px-8 border-b-2 border-ink overflow-hidden select-none font-sans transition-colors duration-300"
+      style={{ backgroundImage: 'url(/images/faq_bg.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
       {/* Daylight Ray Overlay from Top-Left */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-br from-amber-100/40 via-amber-50/10 to-transparent dark:from-indigo-900/10 dark:via-purple-950/5 pointer-events-none z-0" />
@@ -916,10 +917,15 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
                   <div>
                     {/* Category & Book Number Header */}
                     <div className="flex items-center justify-between mb-4">
-                      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xs font-pixel text-xs font-bold border border-slate-900/20 shadow-xs ${selectedBook.color.badgeBg} ${selectedBook.color.badgeText}`}>
-                        <selectedBook.icon className="w-3.5 h-3.5" />
-                        {selectedBook.category.toUpperCase()}
-                      </span>
+                      {(() => {
+                        const BookIcon = selectedBook.icon;
+                        return (
+                          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xs font-pixel text-xs font-bold border border-slate-900/20 shadow-xs ${selectedBook.color.badgeBg} ${selectedBook.color.badgeText}`}>
+                            <BookIcon className="w-3.5 h-3.5" />
+                            {selectedBook.category.toUpperCase()}
+                          </span>
+                        );
+                      })()}
                       <span className="font-mono text-xs text-slate-600 font-bold">
                         VOL. 2026 // BOOK #{selectedBook.number}
                       </span>

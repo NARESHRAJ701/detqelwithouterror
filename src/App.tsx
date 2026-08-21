@@ -3,12 +3,9 @@ import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { GhibliHeroSection } from './components/GhibliHeroSection';
 import { TornPaperDivider } from './components/TornPaperDivider';
-<<<<<<< HEAD
-
-=======
->>>>>>> 17837ed8f4a56b3599d5f51f57d9c3e0bb48eb8c
 import { HeroSection } from './components/HeroSection';
 import { PuzzleServicesSection } from './components/PuzzleServicesSection';
+import { ServicesHeroSection } from './components/services-hero/ServicesHeroSection';
 
 import { RobotTestimonialScene } from './components/RobotTestimonialScene';
 import { KnowledgeLibraryFAQ } from './components/KnowledgeLibraryFAQ';
@@ -24,7 +21,7 @@ import type { Project } from './types';
 export function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [currentPage, setCurrentPage] = useState<'home' | 'contact' | 'about' | 'portfolio'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'contact' | 'about' | 'portfolio' | 'services'>('home');
 
   useEffect(() => {
     if (darkMode) {
@@ -48,11 +45,8 @@ export function App() {
         setCurrentPage('portfolio');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (hash === '#services') {
-        setCurrentPage('home');
-        setTimeout(() => {
-          const el = document.getElementById('services');
-          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
+        setCurrentPage('services');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (hash === '' || hash === '#home') {
         setCurrentPage('home');
       }
@@ -82,13 +76,9 @@ export function App() {
       window.location.hash = 'portfolio';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (page === 'services') {
-      // Services is now a section on the home page — scroll to it
-      setCurrentPage('home');
+      setCurrentPage('services');
       window.location.hash = 'services';
-      setTimeout(() => {
-        const el = document.getElementById('services');
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setCurrentPage('home');
       window.location.hash = sectionId || '';
@@ -137,6 +127,7 @@ export function App() {
                 {/* Hero Section (WE BUILD WORLDS) */}
                 <HeroSection />
 
+
                 {/* Interactive Puzzle Services Showcase */}
                 <PuzzleServicesSection />
 
@@ -146,16 +137,18 @@ export function App() {
                 {/* Knowledge Library FAQ Section */}
                 <KnowledgeLibraryFAQ />
 
-<<<<<<< HEAD
-=======
                 {/* Interactive Office Projector About Us Showcase */}
                 <ProjectorStorySection />
->>>>>>> 17837ed8f4a56b3599d5f51f57d9c3e0bb48eb8c
 
                 {/* Playground & Interactive Labs */}
                 <PlaygroundSection />
               </div>
             </div>
+          </div>
+        ) : currentPage === 'services' ? (
+          /* DEDICATED SEPARATE 3D GAUNTLET SERVICES SHOWCASE PAGE */
+          <div className="pt-16 sm:pt-20">
+            <ServicesHeroSection onNavigate={handleNavigate} />
           </div>
         ) : currentPage === 'contact' ? (
           /* DEDICATED SEPARATE CONTACT US PAGE */

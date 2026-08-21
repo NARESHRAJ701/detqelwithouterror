@@ -28,6 +28,21 @@ class SoundFX {
     return this.enabled;
   }
 
+  private repulsorAudio: HTMLAudioElement | null = null;
+
+  public playRepulsorSound() {
+    if (!this.enabled) return;
+    if (typeof window === 'undefined') return;
+    
+    if (!this.repulsorAudio) {
+      this.repulsorAudio = new Audio('/images/repulsor sound.mp3');
+      this.repulsorAudio.volume = 0.5;
+    }
+    
+    this.repulsorAudio.currentTime = 0;
+    this.repulsorAudio.play().catch(e => console.error("Error playing repulsor sound:", e));
+  }
+
   // Subtle pop / click sound
   public playClick() {
     if (!this.enabled) return;
@@ -97,6 +112,41 @@ class SoundFX {
 
     osc.start();
     osc.stop(now + 0.26);
+  }
+
+  // Mystical pixel gem / stone power activation sound
+  public playStoneActivate(freq: number = 440) {
+    if (!this.enabled) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    const now = this.ctx.currentTime;
+    
+    // High crystalline chime
+    const oscChime = this.ctx.createOscillator();
+    const gainChime = this.ctx.createGain();
+    oscChime.type = 'sine';
+    oscChime.frequency.setValueAtTime(freq, now);
+    oscChime.frequency.exponentialRampToValueAtTime(freq * 1.5, now + 0.15);
+    gainChime.gain.setValueAtTime(0.12, now);
+    gainChime.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+    oscChime.connect(gainChime);
+    gainChime.connect(this.ctx.destination);
+    oscChime.start(now);
+    oscChime.stop(now + 0.36);
+
+    // Warm resonant sub tone
+    const oscSub = this.ctx.createOscillator();
+    const gainSub = this.ctx.createGain();
+    oscSub.type = 'triangle';
+    oscSub.frequency.setValueAtTime(freq * 0.5, now);
+    oscSub.frequency.linearRampToValueAtTime(freq * 0.75, now + 0.2);
+    gainSub.gain.setValueAtTime(0.08, now);
+    gainSub.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+    oscSub.connect(gainSub);
+    gainSub.connect(this.ctx.destination);
+    oscSub.start(now);
+    oscSub.stop(now + 0.26);
   }
   // Realistic projector power-on sound (heavy relay click + rising fan whir)
   public playProjectorOn() {

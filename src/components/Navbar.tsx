@@ -8,7 +8,7 @@ import { MagneticButton } from './MagneticButton';
 interface NavbarProps {
   darkMode: boolean;
   setDarkMode: (val: boolean) => void;
-  activePage?: 'home' | 'contact' | 'about' | 'portfolio';
+  activePage?: 'home' | 'contact' | 'about' | 'portfolio' | 'services';
   onNavigate?: (page: 'home' | 'contact' | 'about' | 'portfolio' | 'services', sectionId?: string) => void;
 }
 
