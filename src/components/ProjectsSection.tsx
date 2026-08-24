@@ -44,12 +44,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
         } else {
           setProjects(PROJECTS_DATA);
         }
-        setLoading(false);
       })
       .catch((err) => {
         console.error('Error fetching featured projects in list:', err);
         setProjects(PROJECTS_DATA);
-        setLoading(false);
       });
   }, []);
 

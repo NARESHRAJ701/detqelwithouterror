@@ -35,7 +35,7 @@ export const ConnectorLayer: React.FC<ConnectorLayerProps> = ({
 
   // Build stepped orthogonal circuit path between Card Anchor and Stone Anchor
   const generatePath = (
-    cId: string,
+    _cId: string,
     p1: { x: number; y: number },
     p2: { x: number; y: number },
     side: 'left' | 'right'

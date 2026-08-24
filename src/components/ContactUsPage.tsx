@@ -51,6 +51,7 @@ export const ContactUsPage: React.FC = () => {
   const [deskLampOn, setDeskLampOn] = useState(true);
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const [robotState, setRobotState] = useState<'idle' | 'blinking' | 'celebrating'>('idle');
+  const [robotMessage, setRobotMessage] = useState('We build AI-Powered Products.');
   const [currentTime, setCurrentTime] = useState('10:30 AM');
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
@@ -227,6 +228,12 @@ export const ContactUsPage: React.FC = () => {
     navigator.clipboard.writeText('+91 95609 13212');
     setCopiedPhone(true);
     setTimeout(() => setCopiedPhone(false), 2500);
+  };
+
+  const triggerMugQuote = () => {
+    sound.playClick();
+    const q = COFFEE_QUOTES[Math.floor(Math.random() * COFFEE_QUOTES.length)];
+    setRobotMessage(q);
   };
 
   const toggleDeskLamp = () => {

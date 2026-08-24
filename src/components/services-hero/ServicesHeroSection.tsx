@@ -7,8 +7,6 @@ import { ConnectorLayer } from './ConnectorLayer';
 import { GauntletScene } from './GauntletScene';
 import { ServiceDetailDrawer } from './ServiceDetailDrawer';
 import { sound } from '../../utils/sound';
-import { triggerCursor } from '../CustomCursor';
-import { ArrowRight } from 'lucide-react';
 
 interface ServicesHeroSectionProps {
   onNavigate?: (page: 'home' | 'contact' | 'about' | 'portfolio' | 'services', sectionId?: string) => void;

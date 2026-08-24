@@ -32,21 +32,21 @@ export interface ProjectResult {
 }
 
 export interface Project {
-  _id: string;
+  _id?: string;
   title: string;
-  slug: {
+  slug?: {
     _type: 'slug';
     current: string;
   };
   category: string;
   shortDescription: string;
-  description: string;
-  client: string;
-  industry: string;
+  description?: string;
+  client?: string;
+  industry?: string;
   year: number | string;
-  duration: string;
-  services: string[];
-  coverImage: SanityImage;
+  duration?: string;
+  services?: string[];
+  coverImage?: SanityImage;
   gallery?: SanityImage[];
   challenge?: string;
   solution?: string;

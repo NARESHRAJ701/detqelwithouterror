@@ -1,14 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Bot, ArrowRight } from 'lucide-react';
-import { sound } from '../../utils/sound';
-import { triggerCursor } from '../CustomCursor';
+import { Bot } from 'lucide-react';
 
 interface HeroCopyProps {
-  onExploreClick: () => void;
+  onExploreClick?: () => void;
 }
 
-export const HeroCopy: React.FC<HeroCopyProps> = ({ onExploreClick }) => {
+export const HeroCopy: React.FC<HeroCopyProps> = () => {
   return (
     <div className="flex flex-col items-start gap-4 select-none relative z-20">
 
