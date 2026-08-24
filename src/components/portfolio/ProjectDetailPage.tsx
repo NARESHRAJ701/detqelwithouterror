@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ExternalLink, Code2, Award, Briefcase, Calendar, Clock, Globe } from 'lucide-react';
 import { client, urlFor } from '../../lib/sanity';
 import { sound } from '../../utils/sound';
@@ -10,7 +9,6 @@ import type { Project } from '../../types';
 
 export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
   const [project, setProject] = useState<Project | null>(null);
   const [nextProject, setNextProject] = useState<{ title: string; slug: string } | null>(null);
   const [loading, setLoading] = useState(true);
