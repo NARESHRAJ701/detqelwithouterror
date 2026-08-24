@@ -37,7 +37,7 @@ const SERVICE_PIECES: ServicePiece[] = [
     id: '01',
     number: '01',
     titleLines: ['BRANDING'],
-    description: 'Identity systems, brand direction & visual language.',
+    description: 'Build a brand people remember.',
     bgColor: '#E6BA68',       // Warm Honey Ochre
     accentColor: '#4A3408',
     shadowColor: '#C49746',
@@ -51,7 +51,7 @@ const SERVICE_PIECES: ServicePiece[] = [
     id: '02',
     number: '02',
     titleLines: ['GRAPHIC', 'DESIGN'],
-    description: 'Posters, social creatives, campaigns & visual communication.',
+    description: 'Visuals that make your brand stand out.',
     bgColor: '#A5B58B',       // Muted Sage Green
     accentColor: '#1E3310',
     shadowColor: '#83946A',
@@ -65,7 +65,7 @@ const SERVICE_PIECES: ServicePiece[] = [
     id: '03',
     number: '03',
     titleLines: ['WEB', 'DEVELOPMENT'],
-    description: 'High-performance websites, interactive experiences & web platforms.',
+    description: 'Fast, modern websites built to perform.',
     bgColor: '#96B9D6',       // Soft Sky Blue
     accentColor: '#102F4C',
     shadowColor: '#7599B8',
@@ -78,8 +78,8 @@ const SERVICE_PIECES: ServicePiece[] = [
   {
     id: '04',
     number: '04',
-    titleLines: ['AI SOLUTIONS', '& LLM INTEGRATION'],
-    description: 'AI products, intelligent assistants, LLM workflows & custom integrations.',
+    titleLines: ['AI', 'SOLUTIONS'],
+    description: 'AI tools, agents and intelligent workflows.',
     bgColor: '#B59EC9',       // Muted Lavender Purple
     accentColor: '#2C1445',
     shadowColor: '#937BAC',
@@ -87,13 +87,13 @@ const SERVICE_PIECES: ServicePiece[] = [
     outwardY: 0,
     rotation: -2.5,
     visualType: 'ai',
-    titleFontSizeSvg: 'text-xl lg:text-2xl xl:text-[27px]',
+    titleFontSizeSvg: 'text-3xl lg:text-4xl xl:text-[40px]',
   },
   {
     id: '05',
     number: '05',
-    titleLines: ['AUTOMATION &', 'WORKFLOW OPTIMIZATION'],
-    description: 'Connect tools, eliminate repetitive work & build smarter workflows.',
+    titleLines: ['AUTOMATION'],
+    description: 'Connect your tools. Remove repetitive work.',
     bgColor: '#E68F70',       // Warm Terracotta
     accentColor: '#4A1403',
     shadowColor: '#C56D4E',
@@ -101,13 +101,13 @@ const SERVICE_PIECES: ServicePiece[] = [
     outwardY: -20,
     rotation: 1.5,
     visualType: 'automation',
-    titleFontSizeSvg: 'text-xl lg:text-2xl xl:text-[27px]',
+    titleFontSizeSvg: 'text-2xl lg:text-3xl xl:text-[34px]',
   },
   {
     id: '06',
     number: '06',
     titleLines: ['SOFTWARE', 'DEVELOPMENT'],
-    description: 'Custom applications, platforms, APIs & scalable software.',
+    description: 'Custom software built around your business.',
     bgColor: '#DFC79C',       // Sand Wheat Cardboard
     accentColor: '#3B2A0E',
     shadowColor: '#BEA476',
@@ -120,8 +120,8 @@ const SERVICE_PIECES: ServicePiece[] = [
   {
     id: '07',
     number: '07',
-    titleLines: ['RESEARCH &', 'PUBLICATION SUPPORT'],
-    description: 'Research workflows, technical documentation, publication support & digital tools.',
+    titleLines: ['RESEARCH &', 'PUBLICATION'],
+    description: 'Research, journals and digital publication support.',
     bgColor: '#89C2B6',       // Mint Teal Cardboard
     accentColor: '#0B332B',
     shadowColor: '#679F94',
@@ -129,13 +129,13 @@ const SERVICE_PIECES: ServicePiece[] = [
     outwardY: 36,
     rotation: -3,
     visualType: 'research',
-    titleFontSizeSvg: 'text-xl lg:text-2xl xl:text-[23px]',
+    titleFontSizeSvg: 'text-2xl lg:text-3xl xl:text-[34px]',
   },
   {
     id: '08',
     number: '08',
-    titleLines: ['CRM / ERP / LMS'],
-    description: 'Business systems for managing customers, operations, learning & internal processes.',
+    titleLines: ['CRM / ERP', '/ LMS'],
+    description: 'Business systems that keep everything connected.',
     bgColor: '#81A6CB',       // Dusty Slate Blue
     accentColor: '#0B233D',
     shadowColor: '#5F84AA',
@@ -365,21 +365,16 @@ export const PuzzleServicesSection: React.FC = () => {
             <div className="space-y-2.5">
               <div className="flex items-center gap-2 font-mono text-xs tracking-widest text-[#666053] uppercase font-bold">
                 <span className="w-2.5 h-2.5 rounded-xs bg-[#E63946]" />
-                <span>// SERVICES & AGENCY CAPABILITIES</span>
+                <span>01 / SERVICES</span>
               </div>
 
               <h2 className="font-pixel text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111111] leading-none">
-                EVERY PIECE<br />
-                HAS A PURPOSE<span className="text-[#E63946]">.</span>
+                EVERY IDEA NEEDS A<br />
+                WAY TO BECOME <span className="text-[#E63946]">REAL.</span>
               </h2>
 
-              <div className="font-pixel text-sm sm:text-base font-bold text-[#554F43] tracking-wide pt-0.5">
-                PUT THEM TOGETHER.<br />
-                BUILD SOMETHING <span className="text-[#111111]">BETTER</span><span className="text-[#E63946]">.</span>
-              </div>
-
               <p className="text-xs sm:text-sm text-[#666053] leading-relaxed pt-1" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                End-to-end digital solutions crafted with strategy, design, technology, and intelligence.
+                We help businesses turn ideas into brands, products and digital systems that people actually use.
               </p>
             </div>
 
@@ -414,7 +409,7 @@ export const PuzzleServicesSection: React.FC = () => {
             {/* EDITORIAL QUOTE & DETQEL STATEMENT */}
             <div className="p-4 rounded-lg bg-[#EAE5D8] border-l-4 border-[#E63946] border-y border-r border-[#D2CBB9] space-y-2">
               <div className="font-pixel text-xs sm:text-sm font-bold text-[#111111] uppercase tracking-wide">
-                “WE DON’T JUST FILL GAPS. WE CONNECT THE PIECES.”
+                “ONE TEAM. FROM IDEA TO EXECUTION.”
               </div>
               <div className="font-mono text-[10px] sm:text-xs font-bold text-[#666053] flex items-center justify-between pt-1 border-t border-[#D5CFBF]">
                 <span>DetQel — Design. Technology. Intelligence.</span>

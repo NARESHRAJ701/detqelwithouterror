@@ -41,7 +41,7 @@ export interface FormDataState {
 export const ContactWorkstationSection: React.FC = () => {
   const [formData, setFormData] = useState<FormDataState>({
     fullName: 'Naresh Raj',
-    email: 'hello@detqel.com',
+    email: 'detqel@gmail.com',
     company: 'Detqel Studio',
     phone: '+91 95609 13212',
     country: 'India',
@@ -181,7 +181,7 @@ export const ContactWorkstationSection: React.FC = () => {
 
   const handleCopyEmail = () => {
     sound.playSuccess();
-    navigator.clipboard.writeText('hello@detqel.com');
+    navigator.clipboard.writeText('detqel@gmail.com');
     setCopiedEmail(true);
     confetti({ particleCount: 50, spread: 50, origin: { y: 0.8 } });
     setTimeout(() => setCopiedEmail(false), 3000);
@@ -493,7 +493,7 @@ export const ContactWorkstationSection: React.FC = () => {
                           value={formData.email}
                           onKeyDown={(e) => handleInputChange('email', formData.email, e.key)}
                           onChange={(e) => handleInputChange('email', e.target.value)}
-                          placeholder="hello@detqel.com"
+                          placeholder="detqel@gmail.com"
                           className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white pl-9 pr-3 py-2 text-sm rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-accent-acid font-sans font-medium"
                         />
                       </div>
@@ -863,7 +863,7 @@ export const ContactWorkstationSection: React.FC = () => {
                   DIRECT EMAIL INBOX
                 </span>
                 <h3 className="font-pixel text-lg font-bold text-ink dark:text-white mb-2">
-                  hello@detqel.com
+                  detqel@gmail.com
                 </h3>
                 <p className="font-sans text-xs text-ink/70 dark:text-gray-300 leading-relaxed">
                   Send your RFPs, project briefs, or general questions anytime.

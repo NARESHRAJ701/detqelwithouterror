@@ -224,33 +224,7 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
             {/* 1. Header Text & Pinned Wall Notes */}
             <div className="space-y-4 relative">
 
-              {/* Pinned Architectural Wireframe & Sticky Notes on the Wall */}
-              <div className="absolute -top-6 -right-4 hidden sm:flex flex-col gap-2 pointer-events-none opacity-90 z-0">
-                {/* Wireframe Sketch Note */}
-                <div className="w-28 h-20 bg-white/90 dark:bg-canvas-dark-paper/90 border border-ink/40 rounded-xs shadow-md p-2 rotate-3 text-[8px] font-mono leading-tight text-ink/70">
-                  <div className="w-full h-1 bg-ink/30 mb-1" />
-                  <div className="grid grid-cols-2 gap-1 mb-1">
-                    <div className="h-6 bg-ink/10 rounded-xs" />
-                    <div className="h-6 bg-ink/10 rounded-xs" />
-                  </div>
-                  <span>UI WIREFRAME // v2</span>
-                </div>
 
-                {/* Sticky Notes */}
-                <div className="flex gap-2">
-                  <div className="bg-[#fef08a] text-yellow-950 font-pixel text-[9px] font-bold p-2 shadow-md -rotate-6 rounded-xs border border-yellow-300">
-                    <div>AI</div>
-                    <div>DESIGN</div>
-                    <div>CODE</div>
-                    <div>AUTOMATE</div>
-                  </div>
-                  <div className="bg-[#fbcfe8] text-pink-950 font-pixel text-[9px] font-bold p-2 shadow-md rotate-6 rounded-xs border border-pink-300">
-                    <div>RESEARCH</div>
-                    <div>BUILD</div>
-                    <div>SCALE</div>
-                  </div>
-                </div>
-              </div>
 
               {/* Title Section */}
               <div className="relative z-10">
@@ -260,17 +234,19 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
                     02
                   </span>
                   <span className={isOn ? 'text-white/70' : 'text-ink/60 dark:text-gray-400'}>
-                    // ABOUT US — OUR STORY
+                    WHO WE ARE
                   </span>
                 </div>
 
                 <h2 className="font-pixel text-4xl sm:text-6xl font-black uppercase tracking-tight text-accent-acid transition-colors duration-500">
-                  OUR STORY<span className="text-accent-coral">.</span>
+                  WE BELIEVE GOOD IDEAS DESERVE TO <span className="text-accent-coral">EXIST.</span>
                 </h2>
 
                 <p className={`font-sans text-sm sm:text-base leading-relaxed max-w-md mt-3 transition-colors duration-500 ${isOn ? 'text-white/80' : 'text-ink/80 dark:text-gray-300'
                   }`}>
-                  DETQEL is an AI-first digital product studio helping startups and brands turn ambitious ideas into scalable products and unforgettable digital experiences.
+                  Not every idea makes it. We built Detqel to change that.
+                  <br /><br />
+                  We're a team of designers, engineers and strategists who care about building things that work and look good doing it. We don't just write code or design logos — we build systems that help you grow.
                 </p>
               </div>
 

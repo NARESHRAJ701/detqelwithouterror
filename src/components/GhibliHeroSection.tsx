@@ -5,6 +5,7 @@ import { PROJECTS_DATA } from '../data/projects';
 import { sound } from '../utils/sound';
 import { triggerCursor } from './CustomCursor';
 import { ArrowRight, Sparkles, Cpu, Code2, Zap, Compass, Smartphone, Palette } from 'lucide-react';
+import { client, urlFor } from '../lib/sanity';
 
 interface GhibliHeroSectionProps {
   onSelectProject?: (project: Project) => void;
@@ -12,13 +13,11 @@ interface GhibliHeroSectionProps {
 
 const SERVICE_TAGS = [
   { text: 'AI Solutions', rotation: -5, xOffset: '-22vw', yOffset: '-17vh', color: 'bg-emerald-100 text-emerald-900 border-emerald-300', clipColor: '#10B981' },
-  { text: 'Brand Identity', rotation: 4, xOffset: '0vw', yOffset: '-24vh', color: 'bg-indigo-100 text-indigo-900 border-indigo-300', clipColor: '#6366F1' },
-  { text: 'UI/UX Design', rotation: -3, xOffset: '22vw', yOffset: '-17vh', color: 'bg-lime-200 text-lime-950 border-lime-400', clipColor: '#84CC16' },
-  { text: 'Web Development', rotation: 5, xOffset: '25vw', yOffset: '0vh', color: 'bg-sky-100 text-sky-900 border-sky-300', clipColor: '#0EA5E9' },
-  { text: 'Automation', rotation: -4, xOffset: '20vw', yOffset: '15vh', color: 'bg-amber-100 text-amber-900 border-amber-300', clipColor: '#F59E0B' },
-  { text: 'ERP & CRM Systems', rotation: 2, xOffset: '0vw', yOffset: '21vh', color: 'bg-teal-100 text-teal-900 border-teal-300', clipColor: '#14B8A6' },
-  { text: 'SaaS Products', rotation: 3, xOffset: '-20vw', yOffset: '15vh', color: 'bg-purple-100 text-purple-900 border-purple-300', clipColor: '#7939a1' },
-  { text: 'Mobile Apps', rotation: -2, xOffset: '-25vw', yOffset: '0vh', color: 'bg-pink-100 text-pink-900 border-pink-300', clipColor: '#EC4899' },
+  { text: 'Brand Design', rotation: 4, xOffset: '0vw', yOffset: '-24vh', color: 'bg-indigo-100 text-indigo-900 border-indigo-300', clipColor: '#6366F1' },
+  { text: 'Web Development', rotation: -3, xOffset: '22vw', yOffset: '-17vh', color: 'bg-lime-200 text-lime-950 border-lime-400', clipColor: '#84CC16' },
+  { text: 'Automation', rotation: 5, xOffset: '25vw', yOffset: '0vh', color: 'bg-sky-100 text-sky-900 border-sky-300', clipColor: '#0EA5E9' },
+  { text: 'Software', rotation: -4, xOffset: '20vw', yOffset: '15vh', color: 'bg-amber-100 text-amber-900 border-amber-300', clipColor: '#F59E0B' },
+  { text: 'Digital Experiences', rotation: 2, xOffset: '0vw', yOffset: '21vh', color: 'bg-teal-100 text-teal-900 border-teal-300', clipColor: '#14B8A6' }
 ];
 
 const DOCK_ITEMS = [
@@ -46,6 +45,35 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
   const springConfig = { stiffness: 100, damping: 20 };
   const parallaxMouseX = useSpring(mouseX, springConfig);
 
+  const [rightProjects, setRightProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "project" && featured == true] | order(sortOrder asc, _createdAt desc) [0...3]`)
+      .then((data) => {
+        if (data && data.length > 0) {
+          const mappedData = data.map((proj: any, idx: number) => ({
+            ...proj,
+            id: proj.slug?.current || proj._id,
+            number: String(idx + 1).padStart(2, '0'),
+            image: proj.coverImage ? urlFor(proj.coverImage).width(120).height(120).url() : '/projects/placeholder.png',
+            tags: proj.services || [],
+            bgAccent: proj.bgAccent || 'bg-accent-acid',
+            badgeText: proj.badgeText || 'SELECTED CASE',
+            year: String(proj.year || 2026),
+          }));
+          setRightProjects(mappedData);
+        } else {
+          // Fallback to static data
+          setRightProjects(PROJECTS_DATA.slice(0, 3));
+        }
+      })
+      .catch((err) => {
+        console.error('Error fetching featured projects in hero:', err);
+        setRightProjects(PROJECTS_DATA.slice(0, 3));
+      });
+  }, []);
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
@@ -58,9 +86,6 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
-
-  // Selected 3 Right Cards
-  const rightProjects = PROJECTS_DATA.slice(0, 3);
 
   return (
     <div className="relative w-full h-screen h-[100vh] max-h-[100vh] overflow-hidden bg-[#87CEEB] selection:bg-[#E0FF00] selection:text-ink font-sans">
@@ -211,9 +236,10 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
               <span className="text-white drop-shadow-[0_10px_20px_rgba(0,0,0,0.4)]">
                 AI-POWERED
               </span><br />
-              PRODUCTS<br />
+              PRODUCTS, BRANDS<br />
+              & DIGITAL EXPERIENCES.<br />
               <span className="text-[#E0FF00] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
-                THAT SCALE.
+                THAT HELP YOU GROW.
               </span>
             </h1>
           </motion.div>
@@ -232,10 +258,10 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
           >
             <div className="flex items-center gap-2 font-mono text-[clamp(0.68rem,0.75vw,0.8rem)] text-white/90 font-bold">
               <span className="w-5 h-0.5 bg-white" />
-              <span>THE DETQEL MANIFESTO</span>
+              <span>AI • DESIGN • TECHNOLOGY</span>
             </div>
             <p className="font-sans text-[clamp(0.85rem,1.05vw,1.15rem)] font-medium text-white/95 leading-relaxed max-w-xs sm:max-w-sm">
-              We don't just build websites. We design brands, engineer software, and create AI-powered digital experiences.
+              We combine AI, design and technology to turn ideas into products, brands and digital experiences that work.
             </p>
           </motion.div>
 

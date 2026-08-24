@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { GhibliHeroSection } from './components/GhibliHeroSection';
@@ -6,7 +7,6 @@ import { TornPaperDivider } from './components/TornPaperDivider';
 import { HeroSection } from './components/HeroSection';
 import { PuzzleServicesSection } from './components/PuzzleServicesSection';
 import { ServicesHeroSection } from './components/services-hero/ServicesHeroSection';
-
 import { RobotTestimonialScene } from './components/RobotTestimonialScene';
 import { KnowledgeLibraryFAQ } from './components/KnowledgeLibraryFAQ';
 import { PlaygroundSection } from './components/PlaygroundSection';
@@ -14,13 +14,13 @@ import { FooterSection } from './components/FooterSection';
 import { ContactUsPage } from './components/ContactUsPage';
 import { AboutUsPage } from './components/about/AboutUsPage';
 import { PortfolioPage } from './components/portfolio/PortfolioPage';
-import { ProjectModal } from './components/ProjectModal';
+import { ProjectDetailPage } from './components/portfolio/ProjectDetailPage';
 import { ProjectorStorySection } from './components/ProjectorStorySection';
-import type { Project } from './types';
 
 export function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState<'home' | 'contact' | 'about' | 'portfolio' | 'services'>('home');
 
   useEffect(() => {
@@ -31,70 +31,45 @@ export function App() {
     }
   }, [darkMode]);
 
-  // Sync route with URL hash / window location
+  // Sync active page state for Navbar styling and trigger scroll-to-top on route changes
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash === '#contact') {
-        setCurrentPage('contact');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (hash === '#about' || hash === '#about-page') {
-        setCurrentPage('about');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (hash === '#portfolio' || hash === '#work') {
-        setCurrentPage('portfolio');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (hash === '#services') {
-        setCurrentPage('services');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (hash === '' || hash === '#home') {
-        setCurrentPage('home');
-      }
-    };
-
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    window.addEventListener('popstate', handleHashChange);
-
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-      window.removeEventListener('popstate', handleHashChange);
-    };
-  }, []);
+    const path = location.pathname;
+    if (path.startsWith('/contact')) {
+      setCurrentPage('contact');
+    } else if (path.startsWith('/about')) {
+      setCurrentPage('about');
+    } else if (path.startsWith('/portfolio') || path.startsWith('/work')) {
+      setCurrentPage('portfolio');
+    } else if (path.startsWith('/services')) {
+      setCurrentPage('services');
+    } else {
+      setCurrentPage('home');
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+  }, [location.pathname]);
 
   const handleNavigate = (page: 'home' | 'contact' | 'about' | 'portfolio' | 'services', sectionId?: string) => {
     if (page === 'contact') {
-      setCurrentPage('contact');
-      window.location.hash = 'contact';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      navigate('/contact');
     } else if (page === 'about') {
-      setCurrentPage('about');
-      window.location.hash = 'about';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      navigate('/about');
     } else if (page === 'portfolio') {
-      setCurrentPage('portfolio');
-      window.location.hash = 'portfolio';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      navigate('/portfolio');
     } else if (page === 'services') {
-      setCurrentPage('services');
-      window.location.hash = 'services';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      navigate('/services');
     } else {
-      setCurrentPage('home');
-      window.location.hash = sectionId || '';
+      navigate('/');
       if (sectionId) {
         setTimeout(() => {
           const el = document.getElementById(sectionId);
           if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 150);
       }
     }
   };
 
   return (
-    <div className="min-h-screen bg-canvas text-ink dark:bg-canvas-dark dark:text-white transition-colors duration-300 relative selection:bg-accent-acid selection:text-ink">
+    <div className="min-h-screen bg-canvas text-ink dark:bg-canvas-dark dark:text-white transition-colors duration-300 relative selection:bg-emerald-500 selection:text-white">
       {/* Noise Grain Background Overlay */}
       <div className="noise-bg" />
 
@@ -109,67 +84,62 @@ export function App() {
         onNavigate={handleNavigate}
       />
 
-      {/* Main Content Layout */}
+      {/* Main Content Layout with Routes */}
       <main>
-        {currentPage === 'home' ? (
-          <div className="relative">
-            {/* Fullscreen Studio Ghibli Parallax Hero Section */}
-            <div className="sticky top-0 z-0 w-full h-screen overflow-hidden">
-              <GhibliHeroSection onSelectProject={(project) => setSelectedProject(project)} />
-            </div>
+        <Routes>
+          <Route path="/" element={
+            <div className="relative">
+              {/* Fullscreen Studio Ghibli Parallax Hero Section */}
+              <div className="sticky top-0 z-0 w-full h-screen overflow-hidden">
+                <GhibliHeroSection />
+              </div>
 
-            {/* Content that scrolls ON TOP of the sticky hero section */}
-            <div className="relative z-10">
-              {/* Realistic Torn Paper Edge Transition */}
-              <TornPaperDivider />
+              {/* Content that scrolls ON TOP of the sticky hero section */}
+              <div className="relative z-10">
+                {/* Realistic Torn Paper Edge Transition */}
+                <TornPaperDivider />
 
-              <div className="bg-[#050608] dark:bg-canvas-dark shadow-2xl">
-                {/* Hero Section (WE BUILD WORLDS) */}
-                <HeroSection />
+                <div className="bg-[#050608] dark:bg-canvas-dark shadow-2xl">
+                  {/* Hero Section (WE BUILD WORLDS) */}
+                  <HeroSection />
 
+                  {/* Interactive Puzzle Services Showcase */}
+                  <PuzzleServicesSection />
 
-                {/* Interactive Puzzle Services Showcase */}
-                <PuzzleServicesSection />
+                  {/* Robot Vacuum Delivery Testimonial Scene */}
+                  <RobotTestimonialScene />
 
-                {/* Robot Vacuum Delivery Testimonial Scene */}
-                <RobotTestimonialScene />
+                  {/* Knowledge Library FAQ Section */}
+                  <KnowledgeLibraryFAQ />
 
-                {/* Knowledge Library FAQ Section */}
-                <KnowledgeLibraryFAQ />
+                  {/* Interactive Office Projector About Us Showcase */}
+                  <ProjectorStorySection />
 
-                {/* Interactive Office Projector About Us Showcase */}
-                <ProjectorStorySection />
-
-                {/* Playground & Interactive Labs */}
-                <PlaygroundSection />
+                  {/* Playground & Interactive Labs */}
+                  <PlaygroundSection />
+                </div>
               </div>
             </div>
-          </div>
-        ) : currentPage === 'services' ? (
-          /* DEDICATED SEPARATE 3D GAUNTLET SERVICES SHOWCASE PAGE */
-          <div className="pt-16 sm:pt-20">
-            <ServicesHeroSection onNavigate={handleNavigate} />
-          </div>
-        ) : currentPage === 'contact' ? (
-          /* DEDICATED SEPARATE CONTACT US PAGE */
-          <ContactUsPage />
-        ) : currentPage === 'about' ? (
-          /* DEDICATED SEPARATE ABOUT US PAGE */
-          <AboutUsPage />
-        ) : (
-          /* DEDICATED SEPARATE PORTFOLIO CREATIVE PLAYGROUND PAGE */
-          <PortfolioPage onSelectProject={(project) => setSelectedProject(project)} />
-        )}
+          } />
+
+          <Route path="/services" element={
+            <div className="pt-16 sm:pt-20">
+              <ServicesHeroSection onNavigate={handleNavigate} />
+            </div>
+          } />
+
+          <Route path="/contact" element={<ContactUsPage />} />
+          <Route path="/about" element={<AboutUsPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/work/:slug" element={<ProjectDetailPage />} />
+
+          {/* Fallback to home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
 
       {/* Footer Section */}
       <FooterSection />
-
-      {/* Project Case Study Detail Modal */}
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
     </div>
   );
 }

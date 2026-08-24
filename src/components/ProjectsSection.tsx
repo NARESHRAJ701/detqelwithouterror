@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Project } from '../types';
 import { PROJECTS_DATA } from '../data/projects';
@@ -7,6 +7,7 @@ import { sound } from '../utils/sound';
 import { triggerCursor } from './CustomCursor';
 import { ArrowUpRight, ArrowRight, CheckCircle2, Layers, Sparkles, Eye } from 'lucide-react';
 import { MagneticButton } from './MagneticButton';
+import { client, urlFor } from '../lib/sanity';
 
 interface ProjectsSectionProps {
   onSelectProject: (project: Project) => void;
@@ -14,7 +15,46 @@ interface ProjectsSectionProps {
 
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProject }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const activeProject = PROJECTS_DATA[activeIndex] || PROJECTS_DATA[0];
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "project" && featured == true] | order(sortOrder asc, _createdAt desc)`)
+      .then((data) => {
+        if (data && data.length > 0) {
+          const mappedData = data.map((proj: any, idx: number) => ({
+            ...proj,
+            id: proj.slug?.current || proj._id,
+            number: String(idx + 1).padStart(2, '0'),
+            image: proj.coverImage ? urlFor(proj.coverImage).width(800).url() : '/projects/placeholder.png',
+            tags: proj.services || [],
+            bgAccent: proj.bgAccent || 'bg-accent-acid',
+            badgeText: proj.badgeText || 'AWWWARDS SITE OF THE DAY',
+            accentColor: proj.accentColor || '#7939a1',
+            mockupType: proj.mockupType || 'custom-image',
+            liveUrl: proj.liveUrl || 'https://example.com',
+            githubUrl: proj.githubUrl || 'https://github.com',
+            role: proj.role || 'Lead Creative Developer & Brand Strategist',
+            metrics: proj.results && proj.results.length > 0 ? `${proj.results[0].value} • ${proj.results[0].label}` : '+410% Direct Sales • 100% Carbon Tracked',
+            subtitle: proj.shortDescription || '',
+            deliverables: proj.services || [],
+            serviceTags: proj.services || [],
+          }));
+          setProjects(mappedData);
+        } else {
+          setProjects(PROJECTS_DATA);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Error fetching featured projects in list:', err);
+        setProjects(PROJECTS_DATA);
+        setLoading(false);
+      });
+  }, []);
+
+  const activeProject = projects[activeIndex] || projects[0] || PROJECTS_DATA[0];
 
   return (
     <section id="projects" className="py-24 px-4 sm:px-8 bg-grid-pattern border-b-2 border-ink selection:bg-accent-acid selection:text-ink">
@@ -52,7 +92,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
               <span>DISCIPLINE</span>
             </div>
 
-            {PROJECTS_DATA.map((project, index) => {
+            {projects.map((project, index) => {
               const isActive = index === activeIndex;
 
               return (
@@ -169,9 +209,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
                   className="w-full h-full"
                 >
                   <MockupCanvas
-                    type={activeProject.mockupType}
-                    accentColor={activeProject.accentColor}
-                    imageSrc={activeProject.image}
+                    type={activeProject.mockupType || 'custom-image'}
+                    accentColor={activeProject.accentColor || '#7939a1'}
+                    imageSrc={activeProject.image || ''}
                     title={activeProject.title}
                   />
                 </motion.div>
@@ -235,7 +275,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
                       <Layers className="w-3.5 h-3.5 text-accent-blue" /> STUDIO SERVICES
                     </span>
                     <div className="flex flex-wrap gap-1.5">
-                      {activeProject.serviceTags.map((tag) => (
+                      {(activeProject.serviceTags || []).map((tag: string) => (
                         <span
                           key={tag}
                           className="font-mono text-[11px] font-bold bg-canvas-paper dark:bg-canvas-dark px-2.5 py-1 border border-ink/30 rounded-xs text-ink dark:text-gray-200"
@@ -252,7 +292,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
                       <CheckCircle2 className="w-3.5 h-3.5 text-accent-acid-green" /> KEY DELIVERABLES
                     </span>
                     <ul className="space-y-1 font-mono text-xs text-ink dark:text-gray-200 font-medium">
-                      {activeProject.deliverables.map((item) => (
+                      {(activeProject.deliverables || []).map((item: string) => (
                         <li key={item} className="flex items-center gap-2">
                           <span className="text-accent-acid-green font-bold">✓</span> {item}
                         </li>

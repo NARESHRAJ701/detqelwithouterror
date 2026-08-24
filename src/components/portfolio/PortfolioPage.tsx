@@ -1,9 +1,11 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, ArrowRight, ExternalLink, SlidersHorizontal } from 'lucide-react';
 import { ProjectsSection } from '../ProjectsSection';
+import { client } from '../../lib/sanity';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -303,16 +305,20 @@ const StatIcon: React.FC<{ color: string; children: React.ReactNode }> = ({ colo
 );
 
 // ── Project Voxel Artwork ──────────────────────────────────────────────────────
-const ProjectArtwork: React.FC<{ project: PortfolioProject; isHovered: boolean }> = ({ project, isHovered }) => {
+const ProjectArtwork: React.FC<{ project: any; isHovered: boolean }> = ({ project, isHovered }) => {
   const artMap: Record<string, React.ReactNode> = {
     'ayura-candles': <AyuraArt accent={project.accent} hover={isHovered} />,
+    'ayura-candeo': <AyuraArt accent={project.accent} hover={isHovered} />,
     'solarex-energy': <SolarexArt accent={project.accent} hover={isHovered} />,
+    'solarix-energy': <SolarexArt accent={project.accent} hover={isHovered} />,
     'lifelinex-app': <LifelineXArt accent={project.accent} hover={isHovered} />,
+    'lifelinex': <LifelineXArt accent={project.accent} hover={isHovered} />,
     'neostep': <NeostepArt accent={project.accent} hover={isHovered} />,
     'brew-aura': <BrewAuraArt accent={project.accent} hover={isHovered} />,
     'go-planet-coffee': <GoPlanetArt accent={project.accent} hover={isHovered} />,
   };
-  return <>{artMap[project.id] || <DefaultArt color={project.accent} hover={isHovered} />}</>;
+  const projectId = project.slug?.current || project.id || '';
+  return <>{artMap[projectId] || <DefaultArt color={project.accent} hover={isHovered} />}</>;
 };
 
 // Individual artwork components using CSS/SVG voxels
@@ -568,15 +574,17 @@ const CTARocketScene: React.FC = () => (
 );
 
 // ── Project Card ──────────────────────────────────────────────────────────────
-const ProjectCard: React.FC<{ project: PortfolioProject; index: number }> = ({ project, index }) => {
+const MotionLink = motion(Link);
+
+const ProjectCard: React.FC<{ project: any; index: number }> = ({ project, index }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLAnchorElement>(null);
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
   const springX = useSpring(rotateX, { stiffness: 300, damping: 30 });
   const springY = useSpring(rotateY, { stiffness: 300, damping: 30 });
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
@@ -592,7 +600,8 @@ const ProjectCard: React.FC<{ project: PortfolioProject; index: number }> = ({ p
   }, [rotateX, rotateY]);
 
   return (
-    <motion.div
+    <MotionLink
+      to={`/work/${project.slug?.current || project.id}`}
       ref={cardRef}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -602,7 +611,7 @@ const ProjectCard: React.FC<{ project: PortfolioProject; index: number }> = ({ p
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       whileHover={{ y: -8 }}
-      className="group relative bg-white rounded-xl border border-gray-200 overflow-hidden cursor-pointer select-none"
+      className="group relative bg-white rounded-xl border border-gray-200 overflow-hidden cursor-pointer select-none block"
       style={{
         rotateX: springX,
         rotateY: springY,
@@ -671,7 +680,7 @@ const ProjectCard: React.FC<{ project: PortfolioProject; index: number }> = ({ p
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.2 }}
       />
-    </motion.div>
+    </MotionLink>
   );
 };
 
@@ -736,16 +745,68 @@ interface PortfolioPageProps {
 
 export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject }) => {
   const [activeFilter, setActiveFilter] = useState<FilterKey>('ALL');
-  const [displayedProjects, setDisplayedProjects] = useState(PROJECTS);
+  const [projects, setProjects] = useState<any[]>([]);
+  const [displayedProjects, setDisplayedProjects] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const filterBarRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "project"] | order(sortOrder asc, _createdAt desc)`)
+      .then((data) => {
+        if (data && data.length > 0) {
+          const mappedData = data.map((proj: any, idx: number) => {
+            // Find standard category filter key
+            let filterCat: FilterKey = 'OTHERS';
+            const catLower = (proj.category || '').toLowerCase();
+            if (catLower.includes('branding') || catLower.includes('identity')) {
+              filterCat = 'BRANDING';
+            } else if (catLower.includes('web development') || catLower.includes('development')) {
+              filterCat = 'WEB DEVELOPMENT';
+            } else if (catLower.includes('ui/ux') || catLower.includes('design')) {
+              filterCat = 'UI/UX DESIGN';
+            } else if (catLower.includes('app')) {
+              filterCat = 'APPLICATIONS';
+            } else if (catLower.includes('motion')) {
+              filterCat = 'MOTION';
+            }
+
+            return {
+              ...proj,
+              id: proj.slug?.current || proj._id,
+              number: String(idx + 1).padStart(2, '0'),
+              category: filterCat,
+              categoryLabel: proj.category || 'OTHER',
+              description: proj.shortDescription || '',
+              accent: proj.accentColor || '#7939a1',
+              accentText: 'text-purple-600',
+              bgGradient: proj.bgGradient || 'from-purple-50 to-pink-50',
+              voxelColor: proj.accentColor || '#7939a1',
+              tags: proj.services || [],
+            };
+          });
+          setProjects(mappedData);
+          setDisplayedProjects(mappedData);
+        } else {
+          setProjects(PROJECTS);
+          setDisplayedProjects(PROJECTS);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Error fetching projects in portfolio:', err);
+        setProjects(PROJECTS);
+        setDisplayedProjects(PROJECTS);
+        setLoading(false);
+      });
+  }, []);
 
   const handleFilter = (f: FilterKey) => {
     setActiveFilter(f);
     // Animate out then in
     setDisplayedProjects([]);
     setTimeout(() => {
-      setDisplayedProjects(f === 'ALL' ? PROJECTS : PROJECTS.filter(p => p.category === f));
+      setDisplayedProjects(f === 'ALL' ? projects : projects.filter(p => p.category === f));
     }, 150);
   };
 
@@ -907,9 +968,22 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject })
               transition={{ duration: 0.2 }}
               className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
             >
-              {displayedProjects.map((project, i) => (
-                <ProjectCard key={project.id} project={project} index={i} />
-              ))}
+              {loading ? (
+                [...Array(6)].map((_, i) => (
+                  <div key={i} className="animate-pulse bg-white border border-gray-200 rounded-xl overflow-hidden" style={{ height: 350 }}>
+                    <div className="h-6 w-1/4 bg-gray-200 m-4 rounded" />
+                    <div className="mx-3 bg-gray-200 rounded-lg" style={{ height: 200 }} />
+                    <div className="p-4 space-y-2">
+                      <div className="h-5 w-3/4 bg-gray-200 rounded" />
+                      <div className="h-4 w-5/6 bg-gray-200 rounded" />
+                    </div>
+                  </div>
+                ))
+              ) : (
+                displayedProjects.map((project, i) => (
+                  <ProjectCard key={project.id} project={project} index={i} />
+                ))
+              )}
               {displayedProjects.length === 0 && (
                 <motion.div
                   initial={{ opacity: 0 }}

@@ -36,7 +36,7 @@ export interface ContactFormState {
 export const ContactUsPage: React.FC = () => {
   const [formData, setFormData] = useState<ContactFormState>({
     fullName: 'Naresh Raj',
-    email: 'hello@detqel.com',
+    email: 'detqel@gmail.com',
     company: 'Detqel Studio',
     details: 'We want to build an AI-powered platform that helps businesses automate their workflows and communication...',
     budget: '₹5L - ₹15L',
@@ -51,8 +51,6 @@ export const ContactUsPage: React.FC = () => {
   const [deskLampOn, setDeskLampOn] = useState(true);
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const [robotState, setRobotState] = useState<'idle' | 'blinking' | 'celebrating'>('idle');
-  const [robotMessage, setRobotMessage] = useState('We build AI-Powered Products.');
-  const [mugQuote, setMugQuote] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState('10:30 AM');
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
@@ -197,7 +195,7 @@ export const ContactUsPage: React.FC = () => {
         particleCount: 90,
         spread: 80,
         origin: { y: 0.6 },
-        colors: ['#88C000', '#FF5533', '#2563EB', '#A7F3D0']
+        colors: ['#8B5CF6', '#FF5533', '#2563EB', '#A7F3D0']
       });
 
       setTimeout(() => {
@@ -218,7 +216,7 @@ export const ContactUsPage: React.FC = () => {
 
   const handleCopyEmail = () => {
     sound.playSuccess();
-    navigator.clipboard.writeText('hello@detqel.com');
+    navigator.clipboard.writeText('detqel@gmail.com');
     setCopiedEmail(true);
     confetti({ particleCount: 40, spread: 40, origin: { y: 0.8 } });
     setTimeout(() => setCopiedEmail(false), 2500);
@@ -231,20 +229,9 @@ export const ContactUsPage: React.FC = () => {
     setTimeout(() => setCopiedPhone(false), 2500);
   };
 
-  const triggerMugQuote = () => {
-    sound.playClick();
-    const q = COFFEE_QUOTES[Math.floor(Math.random() * COFFEE_QUOTES.length)];
-    setMugQuote(q);
-  };
-
   const toggleDeskLamp = () => {
     sound.playClick();
     setDeskLampOn(!deskLampOn);
-  };
-
-  const scrollToTopForm = () => {
-    sound.playClick();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const keyboardRows = [
@@ -329,7 +316,7 @@ export const ContactUsPage: React.FC = () => {
           <div className="lg:col-span-4 pt-2">
             {/* Tag */}
             <div className="inline-flex items-center gap-2 bg-white dark:bg-canvas-dark-paper border border-ink/20 px-3 py-1 rounded-xs shadow-sm mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#88C000] animate-ping" />
+              <span className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-ping" />
               <span className="font-pixel text-xs font-bold uppercase tracking-wider text-ink dark:text-gray-200">
                 // CONTACT US
               </span>
@@ -338,7 +325,7 @@ export const ContactUsPage: React.FC = () => {
             {/* Headline */}
             <h1 className="font-pixel text-5xl sm:text-6xl font-black text-ink dark:text-white tracking-tight leading-[0.98] mb-4">
               LET'S<br />
-              <span className="text-[#88C000]">BUILD</span><br />
+              <span className="text-[#8B5CF6]">BUILD</span><br />
               SOMETHING<br />
               AMAZING<span className="text-accent-coral">.</span>
             </h1>
@@ -350,11 +337,11 @@ export const ContactUsPage: React.FC = () => {
 
             {/* Green Scribble Note & Arrow */}
             <div className="relative inline-block mb-8">
-              <div className="font-handwriting text-2xl text-[#88C000] dark:text-accent-acid font-bold -rotate-2 flex items-center gap-2">
+              <div className="font-handwriting text-2xl text-[#8B5CF6] dark:text-accent-acid font-bold -rotate-2 flex items-center gap-2">
                 <span>Fill the form, we'll take it from here!</span>
                 <span className="animate-bounce">→</span>
               </div>
-              <svg className="w-24 h-8 text-[#88C000] dark:text-accent-acid ml-12 -mt-1 hidden sm:block" viewBox="0 0 100 30" fill="none">
+              <svg className="w-24 h-8 text-[#8B5CF6] dark:text-accent-acid ml-12 -mt-1 hidden sm:block" viewBox="0 0 100 30" fill="none">
                 <path d="M5 5 C30 20, 70 25, 92 15" stroke="currentColor" strokeWidth="2" strokeDasharray="3 2" />
                 <path d="M85 8 L95 15 L87 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -426,8 +413,8 @@ export const ContactUsPage: React.FC = () => {
                         <span className="font-pixel text-[7px] text-gray-400 uppercase tracking-widest">WEBCAM HD</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#88C000] animate-pulse" />
-                        <span className="font-pixel text-[8px] text-[#88C000] uppercase">LIVE</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] animate-pulse" />
+                        <span className="font-pixel text-[8px] text-[#8B5CF6] uppercase">LIVE</span>
                       </div>
                     </div>
 
@@ -445,8 +432,8 @@ export const ContactUsPage: React.FC = () => {
                           </span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <span className="w-2 h-2 rounded-full bg-[#88C000]" />
-                          <span className="font-pixel text-[9px] text-[#88C000] uppercase font-bold">PROJECT DETAILS</span>
+                          <span className="w-2 h-2 rounded-full bg-[#8B5CF6]" />
+                          <span className="font-pixel text-[9px] text-[#8B5CF6] uppercase font-bold">PROJECT DETAILS</span>
                         </div>
                       </div>
 
@@ -470,7 +457,7 @@ export const ContactUsPage: React.FC = () => {
                                   onKeyDown={(e) => handleInputChange('fullName', formData.fullName, e.key)}
                                   onChange={(e) => handleInputChange('fullName', e.target.value)}
                                   placeholder="Naresh Raj"
-                                  className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white pl-7 pr-2 py-1 text-xs rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#88C000] font-sans font-medium"
+                                  className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white pl-7 pr-2 py-1 text-xs rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] font-sans font-medium"
                                 />
                               </div>
                             </div>
@@ -487,8 +474,8 @@ export const ContactUsPage: React.FC = () => {
                                   value={formData.email}
                                   onKeyDown={(e) => handleInputChange('email', formData.email, e.key)}
                                   onChange={(e) => handleInputChange('email', e.target.value)}
-                                  placeholder="hello@detqel.com"
-                                  className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white pl-7 pr-2 py-1 text-xs rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#88C000] font-sans font-medium"
+                                  placeholder="detqel@gmail.com"
+                                  className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white pl-7 pr-2 py-1 text-xs rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] font-sans font-medium"
                                 />
                               </div>
                             </div>
@@ -505,7 +492,7 @@ export const ContactUsPage: React.FC = () => {
                                   onKeyDown={(e) => handleInputChange('company', formData.company, e.key)}
                                   onChange={(e) => handleInputChange('company', e.target.value)}
                                   placeholder="Detqel Studio"
-                                  className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white pl-7 pr-2 py-1 text-xs rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#88C000] font-sans font-medium"
+                                  className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white pl-7 pr-2 py-1 text-xs rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] font-sans font-medium"
                                 />
                               </div>
                             </div>
@@ -520,7 +507,7 @@ export const ContactUsPage: React.FC = () => {
                                   <select
                                     value={formData.budget}
                                     onChange={(e) => handleInputChange('budget', e.target.value)}
-                                    className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white px-1.5 py-1 text-[10px] rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#88C000] font-sans font-medium appearance-none"
+                                    className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white px-1.5 py-1 text-[10px] rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] font-sans font-medium appearance-none"
                                   >
                                     <option value="₹5L - ₹15L">₹5L - ₹15L</option>
                                     <option value="₹15L - ₹30L">₹15L - ₹30L</option>
@@ -539,7 +526,7 @@ export const ContactUsPage: React.FC = () => {
                                   <select
                                     value={formData.timeline}
                                     onChange={(e) => handleInputChange('timeline', e.target.value)}
-                                    className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white px-1.5 py-1 text-[10px] rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#88C000] font-sans font-medium appearance-none"
+                                    className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white px-1.5 py-1 text-[10px] rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] font-sans font-medium appearance-none"
                                   >
                                     <option value="2 - 3 Months">2 - 3 Months</option>
                                     <option value="1 - 2 Sprints">1 - 2 Sprints</option>
@@ -557,7 +544,7 @@ export const ContactUsPage: React.FC = () => {
                                   <select
                                     value={formData.source}
                                     onChange={(e) => handleInputChange('source', e.target.value)}
-                                    className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white px-1.5 py-1 text-[10px] rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#88C000] font-sans font-medium appearance-none"
+                                    className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white px-1.5 py-1 text-[10px] rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] font-sans font-medium appearance-none"
                                   >
                                     <option value="Google Search">Google Search</option>
                                     <option value="Twitter / X">Twitter / X</option>
@@ -590,7 +577,7 @@ export const ContactUsPage: React.FC = () => {
                                 onKeyDown={(e) => handleInputChange('details', formData.details, e.key)}
                                 onChange={(e) => handleInputChange('details', e.target.value)}
                                 placeholder="We want to build an AI-powered platform that helps businesses automate their workflows and communication..."
-                                className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white p-2 text-xs rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#88C000] font-sans font-medium resize-none"
+                                className="w-full bg-white dark:bg-canvas-dark-paper border-2 border-ink text-ink dark:text-white p-2 text-xs rounded-xs shadow-brutalist-sm focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] font-sans font-medium resize-none"
                               />
                             </div>
                           </div>
@@ -603,7 +590,7 @@ export const ContactUsPage: React.FC = () => {
                           disabled={formStatus === 'submitting'}
                           onMouseEnter={() => triggerCursor('SUBMIT', 'hover')}
                           onMouseLeave={() => triggerCursor('', 'default')}
-                          className="w-full py-2.5 bg-[#88C000] text-ink border-2 border-ink rounded-xs font-pixel text-xs sm:text-sm font-black shadow-brutalist hover:bg-accent-coral hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer mt-1"
+                          className="w-full py-2.5 bg-[#10b981] text-ink border-2 border-ink rounded-xs font-pixel text-xs sm:text-sm font-black shadow-brutalist hover:bg-accent-coral hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer mt-1"
                         >
                           {formStatus === 'submitting' ? (
                             <>
@@ -628,7 +615,7 @@ export const ContactUsPage: React.FC = () => {
                       <div className="flex items-center gap-1.5">
                         <div className="w-2.5 h-2.5 rounded-full bg-gray-600 border border-black shadow-inner" />
                         <div className="w-2.5 h-2.5 rounded-full bg-gray-600 border border-black shadow-inner" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#88C000] border border-black shadow-inner" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6] border border-black shadow-inner" />
                       </div>
                     </div>
 
@@ -654,7 +641,7 @@ export const ContactUsPage: React.FC = () => {
                             : { y: [0, -2, 0] }
                         }
                         transition={{ duration: 1.2, repeat: Infinity }}
-                        className="bg-[#88C000] border-2 border-ink p-1 rounded-xs shadow-xs text-center cursor-pointer flex flex-col items-center"
+                        className="bg-[#8B5CF6] border-2 border-ink p-1 rounded-xs shadow-xs text-center cursor-pointer flex flex-col items-center"
                         onClick={() => {
                           sound.playSuccess();
                           const fact = ROBOT_FACTS[Math.floor(Math.random() * ROBOT_FACTS.length)];
@@ -678,7 +665,7 @@ export const ContactUsPage: React.FC = () => {
                                   key={key}
                                   className={`px-1 py-0.5 rounded-[2px] font-mono text-[7px] font-bold border transition-all ${
                                     isPressed
-                                      ? 'bg-[#88C000] text-ink translate-y-0.5 shadow-none'
+                                      ? 'bg-[#8B5CF6] text-ink translate-y-0.5 shadow-none'
                                       : 'bg-[#15141E] text-gray-300 border-black/40 shadow-[0_1.5px_0_#000]'
                                   } ${key === 'SPACE' ? 'w-16 text-center' : key === 'ENTER' ? 'w-8 text-center' : 'w-3.5 sm:w-4 text-center'}`}
                                 >
@@ -713,20 +700,20 @@ export const ContactUsPage: React.FC = () => {
                     {/* Printer Brand & Status LED Bar */}
                     <div className="flex items-center justify-between border-b-2 border-white/10 pb-1.5 mb-2">
                       <span className="font-pixel text-[9px] font-black text-gray-200 uppercase tracking-widest flex items-center gap-1.5">
-                        <Printer className="w-4 h-4 text-[#88C000]" />
+                        <Printer className="w-4 h-4 text-[#8B5CF6]" />
                         DETQEL PRINTER v1.0
                       </span>
                       
                       <div className="flex items-center gap-1.5">
                         <div className="flex items-center gap-1">
-                          <span className={`w-2 h-2 rounded-full ${formStatus === 'submitting' ? 'bg-amber-400 animate-ping' : 'bg-[#88C000]'}`} />
+                          <span className={`w-2 h-2 rounded-full ${formStatus === 'submitting' ? 'bg-amber-400 animate-ping' : 'bg-[#8B5CF6]'}`} />
                           <span className="font-pixel text-[7px] text-gray-300">PWR</span>
                         </div>
                         
                         {/* Feed Button */}
                         <button
                           onClick={executePrintSequence}
-                          className="px-1.5 py-0.5 bg-gray-700 hover:bg-[#88C000] hover:text-ink text-gray-200 border border-black font-pixel text-[7px] font-bold rounded-[2px] transition-colors"
+                          className="px-1.5 py-0.5 bg-gray-700 hover:bg-[#10b981] hover:text-ink text-gray-200 border border-black font-pixel text-[7px] font-bold rounded-[2px] transition-colors"
                           title="Manual Receipt Feed"
                         >
                           FEED 🧾
@@ -735,7 +722,7 @@ export const ContactUsPage: React.FC = () => {
                     </div>
 
                     {/* LCD Matrix Display */}
-                    <div className="bg-[#0A0910] text-[#88C000] p-2 rounded-xs border-2 border-black font-mono text-[9px] flex items-center justify-between mb-2 shadow-inner">
+                    <div className="bg-[#0A0910] text-[#8B5CF6] p-2 rounded-xs border-2 border-black font-mono text-[9px] flex items-center justify-between mb-2 shadow-inner">
                       <div>
                         {formStatus === 'idle'
                           ? 'STANDBY // READY'
@@ -776,7 +763,7 @@ export const ContactUsPage: React.FC = () => {
                               CREATIVE TECHNOLOGY LABS
                             </div>
                             <div className="text-[7.5px] opacity-70">
-                              TEL: +91 95609 13212 | HELLO@DETQEL.COM
+                              TEL: +91 95609 13212 | DETQEL@GMAIL.COM
                             </div>
                             <div className="text-[7px] font-bold text-ink/70 mt-1">
                               ==================================
@@ -791,7 +778,7 @@ export const ContactUsPage: React.FC = () => {
                             </div>
                             <div className="flex justify-between">
                               <span><strong>TICKET #:</strong></span>
-                              <span className="font-bold text-[#88C000] dark:text-emerald-700">{ticketId}</span>
+                              <span className="font-bold text-[#8B5CF6] dark:text-emerald-700">{ticketId}</span>
                             </div>
                             <div><strong>CLIENT:</strong> {formData.fullName}</div>
                             <div><strong>EMAIL:</strong> {formData.email}</div>
@@ -873,7 +860,7 @@ export const ContactUsPage: React.FC = () => {
                   {/* INCOMING PROJECTS TRAY & DIGITAL CLOCK */}
                   <div className="w-full flex flex-col gap-2">
                     <div className="w-full bg-[#171622] border-2 border-ink p-2 rounded-xs shadow-brutalist-sm flex items-center justify-between px-3">
-                      <span className="font-pixel text-[9px] font-bold text-[#88C000] uppercase">
+                      <span className="font-pixel text-[9px] font-bold text-[#8B5CF6] uppercase">
                         📥 INCOMING PROJECTS TRAY
                       </span>
                       <span className="bg-accent-coral text-white font-mono text-[10px] px-1.5 py-0.5 rounded-xs font-bold">
@@ -884,7 +871,7 @@ export const ContactUsPage: React.FC = () => {
                     {/* Clock & Standing Books Row */}
                     <div className="flex items-center justify-between gap-2 w-full">
                       {/* LED Digital Desk Clock */}
-                      <div className="bg-[#12111A] text-[#88C000] border-2 border-ink px-3 py-1.5 rounded-xs font-mono text-xs font-extrabold shadow-brutalist-sm flex items-center gap-1.5">
+                      <div className="bg-[#12111A] text-[#8B5CF6] border-2 border-ink px-3 py-1.5 rounded-xs font-mono text-xs font-extrabold shadow-brutalist-sm flex items-center gap-1.5">
                         <Clock className="w-3.5 h-3.5" />
                         <span>{currentTime}</span>
                       </div>
@@ -925,7 +912,7 @@ export const ContactUsPage: React.FC = () => {
           
           {/* Section Header */}
           <div className="flex items-center gap-2 mb-6 border-b-2 border-ink/20 pb-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#88C000]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6]" />
             <h2 className="font-pixel text-lg font-extrabold uppercase text-ink dark:text-white tracking-wider">
               • WHAT HAPPENS NEXT?
             </h2>
@@ -977,7 +964,7 @@ export const ContactUsPage: React.FC = () => {
                   }}
                   whileHover={{ y: -6 }}
                   className={`bg-white dark:bg-canvas-dark-paper border-2 border-ink p-4 rounded-xs shadow-brutalist transition-all flex flex-col justify-between relative ${
-                    step.highlight || isHovered ? 'ring-2 ring-[#88C000] bg-[#88C000]/10' : ''
+                    step.highlight || isHovered ? 'ring-2 ring-[#8B5CF6] bg-[#8B5CF6]/10' : ''
                   }`}
                 >
                   <div>
@@ -987,7 +974,7 @@ export const ContactUsPage: React.FC = () => {
                       </span>
                     </div>
 
-                    <div className="w-12 h-12 mx-auto bg-[#88C000]/10 border-2 border-ink rounded-full flex items-center justify-center mb-3 relative">
+                    <div className="w-12 h-12 mx-auto bg-[#8B5CF6]/10 border-2 border-ink rounded-full flex items-center justify-center mb-3 relative">
                       <IconComp className="w-6 h-6 text-ink dark:text-white" />
                       {step.highlight && (
                         <div className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border border-ink flex items-center justify-center">
@@ -1017,7 +1004,7 @@ export const ContactUsPage: React.FC = () => {
           
           {/* Section Header */}
           <div className="flex items-center gap-2 mb-6 border-b-2 border-ink/20 pb-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#88C000]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6]" />
             <h2 className="font-pixel text-lg font-extrabold uppercase text-ink dark:text-white tracking-wider">
               • OTHER WAYS TO REACH US
             </h2>
@@ -1030,7 +1017,7 @@ export const ContactUsPage: React.FC = () => {
               
               <div className="flex items-center justify-between border-b border-ink/10 pb-2">
                 <span className="font-pixel text-xs font-bold text-ink dark:text-white uppercase flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#88C000]" />
+                  <span className="w-2 h-2 rounded-full bg-[#8B5CF6]" />
                   COMMUNICATION PANEL
                 </span>
               </div>
@@ -1041,12 +1028,12 @@ export const ContactUsPage: React.FC = () => {
                   <Mail className="w-4 h-4 text-ink dark:text-gray-300" />
                   <div>
                     <span className="font-pixel text-[9px] uppercase text-ink/50 block">Email</span>
-                    <span className="font-mono text-xs font-bold text-ink dark:text-white">hello@detqel.com</span>
+                    <span className="font-mono text-xs font-bold text-ink dark:text-white">detqel@gmail.com</span>
                   </div>
                 </div>
                 <button
                   onClick={handleCopyEmail}
-                  className="font-pixel text-[9px] bg-[#88C000] text-ink px-2 py-1 border border-ink rounded-xs font-bold shadow-xs hover:bg-accent-coral hover:text-white transition-colors"
+                  className="font-pixel text-[9px] bg-[#10b981] text-ink px-2 py-1 border border-ink rounded-xs font-bold shadow-xs hover:bg-accent-coral hover:text-white transition-colors"
                 >
                   {copiedEmail ? 'COPIED!' : 'COPY'}
                 </button>
@@ -1063,7 +1050,7 @@ export const ContactUsPage: React.FC = () => {
                 </div>
                 <button
                   onClick={handleCopyPhone}
-                  className="font-pixel text-[9px] bg-[#88C000] text-ink px-2 py-1 border border-ink rounded-xs font-bold shadow-xs hover:bg-accent-coral hover:text-white transition-colors"
+                  className="font-pixel text-[9px] bg-[#10b981] text-ink px-2 py-1 border border-ink rounded-xs font-bold shadow-xs hover:bg-accent-coral hover:text-white transition-colors"
                 >
                   {copiedPhone ? 'COPIED!' : 'COPY'}
                 </button>
@@ -1090,7 +1077,7 @@ export const ContactUsPage: React.FC = () => {
                     href={s.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 py-1.5 bg-[#1F1D2B] text-gray-200 hover:bg-[#88C000] hover:text-ink border border-ink rounded-xs font-pixel text-[10px] font-bold shadow-xs transition-colors flex items-center justify-center gap-1"
+                    className="flex-1 py-1.5 bg-[#1F1D2B] text-gray-200 hover:bg-[#8B5CF6] hover:text-ink border border-ink rounded-xs font-pixel text-[10px] font-bold shadow-xs transition-colors flex items-center justify-center gap-1"
                   >
                     <span>{s.label}</span>
                   </a>
@@ -1144,18 +1131,18 @@ export const ContactUsPage: React.FC = () => {
                 </div>
 
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span className="font-pixel text-4xl font-black text-[#88C000]">24</span>
+                  <span className="font-pixel text-4xl font-black text-[#8B5CF6]">24</span>
                   <span className="font-pixel text-lg font-bold text-ink dark:text-gray-200">hrs</span>
                 </div>
 
                 <p className="font-sans text-xs text-ink/70 dark:text-gray-300 mb-3 flex items-center gap-1.5 font-medium">
                   <span>We usually reply within a day.</span>
-                  <Bot className="w-4 h-4 text-[#88C000]" />
+                  <Bot className="w-4 h-4 text-[#8B5CF6]" />
                 </p>
 
                 {/* Progress Bar */}
                 <div className="w-full bg-gray-200 dark:bg-gray-700 h-2.5 rounded-xs overflow-hidden border border-ink/20">
-                  <div className="bg-[#88C000] h-full w-[85%]" />
+                  <div className="bg-[#8B5CF6] h-full w-[85%]" />
                 </div>
               </div>
 
@@ -1171,7 +1158,7 @@ export const ContactUsPage: React.FC = () => {
         {/* INTERACTIVE FILING CABINET FAQ SECTION */}
         <div className="mb-16">
           <div className="flex items-center gap-2 mb-6 border-b-2 border-ink/20 pb-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#88C000]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6]" />
             <h2 className="font-pixel text-lg font-extrabold uppercase text-ink dark:text-white tracking-wider">
               INTERACTIVE FILING CABINET // KNOWLEDGE BASE
             </h2>
@@ -1181,7 +1168,7 @@ export const ContactUsPage: React.FC = () => {
             
             {/* Left Column: Metallic Filing Cabinet Drawers */}
             <div className="lg:col-span-5 bg-[#201E2C] border-4 border-ink p-4 rounded-xs shadow-brutalist space-y-3">
-              <span className="font-pixel text-[10px] font-bold text-[#88C000] uppercase tracking-wider block mb-1">
+              <span className="font-pixel text-[10px] font-bold text-[#8B5CF6] uppercase tracking-wider block mb-1">
                 SELECT A FILING DRAWER TO OPEN:
               </span>
 
@@ -1197,7 +1184,7 @@ export const ContactUsPage: React.FC = () => {
                     animate={{ x: isOpen ? 12 : 0 }}
                     className={`p-3.5 rounded-xs border-2 border-ink cursor-pointer font-pixel text-xs font-bold transition-all shadow-brutalist-sm flex justify-between items-center ${
                       isOpen
-                        ? 'bg-[#88C000] text-ink'
+                        ? 'bg-[#8B5CF6] text-ink'
                         : 'bg-[#15141E] text-gray-200 hover:bg-gray-800'
                     }`}
                   >
@@ -1241,45 +1228,7 @@ export const ContactUsPage: React.FC = () => {
           </div>
         </div>
 
-        {/* FINAL CTA BANNER (DARK BOTTOM FOOTER / BANNER) */}
-        <div className="bg-[#121118] text-white p-6 sm:p-10 rounded-xs border-4 border-ink shadow-brutalist flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-          
-          <div className="space-y-2 max-w-lg">
-            <h2 className="font-pixel text-3xl sm:text-4xl font-black uppercase tracking-tight leading-tight">
-              LET'S START<br />
-              YOUR NEXT BIG <span className="text-[#88C000]">PROJECT.</span>
-            </h2>
-            <p className="font-sans text-xs sm:text-sm text-gray-300 font-medium">
-              Your idea + Our expertise = Unforgettable digital experiences.
-            </p>
-          </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <button
-              onClick={scrollToTopForm}
-              onMouseEnter={() => triggerCursor('START', 'hover')}
-              onMouseLeave={() => triggerCursor('', 'default')}
-              className="inline-flex items-center gap-2 bg-[#88C000] text-ink px-6 py-3 font-pixel text-xs sm:text-sm font-extrabold border-2 border-ink shadow-brutalist hover:bg-accent-coral hover:text-white transition-all cursor-pointer"
-            >
-              START A CONVERSATION <ArrowRight className="w-4 h-4" />
-            </button>
-
-            {/* Coffee Mug & Handwritten Note Bubble */}
-            <div className="flex items-center gap-2">
-              <div
-                className="w-10 h-10 bg-amber-900 border-2 border-ink rounded-full flex items-center justify-center text-xl shadow-xs cursor-pointer hover:rotate-12 transition-transform"
-                onClick={triggerMugQuote}
-                title="Click Coffee Cup for Quote"
-              >
-                ☕
-              </div>
-              <div className="bg-white text-ink font-handwriting text-xs font-bold p-2 rounded-xs border border-ink shadow-xs max-w-[170px]">
-                {mugQuote || "Great ideas start over coffee ☕"}
-              </div>
-            </div>
-          </div>
-
-        </div>
 
       </div>
     </div>

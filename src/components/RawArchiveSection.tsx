@@ -423,7 +423,7 @@ export const RawArchiveSection: React.FC<RawArchiveSectionProps> = ({ onSelectPr
                         title: activeItem.title,
                         subtitle: activeItem.description,
                         shortDescription: activeItem.description,
-                        year: activeItem.year,
+                        year: activeItem.year as any,
                         category: activeItem.category,
                         serviceTags: [activeItem.projectType],
                         deliverables: [activeItem.projectType],

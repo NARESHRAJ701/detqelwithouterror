@@ -53,7 +53,7 @@ export const HeroSection: React.FC = () => {
       {/* Micro labels / Framing */}
       <div className="absolute top-4 left-6 text-[10px] uppercase font-mono tracking-widest text-gray-500 z-20 flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-[#00FF9D] inline-block" />
-        VARIATION 4
+        WHAT WE DO
       </div>
       
       {/* 50/50 Split Container */}
@@ -68,50 +68,51 @@ export const HeroSection: React.FC = () => {
           <div className="font-pixel text-[40px] sm:text-[50px] lg:text-[60px] xl:text-[72px] font-black leading-[0.85] tracking-tight uppercase relative z-10 mb-5 mt-4 lg:mt-0">
             <div className="gsap-animate text-white drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">WE BUILD</div>
             <div className="gsap-animate flex items-baseline">
-              <span className="text-[#00FF9D] drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">WORLDS.</span>
+              <span className="text-[#00FF9D] drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">DIGITAL</span>
+            </div>
+            <div className="gsap-animate flex items-baseline">
+              <span className="text-white drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">EXPERIENCES.</span>
               <span className="inline-block w-2.5 h-2.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 bg-[#EF4444] ml-2 lg:ml-3 shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
             </div>
           </div>
 
           {/* Emerald Banner */}
           <div className="gsap-scale w-max bg-[#00FF9D] text-[#050608] font-mono font-bold text-[10px] sm:text-xs px-3 py-1.5 mb-5 tracking-wider uppercase shadow-[2px_2px_0px_rgba(0,0,0,0.5)]">
-            IDEAS BECOME LIVING EXPERIENCES.
+            IDEAS → DESIGN → BUILD → LAUNCH
           </div>
 
           {/* Paragraph */}
           <p className="gsap-animate font-mono text-xs sm:text-sm text-gray-300 max-w-md leading-relaxed mb-8">
-            We fuse design, technology, AI, motion<br className="hidden sm:block" />
-            and storytelling to craft digital<br className="hidden sm:block" />
-            worlds that connect, inspire and last.
+            From a new brand to a complete digital product, we bring strategy, design, AI and technology together under one roof.
           </p>
 
-          {/* 4 Pillars */}
+          {/* 4 Pillars / Stats */}
           <div className="gsap-animate flex flex-col sm:flex-row flex-wrap lg:flex-nowrap gap-4 sm:gap-3 lg:gap-4 mb-8">
             <div className="flex-1 min-w-[90px] pr-2 sm:border-r border-[#1E2640]/50">
-              <PenTool className="w-3.5 h-3.5 text-gray-400 mb-1.5" strokeWidth={1.5} />
-              <div className="font-mono text-[9px] font-bold text-[#00FF9D] mb-0.5">DESIGN</div>
-              <div className="font-mono text-[10px] text-gray-400 leading-tight">Crafting meaningful visuals.</div>
+              <div className="font-pixel text-xl text-white mb-1.5">25+</div>
+              <div className="font-mono text-[9px] font-bold text-[#00FF9D] mb-0.5">PROJECTS</div>
+              <div className="font-mono text-[10px] text-gray-400 leading-tight">Delivered</div>
             </div>
             <div className="flex-1 min-w-[90px] pr-2 sm:border-r border-[#1E2640]/50">
-              <Code className="w-3.5 h-3.5 text-gray-400 mb-1.5" strokeWidth={1.5} />
-              <div className="font-mono text-[9px] font-bold text-[#00FF9D] mb-0.5">TECHNOLOGY</div>
-              <div className="font-mono text-[10px] text-gray-400 leading-tight">Building scalable solutions.</div>
+              <div className="font-pixel text-xl text-white mb-1.5">8+</div>
+              <div className="font-mono text-[9px] font-bold text-[#00FF9D] mb-0.5">CORE</div>
+              <div className="font-mono text-[10px] text-gray-400 leading-tight">Services</div>
             </div>
             <div className="flex-1 min-w-[90px] pr-2 sm:border-r border-[#1E2640]/50 lg:border-r">
-              <Cpu className="w-3.5 h-3.5 text-gray-400 mb-1.5" strokeWidth={1.5} />
-              <div className="font-mono text-[9px] font-bold text-[#00FF9D] mb-0.5">AI &amp; MOTION</div>
-              <div className="font-mono text-[10px] text-gray-400 leading-tight">Adding intelligence in motion.</div>
+              <div className="font-pixel text-xl text-white mb-1.5">END-TO-END</div>
+              <div className="font-mono text-[9px] font-bold text-[#00FF9D] mb-0.5">FROM IDEA</div>
+              <div className="font-mono text-[10px] text-gray-400 leading-tight">To Launch</div>
             </div>
             <div className="flex-1 min-w-[90px]">
-              <Heart className="w-3.5 h-3.5 text-gray-400 mb-1.5" strokeWidth={1.5} />
-              <div className="font-mono text-[9px] font-bold text-[#00FF9D] mb-0.5">STORYTELLING</div>
-              <div className="font-mono text-[10px] text-gray-400 leading-tight">Telling stories that leave an impact.</div>
+              <div className="font-pixel text-xl text-white mb-1.5">AI+DESIGN</div>
+              <div className="font-mono text-[9px] font-bold text-[#00FF9D] mb-0.5">+ TECH</div>
+              <div className="font-mono text-[10px] text-gray-400 leading-tight">One Creative Partner</div>
             </div>
           </div>
 
           {/* CTA */}
           <button className="gsap-animate group relative flex items-center gap-2 w-max px-4 py-2 border border-[#00FF9D] text-white font-mono text-[10px] tracking-wider uppercase overflow-hidden transition-colors duration-300 hover:bg-[#00FF9D]/10">
-            <span className="relative z-10">EXPLORE OUR WORK</span>
+            <span className="relative z-10">SEE OUR WORK</span>
             <ArrowUpRight className="w-3 h-3 relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </button>
         </div>

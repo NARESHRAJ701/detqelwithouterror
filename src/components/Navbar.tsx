@@ -108,28 +108,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               03 ABOUT US
             </a>
-            <a
-              href="#playground"
-              onClick={(e) => handleNav(e, 'home', 'playground')}
-              onMouseEnter={() => triggerCursor('JUMP', 'hover')}
-              onMouseLeave={() => triggerCursor('', 'default')}
-              className="px-2.5 sm:px-3 py-1 sm:py-1.5 hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink transition-colors rounded-xs font-bold"
-            >
-              04 LABS
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => handleNav(e, 'contact')}
-              onMouseEnter={() => triggerCursor('PAGE', 'hover')}
-              onMouseLeave={() => triggerCursor('', 'default')}
-              className={`px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors rounded-xs ${
-                activePage === 'contact'
-                  ? 'bg-accent-acid text-white font-bold border border-ink'
-                  : 'hover:bg-purple-100 hover:text-accent-acid dark:hover:bg-accent-acid dark:hover:text-ink font-bold'
-              }`}
-            >
-              05 CONTACT US
-            </a>
+
           </nav>
 
           {/* Sound FX Toggle */}

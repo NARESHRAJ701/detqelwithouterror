@@ -94,7 +94,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
             {/* Interactive High-Def Canvas Showcase Frame */}
             <div className="w-full aspect-[16/9] min-h-[300px] border-2 border-ink rounded-xs overflow-hidden shadow-brutalist">
-              <MockupCanvas type={project.mockupType} accentColor={project.accentColor} imageSrc={project.image} title={project.title} />
+              <MockupCanvas type={project.mockupType || 'custom-image'} accentColor={project.accentColor || '#7939a1'} imageSrc={project.image || ''} title={project.title} />
             </div>
 
             {/* Detailed Metadata Grid */}
@@ -122,7 +122,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               <h3 className="font-pixel text-xl uppercase font-bold text-ink dark:text-white">
                 PROJECT OVERVIEW & ARCHITECTURE
               </h3>
-              <p>{project.fullDescription}</p>
+              <p>{project.fullDescription || project.description}</p>
             </div>
 
             {/* Tech Tags List */}
@@ -131,7 +131,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 TECHNOLOGY STACK
               </span>
               <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
+                {(project.tags || []).map((tag) => (
                   <span
                     key={tag}
                     className="font-mono text-xs font-bold px-3 py-1 bg-white dark:bg-canvas-dark-paper border-2 border-ink rounded-xs shadow-brutalist-sm"

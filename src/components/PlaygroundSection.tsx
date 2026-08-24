@@ -24,13 +24,13 @@ export const PlaygroundSection: React.FC = () => {
   const [stickers, setStickers] = useState<CustomSticker[]>([]);
 
   const stickerPhrases = [
-    '⚡ SITE OF THE DAY',
-    '★ 60 FPS CRAFT',
-    '👾 PIXEL OBSESSED',
-    'SWISS GRID',
-    'NO TEMPLATES',
-    'STAY CURIOUS',
-    'HANDCRAFTED',
+    'AI Research Agent',
+    'Dynamic Branding System',
+    'E-commerce Auto-Builder',
+    'AI Research Agent',
+    'Dynamic Branding System',
+    'E-commerce Auto-Builder',
+    'AI Research Agent',
   ];
 
   const stickerColors = [
@@ -111,17 +111,17 @@ export const PlaygroundSection: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 text-ink dark:text-gray-300 font-mono text-xs mb-2">
               <span className="bg-ink text-white dark:bg-accent-acid dark:text-ink px-2 py-0.5 font-pixel">
-                03
+                04
               </span>
-              <span>// EXPERIMENTAL LABS</span>
+              <span>// HOW WE THINK</span>
             </div>
             <h2 className="font-pixel text-4xl sm:text-6xl font-black uppercase text-ink dark:text-white">
-              INTERACTIVE TOYS<span className="text-accent-coral">.</span>
+              WE PLAY WITH IDEAS<span className="text-accent-coral">.</span>
             </h2>
           </div>
 
           <p className="font-mono text-xs text-ink dark:text-gray-200 font-medium max-w-xs">
-            Test micro-interaction algorithms, character scramblers, and custom sticker drop canvases.
+            Sometimes the best things come from just trying things out. This is where we test new tech, design weird interactions and see what happens when we mix AI with code.
           </p>
         </div>
 

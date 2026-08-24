@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { sound } from '../utils/sound';
 import { triggerCursor } from './CustomCursor';
-import { MagneticButton } from './MagneticButton';
 import { 
-  ArrowUpRight, 
   Copy, 
   Check, 
   MapPin, 
@@ -19,19 +17,9 @@ export const FooterSection: React.FC = () => {
 
   const handleCopyEmail = () => {
     sound.playClick();
-    navigator.clipboard.writeText('hello@detqel.com');
+    navigator.clipboard.writeText('detqel@gmail.com');
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
-  };
-
-  const handleScrollToContact = () => {
-    sound.playClick();
-    const contactEl = document.getElementById('contact');
-    if (contactEl) {
-      contactEl.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.location.hash = 'contact';
-    }
   };
 
   return (
@@ -55,29 +43,28 @@ export const FooterSection: React.FC = () => {
             {/* Col 1: Brand Info */}
             <div className="lg:col-span-3 space-y-3">
               <h3 className="font-pixel text-2xl font-bold tracking-wider text-white">
-                DETQEL <span className="text-purple-400">//</span>
+                LET'S BUILD SOMETHING TOGETHER<span className="text-purple-400">.</span>
               </h3>
 
               <div className="flex items-center gap-2 font-mono text-xs font-bold text-purple-400">
                 <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-                <span>DETQEL</span>
+                <span>GET IN TOUCH</span>
               </div>
 
               <p className="font-sans text-xs sm:text-sm text-neutral-400 leading-relaxed max-w-xs">
-                A digital product studio crafting AI-powered solutions, immersive web experiences, and bold brands for the future.
+                Have an idea? Need a team to build it? Drop us a line. We're always looking for interesting projects and ambitious partners.
               </p>
 
               <div className="pt-2">
-                <a
-                  href="#portfolio"
-                  onClick={() => sound.playClick()}
-                  onMouseEnter={() => triggerCursor('WORK', 'hover')}
+                <button
+                  onClick={handleCopyEmail}
+                  onMouseEnter={() => triggerCursor('COPY EMAIL', 'hover')}
                   onMouseLeave={() => triggerCursor('', 'default')}
                   className="border border-neutral-700 hover:border-purple-400 hover:text-purple-400 text-white font-mono text-xs font-bold py-2 px-3.5 rounded-lg inline-flex items-center gap-2 transition-all"
                 >
-                  <span>EXPLORE OUR WORK</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
+                  <span>{copiedEmail ? 'COPIED!' : 'detqel@gmail.com'}</span>
+                  {copiedEmail ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                </button>
               </div>
             </div>
 
@@ -205,7 +192,7 @@ export const FooterSection: React.FC = () => {
             {/* Copyright Left */}
             <div className="space-y-1 text-center md:text-left">
               <div className="font-mono text-xs font-bold text-neutral-300">
-                © 2026 DETQEL
+                © 2026 Detqel. All rights reserved.
               </div>
               <p className="font-sans text-xs text-neutral-500">
                 Crafted with AI, design systems and obsessive attention to detail.
@@ -229,10 +216,9 @@ export const FooterSection: React.FC = () => {
 
               <div className="flex items-center gap-2">
                 {[
-                  { label: 'Bē', href: 'https://behance.net' },
                   { label: 'in', href: 'https://linkedin.com' },
-                  { label: '📷', href: 'https://instagram.com' },
-                  { label: '▶', href: 'https://youtube.com' }
+                  { label: 'X', href: 'https://x.com' },
+                  { label: '📷', href: 'https://instagram.com' }
                 ].map((social) => (
                   <a
                     key={social.label}

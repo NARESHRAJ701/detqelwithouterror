@@ -1,0 +1,22 @@
+{
+  "name": "studio-detqel",
+  "private": true,
+  "version": "1.0.0",
+  "main": "package.json",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "start": "sanity start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "sanity": "^3.55.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "styled-components": "^6.1.11",
+    "lucide-react": "^0.300.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
+}

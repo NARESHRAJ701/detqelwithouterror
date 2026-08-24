@@ -51,12 +51,12 @@ export interface FAQBook {
 
 const FAQ_BOOKS: FAQBook[] = [
   {
-    id: 'getting-started',
+    id: 'what-we-do',
     number: '01',
-    category: 'Getting Started',
-    spineTitle: '01. GETTING STARTED',
-    question: 'How do we begin a project with Detqel?',
-    explanation: 'We kick off every collaboration with a 45-minute discovery session to align on your vision, technical architecture, and aesthetic direction.',
+    category: 'General',
+    spineTitle: '01. WHAT DOES DETQEL DO?',
+    question: 'WHAT DOES DETQEL DO?',
+    explanation: 'We build brands, websites, software, AI solutions and digital experiences for businesses and startups.',
     color: {
       pastel: 'bg-[#BAE6FD]', // Sky blue
       dark: 'bg-[#0284C7]',
@@ -69,23 +69,18 @@ const FAQ_BOOKS: FAQBook[] = [
     icon: Rocket,
     height: 'h-64 sm:h-72',
     width: 'w-12 sm:w-14',
-    highlights: [
-      'Discovery Call & Scope Blueprint',
-      'Fixed Proposal & Milestone Roadmap',
-      'Design Sprint & Live Interactive Prototypes',
-      'Production Build & Edge Deployment'
-    ],
-    tip: 'Having your brand guidelines, project goals, and inspo links ready can double our discovery speed!',
-    relatedServices: ['Product Strategy', 'UI/UX Architecture', 'Brand Discovery'],
+    highlights: [],
+    tip: 'One Creative Partner for Everything.',
+    relatedServices: ['Branding', 'Web Development', 'AI Solutions'],
     illustrationType: 'rocket'
   },
   {
-    id: 'services',
+    id: 'only-websites',
     number: '02',
     category: 'Services',
-    spineTitle: '02. SERVICES',
-    question: 'What core creative & engineering services do you offer?',
-    explanation: 'Detqel is a hybrid digital studio crafting high-end web applications, brand identities, custom AI agents, 3D WebGL experiences, and automated workflows.',
+    spineTitle: '02. ONLY WEBSITES?',
+    question: 'DO YOU ONLY BUILD WEBSITES?',
+    explanation: 'No. Websites are just one part of what we do. We also work on branding, AI, automation, software and business systems.',
     color: {
       pastel: 'bg-[#A7F3D0]', // Mint green
       dark: 'bg-[#059669]',
@@ -98,23 +93,18 @@ const FAQ_BOOKS: FAQBook[] = [
     icon: Layers,
     height: 'h-68 sm:h-76',
     width: 'w-13 sm:w-15',
-    highlights: [
-      'Full-Stack React & Next.js Applications',
-      'Brand Identity & Brutalist Design Systems',
-      'Custom LLM Integration & RAG Pipelines',
-      'Three.js / WebGL Interactive Shaders'
-    ],
-    tip: 'Need modular help? You can hire us for a single sprint or as your embedded design & dev team.',
-    relatedServices: ['Frontend Dev', 'AI Engineering', 'WebGL Graphics'],
+    highlights: [],
+    tip: 'We are a full-service digital product studio.',
+    relatedServices: ['Automation', 'Software', 'Business Systems'],
     illustrationType: 'layers'
   },
   {
-    id: 'pricing',
+    id: 'from-scratch',
     number: '03',
-    category: 'Pricing',
-    spineTitle: '03. PRICING & RATES',
-    question: 'How are your projects priced and structured?',
-    explanation: 'We offer crystal-clear fixed-price sprint packages and weekly dedicated studio retainers with zero hidden fees or surprise invoices.',
+    category: 'Process',
+    spineTitle: '03. PRODUCT FROM SCRATCH?',
+    question: 'CAN YOU BUILD A PRODUCT FROM SCRATCH?',
+    explanation: 'Yes. We can take an idea from strategy and design through development and launch.',
     color: {
       pastel: 'bg-[#FECDD3]', // Coral pink
       dark: 'bg-[#E11D48]',
@@ -127,23 +117,18 @@ const FAQ_BOOKS: FAQBook[] = [
     icon: Tag,
     height: 'h-60 sm:h-68',
     width: 'w-12 sm:w-14',
-    highlights: [
-      'Fixed-Scope Sprints starting at $2,500',
-      'Weekly Dedicated Studio Retainers',
-      'Transparent 50/50 Milestone Payments',
-      'No surprise fees—full ownership of code & design'
-    ],
-    tip: 'Studio retainers are perfect for growing products needing continuous design & feature iteration.',
-    relatedServices: ['Sprint Contracts', 'Design Subscriptions', 'Dedicated Team'],
-    illustrationType: 'pricing'
+    highlights: [],
+    tip: 'We are an end-to-end partner.',
+    relatedServices: ['Strategy', 'Design', 'Development'],
+    illustrationType: 'process'
   },
   {
-    id: 'branding',
+    id: 'startups',
     number: '04',
-    category: 'Branding',
-    spineTitle: '04. BRAND IDENTITY',
-    question: 'What is included in Detqel’s branding package?',
-    explanation: 'We build living, tactile brand identities complete with bespoke logomarks, typography rules, color tokens, motion assets, and Figma design systems.',
+    category: 'Clients',
+    spineTitle: '04. WORK WITH STARTUPS?',
+    question: 'DO YOU WORK WITH STARTUPS?',
+    explanation: 'Yes. We work with startups, businesses, agencies and brands at different stages.',
     color: {
       pastel: 'bg-[#DDD6FE]', // Lavender
       dark: 'bg-[#7C3AED]',
@@ -156,23 +141,18 @@ const FAQ_BOOKS: FAQBook[] = [
     icon: Palette,
     height: 'h-66 sm:h-74',
     width: 'w-14 sm:w-16',
-    highlights: [
-      'Vector Logomark & Icon Suite',
-      'Typography & Color Palette Tokens',
-      'Figma Design System & UI Kit',
-      'Interactive Web Guidelines & 3D Assets'
-    ],
-    tip: 'We export production-ready Tailwind CSS theme tokens so your devs can implement branding instantly.',
-    relatedServices: ['Logo Design', 'Design Systems', '3D Asset Creation'],
+    highlights: [],
+    tip: 'From seed to scale, we help you grow.',
+    relatedServices: ['Startups', 'Businesses', 'Agencies'],
     illustrationType: 'brand'
   },
   {
-    id: 'ai-solutions',
+    id: 'add-ai',
     number: '05',
-    category: 'AI Solutions',
-    spineTitle: '05. AI SOLUTIONS',
-    question: 'How do you integrate custom AI into our product?',
-    explanation: 'We design and deploy custom RAG search pipelines, autonomous AI agents, fine-tuned models, and intuitive natural language UI components.',
+    category: 'AI',
+    spineTitle: '05. ADD AI TO BUSINESS?',
+    question: 'CAN YOU ADD AI TO AN EXISTING BUSINESS?',
+    explanation: 'Yes. We can integrate AI into products, workflows, customer support, content systems and internal processes.',
     color: {
       pastel: 'bg-[#FEF08A]', // Mustard yellow
       dark: 'bg-[#CA8A04]',
@@ -185,23 +165,18 @@ const FAQ_BOOKS: FAQBook[] = [
     icon: Cpu,
     height: 'h-64 sm:h-72',
     width: 'w-13 sm:w-15',
-    highlights: [
-      'Custom LLM & Vector Search (RAG)',
-      'Conversational AI & Voice Interfaces',
-      'Automated Data Processing Pipelines',
-      'Secure On-Premise or Cloud Deployment'
-    ],
-    tip: 'We focus on sub-second streaming latency and strict data privacy so your proprietary data stays safe.',
-    relatedServices: ['Vector DBs', 'OpenAI / Anthropic APIs', 'AI UX Design'],
+    highlights: [],
+    tip: 'Make your business smarter and faster with AI.',
+    relatedServices: ['AI Workflows', 'Customer Support AI', 'Content Systems'],
     illustrationType: 'ai'
   },
   {
-    id: 'web-development',
+    id: 'how-to-start',
     number: '06',
-    category: 'Web Development',
-    spineTitle: '06. WEB DEVELOPMENT',
-    question: 'What tech stack and code standards do you use?',
-    explanation: 'We engineer blazingly fast web applications using React, TypeScript, Next.js, Tailwind CSS, Framer Motion, and WebGL for unmatched performance.',
+    category: 'Getting Started',
+    spineTitle: '06. HOW DO WE START?',
+    question: 'HOW DO WE START?',
+    explanation: 'Tell us what you\'re trying to build. We\'ll figure out the next step with you.',
     color: {
       pastel: 'bg-[#BFDBFE]', // Pastel blue
       dark: 'bg-[#2563EB]',
@@ -214,131 +189,10 @@ const FAQ_BOOKS: FAQBook[] = [
     icon: Code,
     height: 'h-68 sm:h-78',
     width: 'w-14 sm:w-16',
-    highlights: [
-      'React 18 / Next.js 14 App Router Architecture',
-      'Strict TypeScript & Modular Codebases',
-      '95+ Lighthouse Performance & SEO Guarantee',
-      'Seamless Framer Motion Micro-Animations'
-    ],
-    tip: 'Every line of code is clean, documented, and delivered via standard GitHub repositories.',
-    relatedServices: ['Frontend Engineering', 'Next.js App Router', 'Performance Audits'],
-    illustrationType: 'code'
-  },
-  {
-    id: 'automation',
-    number: '07',
-    category: 'Automation',
-    spineTitle: '07. AUTOMATION',
-    question: 'Can you automate our business workflows & tools?',
-    explanation: 'Yes! We build automated syncs between your CRM, databases, payment gateways, and Slack using n8n, Make, custom webhooks, and Python scripts.',
-    color: {
-      pastel: 'bg-[#FFEDD5]', // Peach
-      dark: 'bg-[#EA580C]',
-      border: 'border-[#FB923C]',
-      ribbon: 'bg-orange-500',
-      badgeBg: 'bg-orange-100 dark:bg-orange-900/50',
-      badgeText: 'text-orange-800 dark:text-orange-200',
-      accentHex: '#EA580C'
-    },
-    icon: Zap,
-    height: 'h-62 sm:h-70',
-    width: 'w-12 sm:w-14',
-    highlights: [
-      'CRM & Multi-Database Synchronization',
-      'Automated Lead Triage & Email Notifications',
-      'Custom Webhook Listeners & Microservices',
-      'n8n / Make Workflow Engineering'
-    ],
-    tip: 'Automating administrative tasks saves our clients an average of 15+ operational hours every single week.',
-    relatedServices: ['n8n Workflows', 'API Integrations', 'Custom Scripting'],
-    illustrationType: 'automation'
-  },
-  {
-    id: 'timeline',
-    number: '08',
-    category: 'Timeline',
-    spineTitle: '08. TIMELINE & DELIVERIES',
-    question: 'How long does a typical project take from start to launch?',
-    explanation: 'Most projects take between 2 to 6 weeks depending on project scope, iteration cycles, and final testing.',
-    color: {
-      pastel: 'bg-[#99F6E4]', // Soft mint teal
-      dark: 'bg-[#0D9488]',
-      border: 'border-[#2DD4BF]',
-      ribbon: 'bg-teal-500',
-      badgeBg: 'bg-teal-100 dark:bg-teal-900/50',
-      badgeText: 'text-teal-800 dark:text-teal-200',
-      accentHex: '#0D9488'
-    },
-    icon: Clock,
-    height: 'h-66 sm:h-74',
-    width: 'w-13 sm:w-15',
-    highlights: [
-      'Rapid Design Sprints: 1 to 2 Weeks',
-      'Full Web App Engineering: 3 to 5 Weeks',
-      'Brand Identity Package: 2 to 3 Weeks',
-      'Weekly Async Video Demos & Live Staging'
-    ],
-    tip: 'We run 1-week iterative sprints so you test working code and prototypes every Friday.',
-    relatedServices: ['Agile Sprints', 'Rapid Prototyping', 'Staging Deployments'],
-    illustrationType: 'timeline'
-  },
-  {
-    id: 'process',
-    number: '09',
-    category: 'Process',
-    spineTitle: '09. OUR PROCESS',
-    question: 'What does working with Detqel look like step-by-step?',
-    explanation: 'A collaborative 4-phase framework: Blueprint, Craft, Build, and Launch. You get direct access to our private Slack channel and Figma workspace.',
-    color: {
-      pastel: 'bg-[#FBCFE8]', // Soft pink
-      dark: 'bg-[#DB2777]',
-      border: 'border-[#F472B6]',
-      ribbon: 'bg-pink-500',
-      badgeBg: 'bg-pink-100 dark:bg-pink-900/50',
-      badgeText: 'text-pink-800 dark:text-pink-200',
-      accentHex: '#DB2777'
-    },
-    icon: Compass,
-    height: 'h-64 sm:h-72',
-    width: 'w-14 sm:w-16',
-    highlights: [
-      '1. Blueprint: Architecture & Wireframing',
-      '2. Craft: Visual Aesthetics & Motion Design',
-      '3. Build: High-Performance Codebase',
-      '4. Launch: Quality Assurance & Handoff'
-    ],
-    tip: 'No black boxes! You will have a live staging preview link updated daily throughout development.',
-    relatedServices: ['Co-Creation', 'Figma Collaboration', 'Daily Staging'],
-    illustrationType: 'process'
-  },
-  {
-    id: 'support',
-    number: '10',
-    category: 'Support',
-    spineTitle: '10. SUPPORT & CARE',
-    question: 'What post-launch support & maintenance do you provide?',
-    explanation: 'Every project includes 30 days of complimentary post-launch support, plus optional monthly care packages for ongoing optimization and updates.',
-    color: {
-      pastel: 'bg-[#FDE68A]', // Soft amber gold
-      dark: 'bg-[#D97706]',
-      border: 'border-[#FBBF24]',
-      ribbon: 'bg-amber-600',
-      badgeBg: 'bg-amber-100 dark:bg-amber-900/50',
-      badgeText: 'text-amber-800 dark:text-amber-200',
-      accentHex: '#D97706'
-    },
-    icon: ShieldCheck,
-    height: 'h-68 sm:h-76',
-    width: 'w-13 sm:w-15',
-    highlights: [
-      '30-Day Free Warranty & Bug Resolution',
-      'Monthly Security & Dependency Updates',
-      'Dedicated Support Slack Channel',
-      'Video Documentation & Training Guides'
-    ],
-    tip: 'Our studio care plans ensure your website remains fast, secure, and compatible with new browser updates.',
-    relatedServices: ['Care Plans', 'SLA Support', 'Performance Audits'],
-    illustrationType: 'support'
+    highlights: [],
+    tip: 'Let\'s talk about your next big idea.',
+    relatedServices: ['Discovery', 'Strategy', 'Planning'],
+    illustrationType: 'rocket'
   }
 ];
 
@@ -530,7 +384,7 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
               <div className="inline-flex items-center gap-2 bg-white dark:bg-canvas-dark-paper border border-ink/20 px-3 py-1 rounded-xs shadow-sm mb-4">
                 <span className="w-2 h-2 rounded-full bg-accent-acid animate-ping" />
                 <span className="font-pixel text-xs font-bold uppercase tracking-wider text-ink dark:text-gray-200">
-                  KNOWLEDGE LIBRARY // VOL. 2026
+                  YOU ASKED. WE ANSWERED.
                 </span>
               </div>
 
@@ -544,7 +398,7 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
               </h2>
 
               <p className="font-sans text-base sm:text-lg text-ink/80 dark:text-gray-300 leading-relaxed max-w-md mb-6">
-                Everything you need to know before working with Detqel. Pull a book from the shelf to reveal the answer.
+                Not sure where to start? Here's the short version.
               </p>
 
               {/* Handwritten Note & SVG Hand-drawn Arrow */}
@@ -1010,7 +864,7 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
                         }}
                         className="inline-flex items-center gap-2 bg-slate-900 text-white hover:bg-accent-coral px-4 py-2 font-pixel text-xs font-bold border-2 border-slate-900 rounded-xs shadow-brutalist-sm hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
                       >
-                        LET'S BUILD TOGETHER <ArrowRight className="w-4 h-4" />
+                        LET'S BUILD SOMETHING <ArrowRight className="w-4 h-4" />
                       </a>
                     </div>
                   </div>
