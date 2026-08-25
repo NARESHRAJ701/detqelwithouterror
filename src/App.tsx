@@ -102,21 +102,35 @@ export function App() {
                 <div className="bg-[#050608] dark:bg-canvas-dark shadow-2xl">
                   {/* Hero Section (WE BUILD WORLDS) */}
                   <HeroSection />
+                </div>
 
-                  {/* Interactive Puzzle Services Showcase */}
-                  <PuzzleServicesSection />
+                {/* Shared Background Wrapper starting from Section 3 */}
+                <div 
+                  className="relative w-full bg-cover bg-center bg-no-repeat bg-fixed overflow-hidden"
+                  style={{ backgroundImage: 'url("/images/fantasy_bg.jpg")' }}
+                >
+                  {/* Light/bright overlay to keep the background artwork vibrant */}
+                  <div className="absolute inset-0 bg-white/20 dark:bg-black/25 z-0 pointer-events-none" />
 
-                  {/* Robot Vacuum Delivery Testimonial Scene */}
-                  <RobotTestimonialScene />
+                  <div className="relative z-10">
+                    {/* Interactive Puzzle Services Showcase */}
+                    <PuzzleServicesSection />
 
-                  {/* Knowledge Library FAQ Section */}
-                  <KnowledgeLibraryFAQ />
+                    {/* Robot Vacuum Delivery Testimonial Scene */}
+                    <RobotTestimonialScene />
 
-                  {/* Interactive Office Projector About Us Showcase */}
-                  <ProjectorStorySection />
+                    {/* Knowledge Library FAQ Section */}
+                    <KnowledgeLibraryFAQ />
 
-                  {/* Playground & Interactive Labs */}
-                  <PlaygroundSection />
+                    {/* Interactive Office Projector About Us Showcase */}
+                    <ProjectorStorySection />
+
+                    {/* Playground & Interactive Labs */}
+                    <PlaygroundSection />
+
+                    {/* Footer Section (integrated within homepage background environment) */}
+                    <FooterSection isTransparent={true} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -138,8 +152,8 @@ export function App() {
         </Routes>
       </main>
 
-      {/* Footer Section */}
-      <FooterSection />
+      {/* Footer Section (shown only on non-homepage pages) */}
+      {location.pathname !== '/' && <FooterSection />}
     </div>
   );
 }

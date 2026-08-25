@@ -104,7 +104,7 @@ export const PlaygroundSection: React.FC = () => {
   };
 
   return (
-    <section id="playground" className="py-24 px-4 sm:px-8 bg-canvas dark:bg-canvas-dark border-b-2 border-ink">
+    <section id="playground" className="py-24 px-4 sm:px-8 bg-transparent border-b-2 border-ink">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 pb-6 border-b-2 border-ink gap-4">

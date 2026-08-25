@@ -271,8 +271,7 @@ export const KnowledgeLibraryFAQ: React.FC = () => {
   return (
     <section
       id="faq"
-      className="relative py-24 px-4 sm:px-8 border-b-2 border-ink overflow-hidden select-none font-sans transition-colors duration-300"
-      style={{ backgroundImage: 'url(/images/faq_bg.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+      className="relative py-24 px-4 sm:px-8 border-b-2 border-ink overflow-hidden select-none font-sans transition-colors duration-300 bg-transparent"
     >
       {/* Daylight Ray Overlay from Top-Left */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-br from-amber-100/40 via-amber-50/10 to-transparent dark:from-indigo-900/10 dark:via-purple-950/5 pointer-events-none z-0" />

@@ -127,15 +127,15 @@ export const RobotTestimonialScene: React.FC = () => {
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
   return (
-    <section className="py-16 px-4 sm:px-8 bg-[#EFECE6] dark:bg-[#18171C] border-y-2 border-ink relative overflow-hidden select-none">
+    <section className="py-16 px-4 sm:px-8 bg-[#EFECE6]/45 dark:bg-[#18171C]/50 backdrop-blur-xs border-y-2 border-ink relative overflow-hidden select-none">
       
       {/* Warm Oak Tabletop Texture Backdrop */}
-      <div className="absolute inset-0 bg-cover bg-center opacity-30 pointer-events-none mix-blend-multiply dark:mix-blend-overlay"
+      <div className="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none mix-blend-multiply dark:mix-blend-overlay"
         style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '24px 24px' }} 
       />
 
       {/* Main Isolated Scene Container */}
-      <div className="max-w-7xl mx-auto relative min-h-[580px] flex flex-col justify-between p-6 bg-[#F5F2EC] dark:bg-[#1E1C24] border-2 border-ink rounded-xs shadow-brutalist-lg overflow-hidden">
+      <div className="max-w-7xl mx-auto relative min-h-[580px] flex flex-col justify-between p-6 bg-[#F5F2EC]/70 dark:bg-[#1E1C24]/70 border-2 border-ink rounded-xs shadow-brutalist-lg overflow-hidden backdrop-blur-sm">
         
         {/* Soft Afternoon Sunlight Overlay from Left */}
         <div className="absolute top-0 left-0 bottom-0 w-1/2 bg-gradient-to-r from-amber-100/30 via-amber-50/10 to-transparent pointer-events-none z-10" />

@@ -160,26 +160,6 @@ export const GhibliHeroSection: React.FC<GhibliHeroSectionProps> = ({ onSelectPr
         style={{ y: contentY, opacity }}
         className="relative z-10 w-[92vw] max-w-[1600px] h-full flex flex-col justify-between mx-auto pt-[clamp(4.5rem,7vh,5.5rem)] pb-[clamp(4.5rem,7.5vh,6.5rem)] px-2 sm:px-4 box-border overflow-hidden"
       >
-        {/* TOP STATUS CARD (LEFT SAFE AREA) */}
-        <div className="flex justify-between items-start shrink-0 pt-2 sm:pt-4">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-2.5 bg-white/40 dark:bg-black/40 backdrop-blur-md px-3.5 py-1.5 border border-white/50 dark:border-white/20 rounded-full shadow-lg"
-          >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-emerald-800 border-2 border-white flex items-center justify-center text-white text-xs font-bold shadow-xs shrink-0">
-              ⚡
-            </div>
-            <div className="font-mono text-[clamp(0.75rem,0.8vw,0.9rem)] text-white drop-shadow-xs">
-              <div className="flex items-center gap-1.5 font-bold">
-                <span className="w-2 h-2 rounded-full bg-[#E0FF00] animate-ping" />
-                <span>Available for Projects</span>
-              </div>
-              <span className="text-white/80 text-[clamp(0.65rem,0.7vw,0.75rem)]">DETQEL — AI-Powered Product Studio</span>
-            </div>
-          </motion.div>
-        </div>
 
         {/* CENTER MAIN HERO HEADLINE WITH FLOATING SERVICE TAGS */}
         <div className="relative my-auto py-2 sm:py-4 text-center flex flex-col items-center justify-center shrink-1 min-h-0">

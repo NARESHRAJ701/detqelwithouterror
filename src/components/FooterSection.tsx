@@ -12,7 +12,11 @@ import {
   Heart
 } from 'lucide-react';
 
-export const FooterSection: React.FC = () => {
+interface FooterSectionProps {
+  isTransparent?: boolean;
+}
+
+export const FooterSection: React.FC<FooterSectionProps> = ({ isTransparent = false }) => {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const handleCopyEmail = () => {
@@ -23,7 +27,10 @@ export const FooterSection: React.FC = () => {
   };
 
   return (
-    <footer id="footer" className="relative bg-[#050608] text-white py-12 sm:py-16 px-4 sm:px-8 lg:px-12 border-t-2 border-ink overflow-hidden font-sans select-none w-full">
+    <footer 
+      id="footer" 
+      className={`relative ${isTransparent ? 'bg-transparent border-t border-white/10' : 'bg-[#050608] border-t-2 border-ink'} text-white py-12 sm:py-16 px-4 sm:px-8 lg:px-12 overflow-hidden font-sans select-none w-full`}
+    >
       
       {/* Subtle Background Overlay */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
@@ -35,7 +42,7 @@ export const FooterSection: React.FC = () => {
         {/* ========================================================================= */}
         {/* BOTTOM CARD: MAIN DARK FOOTER (DETQEL //)                                 */}
         {/* ========================================================================= */}
-        <div className="bg-[#0C0D12] text-white border-2 border-neutral-800 rounded-3xl p-6 sm:p-10 lg:p-12 relative shadow-2xl space-y-10 w-full">
+        <div className={`text-white border-2 border-neutral-800 rounded-3xl p-6 sm:p-10 lg:p-12 relative shadow-2xl space-y-10 w-full ${isTransparent ? 'bg-[#0C0D12]/75 backdrop-blur-md' : 'bg-[#0C0D12]'}`}>
           
           {/* Top 5-Column Navigation & Info Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 items-start">

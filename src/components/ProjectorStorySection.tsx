@@ -192,19 +192,18 @@ export const ProjectorStorySection: React.FC<ProjectorStorySectionProps> = ({ cl
 
   const currentSlideData = SLIDES_DATA[activeSlide] || SLIDES_DATA[0];
   const currentTrack = YOUTUBE_PLAYLIST[currentTrackIndex];
-
   return (
     <section
       ref={sectionRef}
       id="our-story-projector"
       className={`relative w-full min-h-screen py-16 sm:py-24 px-4 sm:px-8 border-b-2 border-ink transition-colors duration-1000 overflow-hidden font-sans select-none ${isOn
-          ? 'bg-[#0b0d11] text-white'
-          : 'bg-[#ebe7e0] dark:bg-[#15171c] text-ink dark:text-white'
+          ? 'bg-[#0b0d11]/85 text-white backdrop-blur-xs'
+          : 'bg-transparent text-ink dark:text-white'
         } ${className}`}
     >
       {/* Background Room Lighting Effect Overlay */}
       <div
-        className={`absolute inset-0 pointer-events-none transition-opacity duration-1000 z-0 ${isOn ? 'opacity-80' : 'opacity-0'
+        className={`absolute inset-0 pointer-events-none transition-opacity duration-1000 z-0 ${isOn ? 'opacity-90' : 'opacity-0'
           }`}
         style={{
           background: 'radial-gradient(circle at 75% 50%, rgba(20, 24, 33, 0.4) 0%, rgba(8, 9, 12, 0.95) 80%)'

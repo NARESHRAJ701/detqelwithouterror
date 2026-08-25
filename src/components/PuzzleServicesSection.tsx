@@ -342,12 +342,12 @@ export const PuzzleServicesSection: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full bg-[#F3EFE6] text-[#1A1A1A] py-16 sm:py-24 px-4 sm:px-8 overflow-hidden select-none border-b border-[#D8D2C4]">
+    <section className="relative w-full bg-[#F3EFE6]/70 dark:bg-canvas-dark/70 backdrop-blur-md text-[#1A1A1A] dark:text-white py-16 sm:py-24 px-4 sm:px-8 overflow-hidden select-none border-b border-[#D8D2C4]/40">
       {/* Background Tactile Paper Grain Noise */}
       <div
-        className="absolute inset-0 opacity-40 pointer-events-none"
+        className="absolute inset-0 opacity-15 pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(#C2B8A3 1px, transparent 1px), radial-gradient(#C2B8A3 1px, #F3EFE6 1px)`,
+          backgroundImage: `radial-gradient(#C2B8A3 1px, transparent 1px), radial-gradient(#C2B8A3 1px, transparent 1px)`,
           backgroundSize: '24px 24px',
           backgroundPosition: '0 0, 12px 12px',
         }}
