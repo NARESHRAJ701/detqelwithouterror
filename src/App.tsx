@@ -3,19 +3,20 @@ import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { GhibliHeroSection } from './components/GhibliHeroSection';
-import { TornPaperDivider } from './components/TornPaperDivider';
-import { HeroSection } from './components/HeroSection';
+import { WorldSection } from './components/WorldSection';
 import { PuzzleServicesSection } from './components/PuzzleServicesSection';
 import { ServicesHeroSection } from './components/services-hero/ServicesHeroSection';
 import { RobotTestimonialScene } from './components/RobotTestimonialScene';
 import { KnowledgeLibraryFAQ } from './components/KnowledgeLibraryFAQ';
+import { ProjectorStorySection } from './components/ProjectorStorySection';
 import { PlaygroundSection } from './components/PlaygroundSection';
+import { CTASection } from './components/CTASection';
 import { FooterSection } from './components/FooterSection';
 import { ContactUsPage } from './components/ContactUsPage';
 import { AboutUsPage } from './components/about/AboutUsPage';
 import { PortfolioPage } from './components/portfolio/PortfolioPage';
 import { ProjectDetailPage } from './components/portfolio/ProjectDetailPage';
-import { ProjectorStorySection } from './components/ProjectorStorySection';
+import type { Project } from './types';
 
 export function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -68,8 +69,12 @@ export function App() {
     }
   };
 
+  const handleSelectProject = (project: Project) => {
+    navigate(`/work/${project.id || project.slug?.current || 'island-world'}`);
+  };
+
   return (
-    <div className="min-h-screen bg-canvas text-ink dark:bg-canvas-dark dark:text-white transition-colors duration-300 relative selection:bg-emerald-500 selection:text-white">
+    <div className="min-h-screen bg-[#0B2638] text-white selection:bg-[#B7E532] selection:text-[#0A0D0F] transition-colors duration-300 relative">
       {/* Noise Grain Background Overlay */}
       <div className="noise-bg" />
 
@@ -87,60 +92,68 @@ export function App() {
       {/* Main Content Layout with Routes */}
       <main>
         <Routes>
-          <Route path="/" element={
-            <div className="relative">
-              {/* Fullscreen Studio Ghibli Parallax Hero Section */}
-              <div className="sticky top-0 z-0 w-full h-screen overflow-hidden">
-                <GhibliHeroSection />
-              </div>
+          <Route
+            path="/"
+            element={
+              /* ONE CONTINUOUS LIVING WORLD ENVIRONMENT */
+              <div className="relative w-full min-h-screen overflow-hidden">
+                
+                {/* Continuous High-Resolution Fantasy World Background Layer */}
+                <div
+                  className="fixed inset-0 z-0 bg-top bg-no-repeat pointer-events-none"
+                  style={{
+                    backgroundImage: 'url("/images/detqel_world_continuous.png")',
+                    backgroundSize: '100% auto',
+                    backgroundAttachment: 'fixed',
+                  }}
+                />
 
-              {/* Content that scrolls ON TOP of the sticky hero section */}
-              <div className="relative z-10">
-                {/* Realistic Torn Paper Edge Transition */}
-                <TornPaperDivider />
+                {/* Soft Atmospheric Ambient Lighting & Readability Overlays */}
+                <div className="fixed inset-0 z-0 bg-gradient-to-b from-sky-400/10 via-emerald-950/15 to-black/45 pointer-events-none" />
 
-                <div className="bg-[#050608] dark:bg-canvas-dark shadow-2xl">
-                  {/* Hero Section (WE BUILD WORLDS) */}
-                  <HeroSection />
+                {/* Living Website Content Flowing Down the Landscape */}
+                <div className="relative z-10">
+                  
+                  {/* 1. HERO SECTION (High Sky & Floating Castle) */}
+                  <GhibliHeroSection onSelectProject={handleSelectProject} />
+
+                  {/* 2. WE BUILD WORLDS SECTION (Upper Valley & Waterfall) */}
+                  <WorldSection onNavigateWork={() => handleNavigate('portfolio')} />
+
+                  {/* 3. SERVICES & IMPACT CAPABILITIES (8-Piece Jigsaw Puzzle) */}
+                  <PuzzleServicesSection />
+
+                  {/* 4. TESTIMONIALS (Framed Glass Delivery Scene & Carousel) */}
+                  <RobotTestimonialScene />
+
+                  {/* 5. FREQUENTLY ASKED QUESTIONS (Desk Library & Hanging Tabs) */}
+                  <KnowledgeLibraryFAQ />
+
+                  {/* 6. OUR STORY (Workstation & Studio Film Projector) */}
+                  <ProjectorStorySection />
+
+                  {/* 7. INTERACTIVE TOYS (Text Scramble & Sticker Wall Canvas) */}
+                  <PlaygroundSection />
+
+                  {/* 8. CALL TO ACTION (Translucent Glass CTA Card) */}
+                  <CTASection onNavigate={handleNavigate} />
+
+                  {/* 9. CONTINUOUS DARK GLASS FOOTER */}
+                  <FooterSection isTransparent={true} />
+
                 </div>
-
-                {/* Shared Background Wrapper starting from Section 3 */}
-                <div 
-                  className="relative w-full bg-cover bg-center bg-no-repeat bg-fixed overflow-hidden"
-                  style={{ backgroundImage: 'url("/images/fantasy_bg.jpg")' }}
-                >
-                  {/* Light/bright overlay to keep the background artwork vibrant */}
-                  <div className="absolute inset-0 bg-white/20 dark:bg-black/25 z-0 pointer-events-none" />
-
-                  <div className="relative z-10">
-                    {/* Interactive Puzzle Services Showcase */}
-                    <PuzzleServicesSection />
-
-                    {/* Robot Vacuum Delivery Testimonial Scene */}
-                    <RobotTestimonialScene />
-
-                    {/* Knowledge Library FAQ Section */}
-                    <KnowledgeLibraryFAQ />
-
-                    {/* Interactive Office Projector About Us Showcase */}
-                    <ProjectorStorySection />
-
-                    {/* Playground & Interactive Labs */}
-                    <PlaygroundSection />
-
-                    {/* Footer Section (integrated within homepage background environment) */}
-                    <FooterSection isTransparent={true} />
-                  </div>
-                </div>
               </div>
-            </div>
-          } />
+            }
+          />
 
-          <Route path="/services" element={
-            <div className="pt-16 sm:pt-20">
-              <ServicesHeroSection onNavigate={handleNavigate} />
-            </div>
-          } />
+          <Route
+            path="/services"
+            element={
+              <div className="pt-16 sm:pt-20">
+                <ServicesHeroSection onNavigate={handleNavigate} />
+              </div>
+            }
+          />
 
           <Route path="/contact" element={<ContactUsPage />} />
           <Route path="/about" element={<AboutUsPage />} />
@@ -152,8 +165,8 @@ export function App() {
         </Routes>
       </main>
 
-      {/* Footer Section (shown only on non-homepage pages) */}
-      {location.pathname !== '/' && <FooterSection />}
+      {/* Footer Section (shown only on standalone subpages) */}
+      {location.pathname !== '/' && <FooterSection isTransparent={false} />}
     </div>
   );
 }

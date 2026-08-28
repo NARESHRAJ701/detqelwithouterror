@@ -8,6 +8,13 @@
 
 @layer base {
   :root {
+    --color-sky-blue: #3FA9E8;
+    --color-deep-blue: #0B2638;
+    --color-emerald: #00A676;
+    --color-bright-green: #B7E532;
+    --color-purple: #7C3AED;
+    --color-warm-cream: #F7F1E5;
+    --color-orange-accent: #FF6B35;
     --bg-grid-color: rgba(14, 14, 17, 0.05);
     --bg-grid-size: 36px;
   }
@@ -16,21 +23,25 @@
     --bg-grid-color: rgba(255, 255, 255, 0.05);
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background-color: #F9F8F6;
+    background-color: #0B2638;
     color: #0E0E11;
     overflow-x: hidden;
     font-family: 'Space Grotesk', sans-serif;
   }
 
   ::selection {
-    background-color: #10B981;
-    color: #FFFFFF;
+    background-color: #B7E532;
+    color: #0A0D0F;
   }
 
   .dark body {
-    background-color: #0E0E11;
-    color: #F9F8F6;
+    background-color: #0A0D0F;
+    color: #F7F1E5;
   }
 }
 
@@ -53,24 +64,69 @@
 
 @layer utilities {
   /* Color Tokens */
-  .bg-canvas { background-color: #F9F8F6; }
+  .bg-canvas { background-color: #F7F1E5; }
   .bg-canvas-paper { background-color: #F4F3EF; }
-  .bg-canvas-dark { background-color: #0E0E11; }
-  .bg-canvas-dark-paper { background-color: #16161C; }
+  .bg-canvas-dark { background-color: #0A0D0F; }
+  .bg-canvas-dark-paper { background-color: #12161A; }
 
-  .text-ink { color: #0E0E11; }
+  .text-ink { color: #0A0D0F; }
 
-  .bg-accent-acid { background-color: #7939a1; }
-  .text-accent-acid { color: #7939a1; }
+  .bg-sky-blue { background-color: #3FA9E8; }
+  .text-sky-blue { color: #3FA9E8; }
 
-  .bg-accent-coral { background-color: #FF5533; }
-  .text-accent-coral { color: #FF5533; }
+  .bg-deep-blue { background-color: #0B2638; }
+  .text-deep-blue { color: #0B2638; }
 
-  .bg-accent-blue { background-color: #2563EB; }
-  .text-accent-blue { color: #2563EB; }
+  .bg-detqel-emerald { background-color: #00A676; }
+  .text-detqel-emerald { color: #00A676; }
 
-  .bg-accent-purple { background-color: #8B5CF6; }
-  .text-accent-purple { color: #8B5CF6; }
+  .bg-bright-green { background-color: #B7E532; }
+  .text-bright-green { color: #B7E532; }
+
+  .bg-accent-acid { background-color: #B7E532; }
+  .text-accent-acid { color: #B7E532; }
+
+  .bg-accent-coral { background-color: #FF6B35; }
+  .text-accent-coral { color: #FF6B35; }
+
+  .bg-accent-purple { background-color: #7C3AED; }
+  .text-accent-purple { color: #7C3AED; }
+
+  /* Glassmorphism surfaces */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .dark .glass-card {
+    background: rgba(10, 13, 15, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .glass-card-dark {
+    background: rgba(11, 38, 56, 0.7);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .glass-pill {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  .dark .glass-pill {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
 
   .bg-sticky-yellow { background-color: #FFF066; }
   .bg-sticky-pink { background-color: #FFC2E2; }

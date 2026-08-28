@@ -1,0 +1,5 @@
+- [x] Create data definition file `src/data/creativeAssets.ts`
+- [x] Implement Top-Level Toggle in `PortfolioPage.tsx`
+- [x] Implement Masonry Grid and Filters for Graphic Design Showcase in `PortfolioPage.tsx`
+- [x] Implement Media Lightbox Modal in `PortfolioPage.tsx`
+- [x] Verify build and functionality

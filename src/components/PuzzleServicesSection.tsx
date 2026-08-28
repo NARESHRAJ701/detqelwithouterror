@@ -147,34 +147,6 @@ const SERVICE_PIECES: ServicePiece[] = [
   },
 ];
 
-// 4 Credibility Metric Blocks
-const CREDIBILITY_METRICS = [
-  {
-    value: '25+',
-    label: 'CLIENT PROJECTS COMPLETED',
-    sub: 'Delivered across global markets',
-    accent: '#E63946',
-  },
-  {
-    value: '100%',
-    label: 'SOLUTIONS DELIVERED',
-    sub: 'On-time & production-grade',
-    accent: '#2A9D8F',
-  },
-  {
-    value: '8',
-    label: 'CORE CAPABILITIES',
-    sub: 'Strategy, design, tech & AI',
-    accent: '#E76F51',
-  },
-  {
-    value: 'END-TO-END',
-    label: 'FROM IDEA TO DEPLOYMENT',
-    sub: 'Full lifecycle execution',
-    accent: '#2B401B',
-  },
-];
-
 // ─────────────────────────────────────────────────────────────────────────────
 // 100% PERFECT MATHEMATICAL JIGSAW PATH ENGINE
 // ─────────────────────────────────────────────────────────────────────────────
@@ -342,18 +314,9 @@ export const PuzzleServicesSection: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full bg-[#F3EFE6]/70 dark:bg-canvas-dark/70 backdrop-blur-md text-[#1A1A1A] dark:text-white py-16 sm:py-24 px-4 sm:px-8 overflow-hidden select-none border-b border-[#D8D2C4]/40">
-      {/* Background Tactile Paper Grain Noise */}
-      <div
-        className="absolute inset-0 opacity-15 pointer-events-none"
-        style={{
-          backgroundImage: `radial-gradient(#C2B8A3 1px, transparent 1px), radial-gradient(#C2B8A3 1px, transparent 1px)`,
-          backgroundSize: '24px 24px',
-          backgroundPosition: '0 0, 12px 12px',
-        }}
-      />
-
-      <div className="max-w-[1520px] mx-auto relative z-10">
+    <section id="services" className="relative w-full py-16 sm:py-24 px-4 sm:px-8 overflow-hidden select-none">
+      {/* Translucent Glass Backdrop Card */}
+      <div className="max-w-[1540px] mx-auto relative z-10 bg-black/40 dark:bg-black/60 backdrop-blur-2xl border border-white/20 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl text-white">
 
         {/* ── 2-COLUMN EDITORIAL COMPOSITION ───────────────────────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
@@ -362,43 +325,52 @@ export const PuzzleServicesSection: React.FC = () => {
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6 h-full py-1">
 
             {/* Title & Headline Block */}
-            <div className="space-y-2.5">
-              <div className="flex items-center gap-2 font-mono text-xs tracking-widest text-[#666053] uppercase font-bold">
-                <span className="w-2.5 h-2.5 rounded-xs bg-[#E63946]" />
-                <span>01 / SERVICES</span>
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 font-mono text-xs tracking-widest text-[#B7E532] uppercase font-bold">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#B7E532] animate-pulse" />
+                <span>01 / SERVICES & IMPACT CAPABILITIES</span>
               </div>
 
-              <h2 className="font-pixel text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111111] leading-none">
-                EVERY IDEA NEEDS A<br />
-                WAY TO BECOME <span className="text-[#E63946]">REAL.</span>
+              <h2 className="font-sans text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[0.92]">
+                EVERY PIECE<br />
+                HAS A <span className="text-[#FF6B35]">PURPOSE.</span>
               </h2>
 
-              <p className="text-xs sm:text-sm text-[#666053] leading-relaxed pt-1" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                We help businesses turn ideas into brands, products and digital systems that people actually use.
+              <div className="font-mono text-xs sm:text-sm text-[#B7E532] font-bold tracking-wide uppercase">
+                BUT WHEN TOGETHER, BUILD SOMETHING BETTER.
+              </div>
+
+              <p className="font-sans text-xs sm:text-sm text-white/80 leading-relaxed pt-1">
+                From branding and development to AI and automation, design, marketing, intelligence — we bring everything together to build digital products that grow with you.
               </p>
             </div>
 
             {/* 4 EDITORIAL METRIC CARDS (2x2 Grid) */}
             <div className="grid grid-cols-2 gap-3 sm:gap-3.5 pt-1">
-              {CREDIBILITY_METRICS.map((metric, i) => (
+              {[
+                { value: '25+', label: 'CLIENTS EMPOWERED', sub: 'Global startup & brands', accent: '#FF6B35' },
+                { value: '100%', label: 'TAILORED SOLUTIONS', sub: 'Precision deliverables', accent: '#00A676' },
+                { value: '8', label: 'CORE CAPABILITIES', sub: 'Design, tech, AI suite', accent: '#B7E532' },
+                { value: 'END-TO-END', label: 'FROM IDEA TO DEPLOYMENT', sub: 'Full lifecycle execution', accent: '#3FA9E8' },
+              ].map((metric, i) => (
                 <div
                   key={i}
-                  className="group relative p-3.5 sm:p-4 rounded-lg bg-[#EFEBE0]/90 border border-[#D5CFBF] shadow-xs hover:border-[#111111] transition-all duration-300 flex flex-col justify-between"
+                  className="group relative p-3.5 sm:p-4 rounded-2xl bg-white/10 dark:bg-white/5 border border-white/15 backdrop-blur-md shadow-xs hover:border-[#B7E532] transition-all duration-300 flex flex-col justify-between"
                 >
                   <div
-                    className="absolute top-2.5 right-2.5 w-1.5 h-1.5 rounded-full"
+                    className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full"
                     style={{ background: metric.accent }}
                   />
 
-                  <div className="font-pixel text-2xl sm:text-3xl font-black text-[#111111] tracking-tight mb-1">
+                  <div className="font-pixel text-2xl sm:text-3xl font-black text-white tracking-tight mb-1">
                     {metric.value}
                   </div>
 
                   <div>
-                    <div className="font-pixel text-[10px] sm:text-xs font-bold text-[#2A261F] leading-tight uppercase">
+                    <div className="font-mono text-[10px] sm:text-xs font-bold text-[#B7E532] leading-tight uppercase">
                       {metric.label}
                     </div>
-                    <div className="font-mono text-[9px] text-[#777061] mt-0.5" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                    <div className="font-sans text-[10px] text-white/70 mt-0.5">
                       {metric.sub}
                     </div>
                   </div>
@@ -407,30 +379,30 @@ export const PuzzleServicesSection: React.FC = () => {
             </div>
 
             {/* EDITORIAL QUOTE & DETQEL STATEMENT */}
-            <div className="p-4 rounded-lg bg-[#EAE5D8] border-l-4 border-[#E63946] border-y border-r border-[#D2CBB9] space-y-2">
-              <div className="font-pixel text-xs sm:text-sm font-bold text-[#111111] uppercase tracking-wide">
-                “ONE TEAM. FROM IDEA TO EXECUTION.”
+            <div className="p-4 rounded-2xl bg-white/10 dark:bg-white/5 border-l-4 border-[#B7E532] border-y border-r border-white/15 space-y-2 backdrop-blur-md">
+              <div className="font-mono text-xs sm:text-sm font-bold text-white uppercase tracking-wide">
+                “WE DON'T JUST FILL GAPS, WE CONNECT THE PIECES.”
               </div>
-              <div className="font-mono text-[10px] sm:text-xs font-bold text-[#666053] flex items-center justify-between pt-1 border-t border-[#D5CFBF]">
-                <span>DetQel — Design. Technology. Intelligence.</span>
-                <Sparkles className="w-3.5 h-3.5 text-[#E63946]" />
+              <div className="font-sans text-xs text-white/70 flex items-center justify-between pt-1 border-t border-white/10">
+                <span>— Design, Technology, Intelligence.</span>
+                <Sparkles className="w-3.5 h-3.5 text-[#B7E532]" />
               </div>
             </div>
 
             {/* Micro Interaction Hint & Branding Row */}
-            <div className="flex items-center justify-between pt-1 border-t border-[#D8D2C4]/60">
-              <div className="flex items-center gap-3 text-[#111111]">
-                <div className="w-6 h-6 rounded-full bg-[#111111] flex items-center justify-center text-white font-pixel text-xs font-bold">
+            <div className="flex items-center justify-between pt-2 border-t border-white/15">
+              <div className="flex items-center gap-3 text-white">
+                <div className="w-7 h-7 rounded-xl bg-[#00A676] flex items-center justify-center text-black font-pixel text-xs font-black">
                   δ
                 </div>
                 <div>
                   <div className="font-pixel text-xs font-bold tracking-wider uppercase">DETQEL</div>
-                  <div className="font-mono text-[10px] text-[#666053]">Designing Solutions. Delivering Impact.</div>
+                  <div className="font-mono text-[10px] text-white/70">Designing Solutions. Delivering Impact.</div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 font-mono text-[10px] font-bold text-[#666053] uppercase tracking-wider">
-                <MousePointer className="w-3.5 h-3.5 text-[#E63946] animate-bounce" />
+              <div className="flex items-center gap-2 font-mono text-[10px] font-bold text-[#B7E532] uppercase tracking-wider">
+                <MousePointer className="w-3.5 h-3.5 text-[#B7E532] animate-bounce" />
                 <span>HOVER A PIECE</span>
               </div>
             </div>

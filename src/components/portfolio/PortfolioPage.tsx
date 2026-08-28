@@ -1,11 +1,14 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useSpring, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, ArrowRight, ExternalLink, SlidersHorizontal } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, ExternalLink, SlidersHorizontal, X, ChevronLeft, ChevronRight, Maximize2, Film } from 'lucide-react';
 import { ProjectsSection } from '../ProjectsSection';
 import { client } from '../../lib/sanity';
+import { sound } from '../../utils/sound';
+import { CREATIVE_ASSETS } from '../../data/creativeAssets';
+import type { CreativeAsset } from '../../data/creativeAssets';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -743,12 +746,40 @@ interface PortfolioPageProps {
   onSelectProject?: (project: any) => void;
 }
 
+type CreativeFilterKey = 'ALL' | 'LOGO' | 'BUSINESS_CARD' | 'SOCIAL_MEDIA';
+
+const CREATIVE_FILTERS: { key: CreativeFilterKey; label: string }[] = [
+  { key: 'ALL', label: 'ALL DESIGNS' },
+  { key: 'LOGO', label: 'LOGOS' },
+  { key: 'BUSINESS_CARD', label: 'BUSINESS CARDS' },
+  { key: 'SOCIAL_MEDIA', label: 'POSTERS & MEDIA' },
+];
+
 export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject }) => {
+  // Parallax scroll setup
+  const { scrollY } = useScroll();
+  const bgGridY = useTransform(scrollY, value => `${-value * 0.3}px`);
+  const blob1Y = useTransform(scrollY, value => -value * 0.15);
+  const blob2Y = useTransform(scrollY, value => -value * 0.25);
+  const blob3Y = useTransform(scrollY, value => -value * 0.35);
+  const dotsY = useTransform(scrollY, value => -value * 0.2);
+
+  // Tabs for switching portfolios
+  const [portfolioTab, setPortfolioTab] = useState<'CASE_STUDIES' | 'CREATIVE_DESIGNS'>('CASE_STUDIES');
+
+  // Case Studies States
   const [activeFilter, setActiveFilter] = useState<FilterKey>('ALL');
   const [projects, setProjects] = useState<any[]>([]);
   const [displayedProjects, setDisplayedProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const filterBarRef = useRef<HTMLDivElement>(null);
+
+  // Creative Designs States
+  const [activeCreativeFilter, setActiveCreativeFilter] = useState<CreativeFilterKey>('ALL');
+
+  // Lightbox States
+  const [lightboxAsset, setLightboxAsset] = useState<CreativeAsset | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number>(-1);
 
   useEffect(() => {
     client
@@ -802,6 +833,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject })
   }, []);
 
   const handleFilter = (f: FilterKey) => {
+    sound.playClick();
     setActiveFilter(f);
     // Animate out then in
     setDisplayedProjects([]);
@@ -809,6 +841,51 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject })
       setDisplayedProjects(f === 'ALL' ? projects : projects.filter(p => p.category === f));
     }, 150);
   };
+
+  const handleCreativeFilter = (f: CreativeFilterKey) => {
+    sound.playClick();
+    setActiveCreativeFilter(f);
+  };
+
+  // Filtered Creative Assets
+  const filteredCreativeAssets = activeCreativeFilter === 'ALL'
+    ? CREATIVE_ASSETS
+    : CREATIVE_ASSETS.filter(asset => asset.category === activeCreativeFilter);
+
+  // Lightbox navigation
+  const handleNextLightbox = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    sound.playClick();
+    const nextIdx = (lightboxIndex + 1) % filteredCreativeAssets.length;
+    setLightboxIndex(nextIdx);
+    setLightboxAsset(filteredCreativeAssets[nextIdx]);
+  };
+
+  const handlePrevLightbox = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    sound.playClick();
+    const prevIdx = (lightboxIndex - 1 + filteredCreativeAssets.length) % filteredCreativeAssets.length;
+    setLightboxIndex(prevIdx);
+    setLightboxAsset(filteredCreativeAssets[prevIdx]);
+  };
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!lightboxAsset) return;
+      if (e.key === 'ArrowRight') {
+        handleNextLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        handlePrevLightbox();
+      } else if (e.key === 'Escape') {
+        sound.playClick();
+        setLightboxAsset(null);
+        setLightboxIndex(-1);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxAsset, lightboxIndex, filteredCreativeAssets]);
 
   const STATS = [
     { value: '120+', label: ['PROJECTS', 'DELIVERED'], icon: '🎮', color: '#7939a1' },
@@ -821,18 +898,35 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject })
 
   return (
     <div
-      className="min-h-screen pt-20 pb-0 relative"
+      className="min-h-screen pt-20 pb-0 relative overflow-hidden"
       style={{ background: '#F7F7F3', color: '#111111', fontFamily: 'Space Grotesk, sans-serif' }}
     >
+      {/* Parallax Blobs */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <motion.div 
+          className="absolute w-[50vw] h-[50vw] rounded-full blur-[120px] opacity-30" 
+          style={{ background: 'radial-gradient(circle, #7939a1, transparent)', top: '10%', left: '-10%', y: blob1Y }} 
+        />
+        <motion.div 
+          className="absolute w-[40vw] h-[40vw] rounded-full blur-[100px] opacity-20" 
+          style={{ background: 'radial-gradient(circle, #06B6D4, transparent)', top: '40%', right: '-5%', y: blob2Y }} 
+        />
+        <motion.div 
+          className="absolute w-[60vw] h-[60vw] rounded-full blur-[150px] opacity-20" 
+          style={{ background: 'radial-gradient(circle, #EAB308, transparent)', top: '70%', left: '15%', y: blob3Y }} 
+        />
+      </div>
+
       {/* Background grid */}
-      <div className="fixed inset-0 pointer-events-none" style={{
+      <motion.div className="fixed inset-0 pointer-events-none" style={{
         backgroundImage: 'linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)',
         backgroundSize: '32px 32px',
+        backgroundPositionY: bgGridY,
       }} />
 
       {/* Pixel particle dots background */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        {[...Array(20)].map((_, i) => (
+      <motion.div className="fixed pointer-events-none overflow-hidden" style={{ top: '-100vh', bottom: '-100vh', left: 0, right: 0, y: dotsY }}>
+        {[...Array(40)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1"
@@ -841,7 +935,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject })
             transition={{ duration: 4 + i * 0.5, repeat: Infinity, delay: i * 0.4 }}
           />
         ))}
-      </div>
+      </motion.div>
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 relative z-10">
 
@@ -871,10 +965,22 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject })
 
             {/* Buttons */}
             <div className="flex flex-wrap items-center gap-4">
-              <MagBtn primary>
+              <MagBtn primary onClick={() => {
+                sound.playClick();
+                const el = document.getElementById('portfolio-gallery-start');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}>
                 VIEW ALL PROJECTS <ArrowUpRight className="w-4 h-4" />
               </MagBtn>
-              <MagBtn>
+              <MagBtn onClick={() => {
+                sound.playClick();
+                const el = document.getElementById('contact');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  window.location.href = '/contact';
+                }
+              }}>
                 START A PROJECT <ArrowRight className="w-4 h-4" />
               </MagBtn>
             </div>
@@ -922,86 +1028,258 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject })
           </div>
         </section>
 
-        {/* ── SECTION 03: FILTER BAR ──────────────────────────────────────── */}
-        <section className="mb-10">
-          <div ref={filterBarRef} className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2 no-scrollbar">
-            {/* Label */}
-            <div className="flex-shrink-0 flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 bg-white font-mono text-xs font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap shadow-sm">
-              <SlidersHorizontal className="w-3.5 h-3.5" />
-              FILTER WORK
-            </div>
-
-            {/* Filters */}
-            {FILTERS.map(f => (
-              <motion.button
-                key={f}
-                onClick={() => handleFilter(f)}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex-shrink-0 px-4 py-2 rounded-lg font-pixel text-xs font-bold uppercase tracking-wider border transition-all whitespace-nowrap"
-                style={activeFilter === f ? {
-                  background: '#7939a1',
-                  color: '#fff',
-                  borderColor: '#7939a1',
-                  boxShadow: '0 4px 12px rgba(121,57,161,0.3)',
-                } : {
-                  background: '#fff',
-                  color: '#555',
-                  borderColor: '#e5e7eb',
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-                }}
-              >
-                {f}
-              </motion.button>
-            ))}
-          </div>
-        </section>
-
-        {/* ── SECTION 04: PROJECT GRID ─────────────────────────────────────── */}
-        <section className="mb-20">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeFilter}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+        {/* ── PORTFOLIO TYPE TOGGLE ────────────────────────────────────────── */}
+        <div id="portfolio-gallery-start" className="flex justify-center mb-12 scroll-mt-24">
+          <div className="inline-flex p-1.5 bg-white rounded-xl border border-gray-200 shadow-sm max-w-full overflow-x-auto no-scrollbar">
+            <button
+              onClick={() => {
+                sound.playClick();
+                setPortfolioTab('CASE_STUDIES');
+              }}
+              onMouseEnter={() => sound.playHover()}
+              className="flex items-center gap-2.5 px-6 py-3 rounded-lg font-pixel text-xs sm:text-sm font-bold uppercase tracking-wider transition-all whitespace-nowrap"
+              style={portfolioTab === 'CASE_STUDIES' ? {
+                background: '#7939a1',
+                color: '#fff',
+                boxShadow: '0 4px 12px rgba(121,57,161,0.3)',
+              } : {
+                color: '#555',
+              }}
             >
-              {loading ? (
-                [...Array(6)].map((_, i) => (
-                  <div key={i} className="animate-pulse bg-white border border-gray-200 rounded-xl overflow-hidden" style={{ height: 350 }}>
-                    <div className="h-6 w-1/4 bg-gray-200 m-4 rounded" />
-                    <div className="mx-3 bg-gray-200 rounded-lg" style={{ height: 200 }} />
-                    <div className="p-4 space-y-2">
-                      <div className="h-5 w-3/4 bg-gray-200 rounded" />
-                      <div className="h-4 w-5/6 bg-gray-200 rounded" />
-                    </div>
-                  </div>
-                ))
-              ) : (
-                displayedProjects.map((project, i) => (
-                  <ProjectCard key={project.id} project={project} index={i} />
-                ))
-              )}
-              {displayedProjects.length === 0 && (
+              👾 Case Studies
+            </button>
+            <button
+              onClick={() => {
+                sound.playClick();
+                setPortfolioTab('CREATIVE_DESIGNS');
+              }}
+              onMouseEnter={() => sound.playHover()}
+              className="flex items-center gap-2.5 px-6 py-3 rounded-lg font-pixel text-xs sm:text-sm font-bold uppercase tracking-wider transition-all whitespace-nowrap"
+              style={portfolioTab === 'CREATIVE_DESIGNS' ? {
+                background: '#7939a1',
+                color: '#fff',
+                boxShadow: '0 4px 12px rgba(121,57,161,0.3)',
+              } : {
+                color: '#555',
+              }}
+            >
+              🎨 Creative Gallery
+            </button>
+          </div>
+        </div>
+
+        {portfolioTab === 'CASE_STUDIES' ? (
+          <>
+            {/* ── SECTION 03: FILTER BAR ──────────────────────────────────────── */}
+            <section className="mb-10">
+              <div ref={filterBarRef} className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2 no-scrollbar">
+                {/* Label */}
+                <div className="flex-shrink-0 flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 bg-white font-mono text-xs font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap shadow-sm">
+                  <SlidersHorizontal className="w-3.5 h-3.5" />
+                  FILTER WORK
+                </div>
+
+                {/* Filters */}
+                {FILTERS.map(f => (
+                  <motion.button
+                    key={f}
+                    onClick={() => handleFilter(f)}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="flex-shrink-0 px-4 py-2 rounded-lg font-pixel text-xs font-bold uppercase tracking-wider border transition-all whitespace-nowrap"
+                    style={activeFilter === f ? {
+                      background: '#7939a1',
+                      color: '#fff',
+                      borderColor: '#7939a1',
+                      boxShadow: '0 4px 12px rgba(121,57,161,0.3)',
+                    } : {
+                      background: '#fff',
+                      color: '#555',
+                      borderColor: '#e5e7eb',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                    }}
+                  >
+                    {f}
+                  </motion.button>
+                ))}
+              </div>
+            </section>
+
+            {/* ── SECTION 04: PROJECT GRID ─────────────────────────────────────── */}
+            <section className="mb-20">
+              <AnimatePresence mode="wait">
                 <motion.div
+                  key={activeFilter}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="xl:col-span-3 md:col-span-2 flex flex-col items-center justify-center py-24 text-center"
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
                 >
-                  <div className="mb-4"><VoxelCube size={40} color="#7939a1" /></div>
-                  <p className="font-pixel text-lg text-gray-400">NO PROJECTS IN THIS CATEGORY YET.</p>
+                  {loading ? (
+                    [...Array(6)].map((_, i) => (
+                      <div key={i} className="animate-pulse bg-white border border-gray-200 rounded-xl overflow-hidden" style={{ height: 350 }}>
+                        <div className="h-6 w-1/4 bg-gray-200 m-4 rounded" />
+                        <div className="mx-3 bg-gray-200 rounded-lg" style={{ height: 200 }} />
+                        <div className="p-4 space-y-2">
+                          <div className="h-5 w-3/4 bg-gray-200 rounded" />
+                          <div className="h-4 w-5/6 bg-gray-200 rounded" />
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    displayedProjects.map((project, i) => (
+                      <ProjectCard key={project.id} project={project} index={i} />
+                    ))
+                  )}
+                  {displayedProjects.length === 0 && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="xl:col-span-3 md:col-span-2 flex flex-col items-center justify-center py-24 text-center"
+                    >
+                      <div className="mb-4"><VoxelCube size={40} color="#7939a1" /></div>
+                      <p className="font-pixel text-lg text-gray-400">NO PROJECTS IN THIS CATEGORY YET.</p>
+                    </motion.div>
+                  )}
                 </motion.div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </section>
+              </AnimatePresence>
+            </section>
 
-        {/* ── SECTION 04.5: FEATURED PROJECTS (Moved from Home) ─────────────── */}
-        <div className="mb-20 -mx-6 sm:-mx-10 rounded-2xl overflow-hidden shadow-2xl">
-          <ProjectsSection onSelectProject={onSelectProject || (() => {})} />
-        </div>
+            {/* ── SECTION 04.5: FEATURED PROJECTS (Moved from Home) ─────────────── */}
+            <div className="mb-20 -mx-6 sm:-mx-10 rounded-2xl overflow-hidden shadow-2xl">
+              <ProjectsSection onSelectProject={onSelectProject || (() => {})} />
+            </div>
+          </>
+        ) : (
+          <>
+            {/* ── CREATIVE GALLERY FILTER BAR ─────────────────────────────────── */}
+            <section className="mb-10">
+              <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2 no-scrollbar">
+                {/* Label */}
+                <div className="flex-shrink-0 flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 bg-white font-mono text-xs font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap shadow-sm">
+                  <SlidersHorizontal className="w-3.5 h-3.5" />
+                  FILTER DESIGNS
+                </div>
+
+                {/* Filters */}
+                {CREATIVE_FILTERS.map(f => (
+                  <motion.button
+                    key={f.key}
+                    onClick={() => handleCreativeFilter(f.key)}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="flex-shrink-0 px-4 py-2 rounded-lg font-pixel text-xs font-bold uppercase tracking-wider border transition-all whitespace-nowrap"
+                    style={activeCreativeFilter === f.key ? {
+                      background: '#7939a1',
+                      color: '#fff',
+                      borderColor: '#7939a1',
+                      boxShadow: '0 4px 12px rgba(121,57,161,0.3)',
+                    } : {
+                      background: '#fff',
+                      color: '#555',
+                      borderColor: '#e5e7eb',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                    }}
+                  >
+                    {f.label}
+                  </motion.button>
+                ))}
+              </div>
+            </section>
+
+            {/* ── CREATIVE GALLERY MASONRY GRID ──────────────────────────────── */}
+            <section className="mb-20">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeCreativeFilter}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.2 }}
+                  className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6 [column-fill:_balance]"
+                >
+                  {filteredCreativeAssets.map((asset, idx) => (
+                    <motion.div
+                      key={asset.id}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, margin: '-50px' }}
+                      transition={{ duration: 0.4, delay: (idx % 8) * 0.05 }}
+                      onClick={() => {
+                        sound.playClick();
+                        setLightboxAsset(asset);
+                        setLightboxIndex(idx);
+                      }}
+                      onMouseEnter={() => sound.playHover()}
+                      className="break-inside-avoid group relative overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-brutalist hover:border-gray-900 cursor-pointer block"
+                    >
+                      {/* Image / Video area */}
+                      <div className="relative w-full overflow-hidden bg-gray-50 flex items-center justify-center">
+                        {asset.type === 'video' ? (
+                          <div className="relative w-full aspect-square">
+                            <video
+                              src={asset.src}
+                              muted
+                              loop
+                              autoPlay
+                              playsInline
+                              className="w-full h-full object-cover rounded-t-xl"
+                            />
+                            <div className="absolute top-3 right-3 bg-gray-900/80 backdrop-blur-sm p-1.5 rounded-md border border-white/10 z-10 text-white">
+                              <Film className="w-3.5 h-3.5 animate-pulse" />
+                            </div>
+                          </div>
+                        ) : (
+                          <img
+                            src={asset.src}
+                            alt={asset.title}
+                            loading="lazy"
+                            className={`w-full object-cover rounded-t-xl transition-transform duration-500 group-hover:scale-105 ${
+                              asset.aspectRatio === 'square' ? 'aspect-square' :
+                              asset.aspectRatio === 'portrait' ? 'aspect-[3/4]' : 'aspect-[1.6/1]'
+                            }`}
+                          />
+                        )}
+
+                        {/* Interactive overlay on hover */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-gray-950/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4 text-white">
+                          <span className="font-mono text-[9px] font-bold tracking-wider uppercase bg-[#B7E532] text-gray-900 px-2 py-0.5 border border-gray-900">
+                            VIEW DETAILS
+                          </span>
+                          <Maximize2 className="w-4 h-4 text-[#B7E532]" />
+                        </div>
+                      </div>
+
+                      {/* Info Area */}
+                      <div className="p-4 border-t border-gray-100 bg-white">
+                        <span className="font-mono text-[9px] font-bold uppercase tracking-wider text-purple-600 block mb-1">
+                          {asset.categoryLabel}
+                        </span>
+                        <h3 className="font-pixel text-sm font-black text-gray-900 mb-1 leading-tight group-hover:text-purple-700 transition-colors">
+                          {asset.title}
+                        </h3>
+                        <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                          {asset.description}
+                        </p>
+                      </div>
+
+                      {/* Custom bottom edge hover animation */}
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#7939a1] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+
+              {filteredCreativeAssets.length === 0 && (
+                <div className="flex flex-col items-center justify-center py-24 text-center">
+                  <VoxelCube size={40} color="#7939a1" />
+                  <p className="font-pixel text-lg text-gray-400 mt-4">NO DESIGNS FOUND IN THIS CATEGORY.</p>
+                </div>
+              )}
+            </section>
+          </>
+        )}
 
         {/* ── SECTION 05: CREATIVE CTA ─────────────────────────────────────── */}
         <section className="mb-0">
@@ -1036,7 +1314,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject })
                   Let's build something great together.<br />
                   We'd love to hear your idea.
                 </p>
-                <MagBtn primary onClick={() => { window.location.hash = 'contact'; }}>
+                <MagBtn primary onClick={onSelectProject ? () => { sound.playClick(); onSelectProject(null); } : () => { sound.playClick(); window.location.href = '/contact'; }}>
                   LET'S TALK <ArrowRight className="w-4 h-4" />
                 </MagBtn>
               </div>
@@ -1117,6 +1395,125 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onSelectProject })
         </div>
 
       </div>
+
+      {/* ── LIGHTBOX MODAL ────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {lightboxAsset && (
+          <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6 md:p-10">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => {
+                sound.playClick();
+                setLightboxAsset(null);
+                setLightboxIndex(-1);
+              }}
+              className="fixed inset-0 bg-[#0B2638]/95 backdrop-blur-md"
+            />
+
+            {/* Modal Container */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-5xl bg-white border-2 border-gray-900 shadow-brutalist-lg rounded-xl overflow-hidden z-10 max-h-[90vh] flex flex-col my-auto text-gray-900"
+            >
+              {/* Header Bar */}
+              <div className="flex justify-between items-center px-6 py-4 border-b-2 border-gray-900 bg-gray-50 flex-shrink-0">
+                <div className="flex items-center gap-3 font-mono text-xs">
+                  <span className="px-2 py-0.5 font-pixel font-bold bg-[#B7E532] text-gray-900 border border-gray-900 uppercase">
+                    {lightboxAsset.categoryLabel}
+                  </span>
+                  <span className="hidden sm:inline text-gray-500 font-bold">
+                    // ASSET {lightboxIndex + 1} OF {filteredCreativeAssets.length}
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => {
+                    sound.playClick();
+                    setLightboxAsset(null);
+                    setLightboxIndex(-1);
+                  }}
+                  onMouseEnter={() => sound.playHover()}
+                  className="p-2 bg-white border-2 border-gray-900 rounded-lg hover:bg-rose-500 hover:text-white transition-all shadow-sm"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Content Area */}
+              <div className="relative flex-1 bg-gray-50 flex items-center justify-center p-6 min-h-[300px] overflow-hidden group/content">
+                {/* Previous Button */}
+                <button
+                  onClick={handlePrevLightbox}
+                  onMouseEnter={() => sound.playHover()}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 border-2 border-gray-900 hover:bg-gray-100 hover:scale-105 transition-all shadow-md text-gray-900 md:opacity-0 md:group-hover/content:opacity-100 animate-fade-in"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+
+                {/* Media Viewer */}
+                <div className="max-w-full max-h-[50vh] sm:max-h-[60vh] flex items-center justify-center rounded-lg overflow-hidden border border-gray-200 bg-white p-2 shadow-sm">
+                  {lightboxAsset.type === 'video' ? (
+                    <video
+                      key={lightboxAsset.id}
+                      src={lightboxAsset.src}
+                      controls
+                      autoPlay
+                      playsInline
+                      className="max-w-full max-h-[48vh] sm:max-h-[58vh] object-contain rounded-md"
+                    />
+                  ) : (
+                    <img
+                      key={lightboxAsset.id}
+                      src={lightboxAsset.src}
+                      alt={lightboxAsset.title}
+                      className="max-w-full max-h-[48vh] sm:max-h-[58vh] object-contain rounded-md select-none"
+                    />
+                  )}
+                </div>
+
+                {/* Next Button */}
+                <button
+                  onClick={handleNextLightbox}
+                  onMouseEnter={() => sound.playHover()}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/90 border-2 border-gray-900 hover:bg-gray-100 hover:scale-105 transition-all shadow-md text-gray-900 md:opacity-0 md:group-hover/content:opacity-100 animate-fade-in"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
+
+              {/* Details Footer */}
+              <div className="px-6 py-5 bg-white border-t-2 border-gray-900 flex-shrink-0">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <h3 className="font-pixel text-lg font-black uppercase text-gray-900">{lightboxAsset.title}</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed font-medium" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                      {lightboxAsset.description}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={lightboxAsset.src}
+                      target="_blank"
+                      rel="noreferrer"
+                      onMouseEnter={() => sound.playHover()}
+                      onClick={() => sound.playSuccess()}
+                      className="inline-flex items-center gap-2 px-4 py-2 border-2 border-gray-900 rounded-lg font-pixel text-xs font-bold bg-white text-gray-900 hover:bg-purple-600 hover:text-white transition-all shadow-sm"
+                    >
+                      VIEW FULLSIZE <Maximize2 className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* hide scrollbar for filter bar */}
       <style>{`.no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }`}</style>
